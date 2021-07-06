@@ -1,5 +1,19 @@
 @charset "ISO-8859-1";
-@media screen and (max-width:760px){
+@media screen and (max-width:1024px){
+	header{
+display:block;
+background-color:#00ff00;
+}
+.tabellaProdotti td, .tabellaProdotti th{
+	
+	margin-left:12%;
+	
+border:1px solid #0000a0;
+display:inline-block;	
+}
+
+}
+@media screen and (max-width:680px){
 
 .btn-menu{
 	text-decoration:none;
@@ -28,6 +42,12 @@ nav ul li{
 	
 }
 
+.tabellaProdotti td, .tabellaProdotti th{
 
-
+	margin-left:20%;
+	margin-right:25%;
+	
+border:1px solid #00ff40;
+display:inline-block;	
+}
 }

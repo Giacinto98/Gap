@@ -113,9 +113,6 @@
 </nav>
 
 <section id=StampaProdotti style="margin: 3px 3px 3px 3px;">
-<div class="container">
-<div class="row">
-<div class="col-md">
 
 <table class="tabellaProdotti">
 <tr>
@@ -124,48 +121,25 @@
 		if(prodotti != null && prodotti.size() > 0) //controllo se ci sono prodotti all'interno dell'array
 		{
 			Iterator<?> it = prodotti.iterator(); //iteriamo i prodotti
-			int count = 0;
 			while(it.hasNext()) //fin quando ho prodotti
 			{
-			ProdottoBean bean = (ProdottoBean) it.next(); //metto nel bean riferito alla tabella dei prodotti il prodotto i-esimo
-			if(count < 4)
-			{
-			count ++;	
+			ProdottoBean bean = (ProdottoBean) it.next(); //metto nel bean riferito alla tabella dei prodotti il prodotto i-esimo	
 		%>	
 
-	<td>
-		<div class="card" style="width: 18rem;border-style:solid; border-color:#CCCCCC; border-width:3px;">
-  		<img class="card-img-top" height=200 width=288 src="Elementi/<%=bean.getNome()%>.jpg " alt="Card image cap">
-  		<div class="card-body">
-    	<h3 class="card-title"><%=bean.getNome()%></h3>
-    	<p class="card-text">Apri per maggiori iformazioni </p>
-    	<form action= "CercaProdottoControl" method="get"><input type="submit" onClik="sessione()" value="Apri Prodotto"/></form>
-		</div>
-		</div>
-	</td>
-       <% }
-       
-       else
-       {
-       count = 1;
-       %>
-      </tr>
-      <tr>
-      <td>
-		<div class="card" style="width: 18rem;border-style:solid; border-color:#CCCCCC; border-width:3px;">
-  		<img class="card-img-top" height=200 width=288 src="Elementi/<%=bean.getNome()%>.jpg " alt="Card image cap">
-  		<div class="card-body">
+	<td> 
+
+	
+		<div class="card" id="carta" >
+  		<img class="card-img-top" height=200 width=100% src="Elementi/<%=bean.getNome()%>.jpg " alt="Card image cap">
+  			<div class="card-body">
     	<h3 class="card-title"><%=bean.getNome()%></h3>
     	<p class="card-text">Apri per maggiori iformazioni </p>
     	<a href="#" class="btn btn-primary">Apri Sezione</a>   
+			</div>
 		</div>
-		</div>
-	</td>
-       <% } %>
-</div> 
-</div>
-		<% 
-			}
+
+  	</td> 
+		<% }
 		} %>
 	
 </tr>		    

@@ -18,7 +18,7 @@ public class CercaProdottoControl extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		response.encodeURL("CercaProdottControl");
+		response.encodeURL("CercaProdottoControl");
 		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource"); //recuperiamo il datasource
 		ProdottoModel model = new ProdottoModel (ds); //creiamo un product model che abbiamo instaziato e che ci permette di recuperare i dati che poi inserirà nel bean da leggere
 		

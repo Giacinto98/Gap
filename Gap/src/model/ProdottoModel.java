@@ -22,16 +22,48 @@ public class ProdottoModel implements InterfacciaDAO <ProdottoBean>
 	}
 	
 	@Override
-	public ProdottoBean doRetrieveByKey(String code) throws SQLException {
-		 return null;
+	public ProdottoBean doRetrieveByKey(String nome) throws SQLException {
+		Connection connection = null; //creo connessione 
+		PreparedStatement preparedStatement = null;
+		ProdottoBean bean = new ProdottoBean();
+		System.out.println(nome);
+		String selectSQL = "select * from prodotto where Nome = '"+ nome +"';";
+		
+		try {
+			connection = ds.getConnection(); //recuperiamo la connessione dal datasource passato in input nel costruttore della classe
+			preparedStatement = connection.prepareStatement(selectSQL); //accediamo alla connessione e passiamo alla funzione la stringa SQL
+			ResultSet rs = preparedStatement.executeQuery(); //esguiamo la query come facevamo nanche in db del primo sempestre
+			while(rs.next()) //scorriamo i valori che ci vengono restituiti e li mettima nel bean dedicato a questa tabella
+			{
+				bean.setCodice(rs.getInt("codice"));
+				bean.setNome(rs.getString("nome"));
+				bean.setAltezza(rs.getInt("altezza"));
+				bean.setProfondita(rs.getInt("profondita"));
+				bean.setLarghezza(rs.getInt("larghezza"));
+				bean.setTipologia(rs.getString("tipologia"));
+				bean.setQuantita(rs.getInt("quantita"));
+				bean.setPrezzo(rs.getInt("prezzo"));
+				bean.setSconto(rs.getInt("sconto"));
+			}
+		} finally { //rilasiamo tutte le risorse che abbiamo
+			try {
+			if(preparedStatement != null)
+				preparedStatement.close();
+			} finally {
+			if(connection != null)
+				connection.close();
+			}
+		}
+		return bean; //ritorniamo la lista dei prodotti presi dal database.
 	}
+	
 
 	@Override
 	public Collection<ProdottoBean> doRetriveAll(String order) throws SQLException {
 		Connection connection = null; //creo connessione 
 		PreparedStatement preparedStatement = null;
 		
-		String selectSQL = "select * from prodotto order by sconto desc";
+		String selectSQL = "select * from prodotto order by sconto desc;";
 		
 		Collection<ProdottoBean> prodotti = new LinkedList<ProdottoBean>(); //arrey di prodotti che vengono recuperati dal database e poi inseriti nell'array
 		

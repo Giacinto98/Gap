@@ -59,10 +59,10 @@
 			if(utente != null)
 			{
 			%>
-			<div style="top:0px; right: 100px">
+			<div>
 				<p align = "center"><a href="profilo.jsp"><img src = "Elementi/profilo.png" width="30" height="30"></a>
 				<br><%=utente.getNome()%></p>
-			</div> 
+			</div>
 				<a href="logout.jsp"><img src = "Elementi/logout.png" width="35" height="35"></a>
 				<a href="carrello.jsp"><img src = "Elementi/carrello.png" width="35" height="35"></a>
 			<%
@@ -134,8 +134,8 @@
   			<div class="card-body">
     	<h3 class="card-title"><%=bean.getNome()%></h3>
     	<p class="card-text">Apri per maggiori iformazioni </p>
-    	<a href="CercaProdottoControl" class="btn btn-primary">Apri Prodotto</a>   
-			</div>
+    	<form action="CercaProdottoControl" method="get"> <button type="submit" name="bottone" value="<%=bean.getNome()%>">Apri Prodotto</button>
+		</div>
 		</div>
 
   	</td> 

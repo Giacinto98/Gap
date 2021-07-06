@@ -101,7 +101,14 @@
 	</h3></ul>
 	</nav>
 	
-
+	<%
+		ProdottoBean prodotto = new ProdottoBean(); 
+		prodotto = (ProdottoBean) request.getAttribute("prodotto");
+	%>
+	<%=prodotto.getCodice() %>
+	<%=prodotto.getNome() %> 
+	<%=prodotto.getAltezza() %>
+	
 
 
 

@@ -1,0 +1,33 @@
+@charset "ISO-8859-1";
+@media screen and (max-width:760px){
+
+.btn-menu{
+	text-decoration:none;
+	color:white;
+	font-size:200%;
+	border:1px solid white;
+	display:block;
+}	
+#navbar{
+	display:none;
+}
+	header{
+display:block;
+background-color:#0000a0;
+width:100%;
+height:auto;
+
+
+
+}
+nav ul li{
+	display:block;
+}
+.dropdow-content{
+	position:static;
+	
+}
+
+
+
+}

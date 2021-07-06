@@ -83,11 +83,14 @@
      
 <div>    
     <% 
-    	String error = (String) request.getParameter("error");
-    	if(error != null)
+    	String error="ciao" ;
+    	error = (String) request.getAttribute("error");
+    	System.out.println(error);
+    	if(error != "" && error != null)
+    	{
     %>
-    		<p><%=error %></p>
- 	
+    		<p Style= "color:red;"><%=error %></p>
+ 	<%  } %>
     	
     <p id="demo" style="color:red"></p>
     	<table style= >

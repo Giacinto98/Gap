@@ -77,25 +77,48 @@ public class RegControl extends HttpServlet {
 		else
 			request.setAttribute("telefono", utente.getTelefono());
 		
-		if(error != null && !error.equals(""))
+		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource"); 
+		RegModel registrazione = new RegModel(ds);
+		
+		Boolean var = null;
+		
+		try {
+			var = registrazione.cercaSimili(utente);
+			System.out.println("1Sono qua " + var);
+		} catch (SQLException e1) {
+			System.out.println("Eccezzione confronto email utente");
+			e1.printStackTrace();
+		}
+		
+		if(var != null && var == true)
+		{	
+			try
 			{
+			registrazione.doSave(utente); //salva utente nel db
+			System.out.println("2Sono qua");
+			} catch (SQLException e1) 
+				{
+					System.out.println("Eccezzione salvataggio utente");
+					e1.printStackTrace();	
+				}
+		}
+		else if(var != null && var == false)
+				{
+				error = "Non è possibile registrarsi con questa email";
+				System.out.println("3Sono qua");
+				}
+		
+		
+		if(error != null && !error.equals(""))
+		{
+			System.out.println("4Sono qua");
 			request.setAttribute("error", error);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Registrazione.jsp");
 			dispatcher.forward(request, response);
-			}
+		}
 		else
 		{
-			DataSource ds = (DataSource)getServletContext().getAttribute("DataSource"); 
-			RegModel registrazione = new RegModel(ds);
-			try
-			{
-				registrazione.doSave(utente);
-			}
-			catch (SQLException e) 
-			{
-				System.out.println("Eccezione Registrazione utente");
-				e.printStackTrace();
-			}
+			System.out.println("5Sono qua");
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/regEffettuata.html");
 			dispatcher.forward(request, response);
 		}

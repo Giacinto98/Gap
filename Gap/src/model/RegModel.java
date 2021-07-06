@@ -2,8 +2,10 @@ package model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.LinkedList;
 
 import javax.sql.DataSource;
 
@@ -30,6 +32,37 @@ public class RegModel implements InterfacciaDAO <UtenteBean>{
 		return null;
 	}
 
+	public boolean cercaSimili (UtenteBean item) throws SQLException
+	{
+		Connection connection = null; //creo connessione 
+		PreparedStatement preparedStatement = null;
+		String UpdateSQL = "Select Email from Utente";
+		try
+		{
+			connection = ds.getConnection(); //recuperiamo la connessione dal datasource passato in input nel costruttore della classe
+			preparedStatement = connection.prepareStatement(UpdateSQL);
+			ResultSet rs = preparedStatement.executeQuery();
+			while(rs.next())
+			{
+				UtenteBean bean = new UtenteBean();
+				bean.setEmail(rs.getString("Email"));
+				if(bean.getEmail().equals(item.getEmail()))
+					return false;
+			}	
+		}
+		finally { //rilasiamo tutte le risorse che abbiamo
+			try {
+			if(preparedStatement != null)
+				preparedStatement.close();
+			} finally {
+			if(connection != null)
+				connection.close();
+			}
+		}
+		return true;
+	}
+	
+	
 	//salviamo l'utente all'interno del database
 	@Override
 	public void doSave(UtenteBean item) throws SQLException {

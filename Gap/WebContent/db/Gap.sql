@@ -14,18 +14,30 @@ Cognome varchar(15) not null,
 Email varchar(25) not null,
 Passw varchar(50) not null, 
 Indirizzo_Fatturazione varchar(40),
-Telefono int,
-Tipologia int,
-primary key (CF)
+Telefono varchar(50),
+primary key (Email)
+);
+
+create table Ruolo(
+	Nome varchar(15) not null,
+    primary key(nome)
+);
+
+create table Utente_Ruolo(
+	Email varchar(25) not null,
+    Ruolo varchar(15) not null,
+    primary key(Email, Ruolo),
+    foreign key (Email) references Utente(Email) on update cascade on delete cascade,
+    foreign key (Ruolo) references Ruolo(Nome) on update cascade on delete cascade
 );
 
 create table carta (
 Numero char(16) not null,
 Anno_scadenza date not null,
 Proprietario varchar(50) not null,
-CF char(16) not null,
+Email char(25) not null,
 primary key (Numero),
-foreign key (CF) references utente(CF) on update cascade on delete cascade
+foreign key (Email) references Utente(Email) on update cascade on delete cascade
 );
 
 create table Prodotto(
@@ -53,29 +65,28 @@ create table recensione (
 Testo varchar(250) not null,
 Data_Recensione date not null,
 Codice int not null,
-CF char(16) not null,
-primary key (CF,Codice),
-foreign key (CF) references utente(CF) on update cascade on delete cascade,
+Email char(25) not null,
+primary key (Email,Codice),
+foreign key (Email) references utente(Email) on update cascade on delete cascade,
 foreign key (Codice) references Prodotto (Codice) on update cascade on delete cascade
 );
 
 create table Ordine(
 Num_Ordine int auto_increment,
-CF char(16) not null,
+Email char(25) not null,
 Prezzo_Totale int not null,
 Num_Prodotti int not null,
 data_Ordine date not null,
 primary key(Num_ordine),
-foreign key(CF) references Utente(CF) 
+foreign key(Email) references Utente(Email) 
 )auto_increment=1;
 
 create table Composizione
 (
-Id int not null,
 Num_Ordine int not null,
 Codice int not null,
-Num_elementi int not null,
-primary key(Id),
+Quantita int not null,
+primary key(Num_Ordine, Codice),
 foreign key(Codice) references Prodotto(Codice),
 foreign key(Num_Ordine) references Ordine(Num_ordine)
 );
@@ -97,30 +108,30 @@ foreign key(Id) references Materiale(Id) on update cascade on delete cascade
 );
 
 
-Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ("Zeus",150,50,75,"Manuale",15,150,15);
-Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('Arrow',175,120,100,'Elettrica',200,250,0);
-Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('Markus',162,90,150,'Letto',20,200,3);
-Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('Hugò',158,50,75,'Manuale',15,150,0);
-Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('Robert',145,50,75,'Letto',15,150,15);
-Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('Silandrio',120,50,80,'Manuale',25,100,23);
-Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('Pouf',45,60,100,'Pouf',150,20,0);
-Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('Zelbio',25,70,75,'Pouf',15,150,15);
-Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('Attr1',240,58,205,'Moderna',25,250,5);
-Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('Attr2',236,65,200,'Classica',150,300,0);
-Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('Attr3',200,45,200,'Classica',350,200,25);
-Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('Attr4',150,50,75,'Moderna',15,150,15);
+Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ("zeus",150,50,75,"manuale",15,150,15);
+Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('arrow',175,120,100,'elettrica',200,250,0);
+Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('markus',162,90,150,'letto',20,200,3);
+Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('hugò',158,50,75,'manuale',15,150,0);
+Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('robert',145,50,75,'letto',15,150,15);
+Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('silandrio',120,50,80,'manuale',25,100,23);
+Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('pouf',45,60,100,'pouf',150,20,0);
+Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('zelbio',25,70,75,'pouf',15,150,15);
+Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('attr1',240,58,205,'moderna',25,250,5);
+Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('attr2',236,65,200,'classica',150,300,0);
+Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('attr3',200,45,200,'classica',350,200,25);
+Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('attr4',150,50,75,'moderna',15,150,15);
 
 
-Insert into Materiale (Id,Tipologia_Materiale,Colore) values (1,'pelle','Rosso'); 
-Insert into Materiale (Id,Tipologia_Materiale,Colore) values (2,'Abelia','Monocromo'); 
-Insert into Materiale (Id,Tipologia_Materiale,Colore) values (3,'Begonia','Marrone');
-Insert into Materiale (Id,Tipologia_Materiale,Colore) values (4,'Lilum','Blu');
-Insert into Materiale (Id,Tipologia_Materiale,Colore) values (5,'Liroe','Bianco'); 
-Insert into Materiale (Id,Tipologia_Materiale,Colore) values (6,'pelle','Nero'); 
-Insert into Materiale (Id,Tipologia_Materiale,Colore) values (7,'pelle','Ombra'); 
-Insert into Materiale (Id,Tipologia_Materiale,Colore) values (8,'Santolina','Bordeaux');
-Insert into Materiale (Id,Tipologia_Materiale,Colore) values (9,'Pelle','Beige'); 
-Insert into Materiale (Id,Tipologia_Materiale,Colore) values (10,'Solidago','Monocromo');
+Insert into Materiale (Id,Tipologia_Materiale,Colore) values (1,'pelle','rosso'); 
+Insert into Materiale (Id,Tipologia_Materiale,Colore) values (2,'abelia','monocromo'); 
+Insert into Materiale (Id,Tipologia_Materiale,Colore) values (3,'begonia','marrone');
+Insert into Materiale (Id,Tipologia_Materiale,Colore) values (4,'lilum','blu');
+Insert into Materiale (Id,Tipologia_Materiale,Colore) values (5,'liroe','bianco'); 
+Insert into Materiale (Id,Tipologia_Materiale,Colore) values (6,'pelle','nero'); 
+Insert into Materiale (Id,Tipologia_Materiale,Colore) values (7,'pelle','ombra'); 
+Insert into Materiale (Id,Tipologia_Materiale,Colore) values (8,'santolina','bordeaux');
+Insert into Materiale (Id,Tipologia_Materiale,Colore) values (9,'pelle','beige'); 
+Insert into Materiale (Id,Tipologia_Materiale,Colore) values (10,'solidago','monocromo');
 
 
 Insert into Composto (Id,Codice) values (1,7);
@@ -142,20 +153,13 @@ Insert into Composto (Id,Codice) values (7,2);
 Insert into Composto (Id,Codice) values (8,3);
 Insert into Composto (Id,Codice) values (9,4);
 
-Insert into Utente (CF,Nome,Cognome,Email,Passw,Tipologia) values ('dnlgnt98a05g813p','Giacinto','Adinolfi','Giaci95@live.it','root',1);
-Insert into Utente (CF,Nome,Cognome,Email,Passw,Tipologia) values ('dnlotp254689541d','Vincenzo','Palcone','Vincenzo85@gmail.com','root',1);
+Insert into Utente (CF,Nome,Cognome,Email,Passw) values ('dnlgnt98a05g813p','Giacinto','Adinolfi','giaci95@live.it','root');
+Insert into Utente (CF,Nome,Cognome,Email,Passw) values ('dnlotp254689541d','Vincenzo','Palcone','vincenzo85@gmail.com','root');
+Insert into Utente (CF,Nome,Cognome,Email,Passw,Indirizzo_Fatturazione,Telefono) values ('dnn5sd47efr85gfd','Emanuele','Giammarino','giammarino85@gmail.com','emanuele','Via anice','3485625478' );
 
-insert into immagine (Codice,foto) value(1,LOAD_FILE('C:/Users/giaci/OneDrive/Desktop/TSW/ProgettoTSW/Poltorne/zeus.jpg'));
-insert into immagine (Codice,foto) value(2,LOAD_FILE('C:/Users/giaci/OneDrive/Desktop/TSW/ProgettoTSW/Poltorne/arrow.jpg'));
-insert into immagine (Codice,foto) value(3,LOAD_FILE('C:/Users/giaci/OneDrive/Desktop/TSW/ProgettoTSW/Poltorne/markus.jpg'));
-insert into immagine (Codice,foto) value(4,LOAD_FILE('C:/Users/giaci/OneDrive/Desktop/TSW/ProgettoTSW/Poltorne/hugò.jpg'));
-insert into immagine (Codice,foto) value(5,LOAD_FILE('C:/Users/giaci/OneDrive/Desktop/TSW/ProgettoTSW/Poltorne/robert.jpg'));
-insert into immagine (Codice,foto) value(6,LOAD_FILE('C:/Users/giaci/OneDrive/Desktop/TSW/ProgettoTSW/Poltorne/silandrio.jpg'));
-insert into immagine (Codice,foto) value(7,LOAD_FILE('C:/Users/giaci/OneDrive/Desktop/TSW/ProgettoTSW/Poltorne/pouf.jpg'));
-insert into immagine (Codice,foto) value(8,LOAD_FILE('C:/Users/giaci/OneDrive/Desktop/TSW/ProgettoTSW/Poltorne/zelbio.jpg'));
-insert into immagine (Codice,foto) value(9,LOAD_FILE('C:/Users/giaci/OneDrive/Desktop/TSW/ProgettoTSW/Poltorne/attr1.jpg'));
-insert into immagine (Codice,foto) value(10,LOAD_FILE('C:/Users/giaci/OneDrive/Desktop/TSW/ProgettoTSW/Poltorne/attr2.jpg'));
-insert into immagine (Codice,foto) value(11,LOAD_FILE('C:/Users/giaci/OneDrive/Desktop/TSW/ProgettoTSW/Poltorne/attr3.jpg'));
-insert into immagine (Codice,foto) value(12,LOAD_FILE('C:/Users/giaci/OneDrive/Desktop/TSW/ProgettoTSW/Poltorne/attr4.jpg'));
+Insert into Ruolo (Nome) values ('amministratore');
+Insert into Ruolo (Nome) values ('utente');
 
-
+Insert into Utente_Ruolo (Email, Ruolo) values ('giaci95@live.it','amministratore');
+Insert into Utente_Ruolo (Email, Ruolo) values ('vincenzo85@gmail.com','amministratore');
+Insert into Utente_Ruolo (Email, Ruolo) values ('giammarino85@gmail.com','utente');

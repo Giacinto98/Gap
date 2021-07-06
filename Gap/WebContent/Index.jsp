@@ -134,7 +134,7 @@
   			<div class="card-body">
     	<h3 class="card-title"><%=bean.getNome()%></h3>
     	<p class="card-text">Apri per maggiori iformazioni </p>
-    	<a href="#" class="btn btn-primary">Apri Sezione</a>   
+    	<a href="CercaProdottoControl" class="btn btn-primary">Apri Prodotto</a>   
 			</div>
 		</div>
 

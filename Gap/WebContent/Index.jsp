@@ -23,7 +23,7 @@
 	
 	<link href="css/responsive.css" rel="stylesheet" type="text/css">
 	<link href="css/index.css" rel="stylesheet" type="text/css">
-	<link href="css/responsive.css" rel="stylesheet" type="text/css">
+	<link href="css/generale.css" rel="stylesheet" type="text/css">
 	
 <style>
 	div {
@@ -129,12 +129,12 @@
 	<td> 
 
 	
-		<div class="card" id="carta" >
+		<div id="carta" >
   		<img class="card-img-top" height=200 width=100% src="Elementi/<%=bean.getNome()%>.jpg " alt="Card image cap">
   			<div class="card-body">
-    	<h3 class="card-title"><%=bean.getNome()%></h3>
+    	<h3 class="card-title"><%=bean.getNome()%> <%if(bean.getSconto()>0) {%> <b style="color:red;"> &nbsp;&nbsp; SCONTO <%=bean.getSconto()%> &percnt; </b> <%} %></h3>
     	<p class="card-text">Apri per maggiori iformazioni </p>
-    	<form action="CercaProdottoControl" method="get"> <button type="submit" name="bottone" value="<%=bean.getNome()%>">Apri Prodotto</button> </form>
+    	<form action="CercaProdottoControl" method="get"> <button  type="submit" name="bottone" value="<%=bean.getNome()%>">Apri Prodotto</button> </form>
 		</div>
 		</div>
 

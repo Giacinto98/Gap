@@ -4,7 +4,7 @@
 }
 header{
 display: flex;
-background-color:#FFE4C4;
+background-color: #0088b3;
 width:100%;
 height:auto;
 text-align:center;
@@ -87,15 +87,22 @@ nav li:hover  {
 	display: none;
 	padding: 15px;
 }
+
+
 nav li:hover .dropdown-content a{
 	display:block
 }
+
+
 #carta{
 	width:18rem;
 	border-style:solid; 
 	border-color:#CCCCCC;
-	 border-width:3px;
+	border-width:3px;
+	border-radius: 5px;
+    border: 3px solid #0088b3;
 }
+
 
 .tabellaProdotti
 {

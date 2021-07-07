@@ -3,9 +3,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Login form</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<link href="css/generale.css" rel="stylesheet" type="text/css">
+
+	<title>Login form</title>
 </head>
+
 <body>
 
 <form action="LoginControl" method="get"> 

@@ -1,0 +1,37 @@
+@charset "ISO-8859-1";
+.immagine{
+	width:100%;
+	position:relative;
+}
+.immagineFoto{
+	margin:5px 0 0 0 ;
+	float:left;
+	min-width:300px;
+	max-width:45%;
+}
+.immagineDesc{
+	margin:5px 0 0 0 ;
+	text-align:center;
+
+}
+.bordino{
+	border:none;
+}
+
+@media screen and (max-width:680px){
+.immagine{
+	width:100%;
+	position:relative;
+}
+.immagineFoto{
+	margin:5px 0 0 0 ;
+	float:left;
+	min-width:300px;
+	max-width:100%;
+}
+.immagineDesc{
+	margin:5px 0 0 0 ;
+	text-align:center;
+
+}
+}

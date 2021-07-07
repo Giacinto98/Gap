@@ -26,7 +26,6 @@ public class ProdottoModel implements InterfacciaDAO <ProdottoBean>
 		Connection connection = null; //creo connessione 
 		PreparedStatement preparedStatement = null;
 		ProdottoBean bean = new ProdottoBean();
-		System.out.println(nome);
 		String selectSQL = "select * from prodotto where Nome = '"+ nome +"';";
 		
 		try {

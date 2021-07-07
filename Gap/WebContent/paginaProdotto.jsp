@@ -12,7 +12,8 @@
 	
 	<link href="css/responsive.css" rel="stylesheet" type="text/css">
 	<link href="css/index.css" rel="stylesheet" type="text/css">
-	<link href="css/responsive.css" rel="stylesheet" type="text/css">
+	<link href="css/prodotto.css" rel="stylesheet" type="text/css">
+	<link href="css/generale.css" rel="stylesheet" type="text/css">
 	
 	<style>
 		div 
@@ -101,14 +102,63 @@
 	</h3></ul>
 	</nav>
 	
+<div class="immagine">
+	
+	
 	<%
 		ProdottoBean prodotto = new ProdottoBean(); 
 		prodotto = (ProdottoBean) request.getAttribute("prodotto");
+		Collection<?> materiali = (Collection<?>) request.getAttribute("materiali");	
 	%>
-	<%=prodotto.getCodice() %>
-	<%=prodotto.getNome() %> 
-	<%=prodotto.getAltezza() %>
 	
+	<img class="immagineFoto" src="Elementi/<%=prodotto.getNome()%>.jpg" alt="<%=prodotto.getNome()%>">
+
+<fieldset class="bordino">
+	<div class="immagineDesc">
+		<h1><%=prodotto.getNome()%></h1>
+		<b>Dimensioni: </b><b><em>h.</em></b><%=prodotto.getAltezza()%>
+		<b><em>L.</em></b><%=prodotto.getLarghezza()%>
+		<b><em>P.</em></b><%=prodotto.getProfondita()%>
+		<br>
+		<b>Tipologia: <%=prodotto.getTipologia()%></b>
+		<%if(prodotto.getSconto() > 0)
+	  	  { %>
+			<h3 style="color:red">Prezzo </h3> <h2><del><%=prodotto.getPrezzo()%></del>  $ </h2>
+	  		<%float sconto = prodotto.getPrezzo() - ((prodotto.getPrezzo() * prodotto.getSconto())/100); %>
+			<h3 style="color:red">Prezzo Scontato </h3> <h2><%=sconto%> $ <br> </h2>
+	   <% } 
+		
+		else 
+			{ %>
+	   			<h3 style="color:red">Prezzo </h3> <h2><%=prodotto.getPrezzo()%> $ </h2>
+		<%  } 
+		//controlliamo se non ci sono prodotti da mostrare
+				if(materiali != null && materiali.size() > 0) //controllo se ci sono prodotti all'interno dell'array
+				{
+			%> <div> <% 
+					Iterator<?> it = materiali.iterator(); //iteriamo i prodotti
+					while(it.hasNext()) //fin quando ho prodotti
+					{
+					MaterialeBean materiale = (MaterialeBean) it.next(); //metto nel bean riferito alla tabella dei prodotti il prodotto i-esimo	
+			%> 
+					<img class="bordo" height=30 width=30 src="Materiali/<%=materiale.getTipologiaMateriale()%>_<%=materiale.getColore()%>.jpg " alt="Card image cap">
+				  <%} 
+				}%>
+				</div>
+		  
+		
+		
+		
+		<button type="submit" name="bottone" value="<%=prodotto.getNome()%>"> Aggiungi al carrello</button>
+	</div>	
+</fieldset>
+	
+</div>
+
+
+<footer style="background:grey; color:white;margin:10px 0px 0px 0px">
+	<p align="center">GRAZIE DELLA VISIONE PER SUPPORTARE IL SITO POTETE DONARE AL SEGUENTE IBAN:(iserire qui ibad di Emanuele)</p>
+</footer>
 
 
 

@@ -32,7 +32,6 @@
 				<p class="sposta"><a href="logout.jsp"><img src = "Elementi/logout.png" width="35" height="35"></a>
 				<a href="carrello.jsp"><img src = "Elementi/carrello.png" width="35" height="35"></a></p>
 				<span id="carrello"></span>
-
 			</div>
 			<%
 			}
@@ -48,10 +47,7 @@
 	</div> 
 		
 		<%	}
-		} %>
-		
-
-
+		} 	%>
 </header>
 
 <nav id="navbar">

@@ -28,7 +28,6 @@ public class CarrelloControl extends HttpServlet {
 		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource"); 
 		String nome = request.getParameter("nome");
 		String colore = request.getParameter("colore");
-		//System.out.println(nome + " " + colore);
 		ProdottoModel prodotto = new ProdottoModel(ds);
 		ProdottoBean bean = new ProdottoBean();
 		
@@ -41,7 +40,6 @@ public class CarrelloControl extends HttpServlet {
 		
 		//Assegna al bean carrello
 		
-		//System.out.println(bean.getNome());
 		response.setContentType("application/json");
 		JSONObject json = new JSONObject();
 		try {

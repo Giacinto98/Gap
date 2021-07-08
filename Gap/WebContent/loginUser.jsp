@@ -21,8 +21,8 @@
      	<p><input id="username" type="text" name="username" placeholder="enter email" required> </p>
        	<p><label for="password">Password</label></p>
      	<p><input id="password" type="password" name="password" placeholder="enter password" required> <p>
-     	<input type="submit" value="Login"/>
-     	<input type="reset" value="Reset"/>
+     	<input style="border-radius: 5px; border: 3px solid #0088b3; background-color:#0088b3; color: white;" type="submit" value="Login"/>
+     	<input style="border-radius: 5px; border: 3px solid #0088b3; background-color:#0088b3; color: white;" type="reset" value="Reset"/>
      </div> 
 </fieldset>
 </form> 

@@ -27,81 +27,7 @@
 
 
 <body>
-	<header>
-		<div>
-			<p align="left">
-			<a href="Index.jsp"><img src = "Elementi/logo.png" width="75" height="75"></a>
-			<p align="center">
-		</div>
-	
-		<div>
-			<p align="center" >
-			<input id = "s" type="text" name="ricerca" >
-			<a href="ricerca.jsp"><img src = "Elementi/ricerca.png" width="25" height="25"></a>
-			</p>
-	 	</div >
-	 	
-	<%
-		HttpSession sessione = request.getSession(false);
-	   if (sessione != null)
-	   {
-			UtenteBean utente = (UtenteBean) session.getAttribute("utente");
-			if(utente != null)
-			{
-				%>
-				<div style="top:0px; right: 100px">
-					<p align = "center"><a href="profilo.jsp"><img src = "Elementi/profilo.png" width="30" height="30"></a>
-					<br><%=utente.getNome()%></p>
-				</div> 
-					<a href="logout.jsp"><img src = "Elementi/logout.png" width="35" height="35"></a>
-					<a href="carrello.jsp"><img src = "Elementi/carrello.png" width="35" height="35"></a>
-				<%
-			}
-	 		else 
-	 		{
-			 %>
-			 
-	<div>
-	 	<p class="logRec" align="right" >
-	 	<a  class="link" title="login" href="loginUser.jsp"> LOGIN</a> 
-	 	<a  class="link" title="registrazione" href="Registrazione.jsp" >/REG</a>
-		</p>
-	</div> 
-		
-		<%	}
-		} %>
-		
-		<a href="javascript:void(0)" class="btn-menu" onclick=toggle()>&#9776;</a>	
-	</header>
-
-	<nav id="navbar">
-		<ul><h3>
-		<li><a class="dropdown" href="#">Poltrone</a>
-			<div class="dropdown-content">
-				<a href="#">Manuali</a>
-				<a href="#">Elettriche</a>
-				<a href="#">Pouf</a>
-			</div>
-		</li>
-		<li><a href="#" class="dropdown">Pareti Attrezzate</a>
-			<div class="dropdown-content">
-				<a href="#">PA1</a>
-				<a href="#">PA2</a>
-				<a href="#">PA3</a>
-			</div>
-		</li>
-		<li><a href="#">Chi siamo</a></li>
-	
-		<% 
-		UtenteBean utente = (UtenteBean) session.getAttribute("utente"); 
-		if(utente != null)
-			if(utente.getRuolo().equals("amministratore"))
-			{%>
-			<li><a href="#">Amministratore</a></li>
-			<%} %>
-	</h3></ul>
-	</nav>
-	
+<jsp:include page="common/header.jsp"/>
 <div class="immagine">
 	
 	
@@ -141,15 +67,16 @@
 					{
 					MaterialeBean materiale = (MaterialeBean) it.next(); //metto nel bean riferito alla tabella dei prodotti il prodotto i-esimo	
 			%> 
-					<img class="bordo" height=30 width=30 src="Materiali/<%=materiale.getTipologiaMateriale()%>_<%=materiale.getColore()%>.jpg " alt="Card image cap">
+					<img class="bordo"  title="<%=materiale.getTipologiaMateriale()%>_<%=materiale.getColore()%>"  onclick="selezionaColore ('<%=materiale.getTipologiaMateriale()%>_<%=materiale.getColore()%>')" 
+					 height=30 width=30 src="Materiali/<%=materiale.getTipologiaMateriale()%>_<%=materiale.getColore()%>.jpg " alt="Card image cap">
 				  <%} 
 				}%>
 				</div>
-		  
+		  		<p id="demo"></p>
 		
 		
 		
-		<button type="submit" name="bottone" value="<%=prodotto.getNome()%>"> Aggiungi al carrello</button>
+		<button type="submit" name="bottone" onclick="aggiungiAlCarrello('<%=prodotto.getNome()%>')" value="<%=prodotto.getNome()%>"> Aggiungi al carrello</button>
 	</div>	
 </fieldset>
 	
@@ -160,6 +87,44 @@
 	<p align="center">GRAZIE DELLA VISIONE PER SUPPORTARE IL SITO POTETE DONARE AL SEGUENTE IBAN:(iserire qui ibad di Emanuele)</p>
 </footer>
 
+
+<script type="text/javascript">
+var colore = null;
+
+	function selezionaColore (c)
+	{
+		colore = c;
+	}
+	
+	function aggiungiAlCarrello(nome)
+	{
+		
+		if(colore==null)
+			{
+			document.getElementById("demo").innerHTML = "Scegliere una tipologia di materiale per il prodotto";
+			return;
+			}
+		else
+			document.getElementById("demo").innerHTML = "";
+
+			//alert(JSON.stringify(oggetto));
+			
+			var url = 'CarrelloControl?nome=' + encodeURIComponent(nome) + "&colore=" + encodeURIComponent(colore);
+			
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = //alla risposta della servlet
+				function() //aumenta di 1 unità il carrello
+				{
+					if(xhr.readyState == 4 && xhr.status == 200)
+					{
+						var response = JSON.parse(xhr.responseText); //stringa che contiene la risposta da parte del server
+						document.getElementById("carrello").innerHTML = response.number;
+					}
+				}
+			xhr.open("GET",url,true);
+			xhr.send(null);
+	}
+</script>
 
 
 </body>

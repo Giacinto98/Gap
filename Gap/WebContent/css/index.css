@@ -2,36 +2,49 @@
 .btn-menu{
 	display:none;
 }
+
+
 header{
 display: flex;
 background-color: #0088b3;
 width:100%;
-height:auto;
+height:100px;
 text-align:center;
-
 }
+
+
+.sposta{
+	display: inline-block;
+	text-align:right;	
+}
+
 
 div.logRec{
-	
 	text-decoration:none;
-	
 	text-align:right;
 }
+
+
 .link{
 	color:white;
-	
 }
+
+
 .link:hover{
 	color:black;
 }
+
+
 nav{
 
 	display:inline-block;
-	background-color:Grey;
+	background-color:white;
 	color:white;
-	text-align:center;
+
 	width:100%; 
-	
+	border:1px solid black;
+	border-color:#0088b3;	
+	text-align:center;
 }
 
 nav ul{
@@ -42,14 +55,13 @@ nav ul{
 }
 nav li a{
 	text-decoration:none;
-	color:white;
+	color:black;
 	padding:15px;
 }
 
 nav li{
 	
 	display: inline-table;
-	
 	padding: 15 px;
 }
 
@@ -72,12 +84,16 @@ nav li:hover  {
 
 .dropdown-content{
 	
-	background-color:Purple;
+	background-color:white;
+	position:absolute;
+	width:auto;
 
 }
 .dropdown:hover .dropdown-content{
 	display:inline;
 }
+
+
 .dropdown{
 	padding:12px 16px;
 }
@@ -97,10 +113,8 @@ nav li:hover .dropdown-content a{
 #carta{
 	width:18rem;
 	border-style:solid; 
-	border-color:#CCCCCC;
+	border-color:#0088b3;
 	border-width:3px;
-	border-radius: 5px;
-    border: 3px solid #0088b3;
 }
 
 
@@ -113,6 +127,6 @@ border-collapse: collapse;
 
 .tabellaProdotti td, .tabellaProdotti th{
 margin-left:10%;
-border:1px solid #ddd;
+border:1px solid #0088b3;
 display:inline-block;	
 }

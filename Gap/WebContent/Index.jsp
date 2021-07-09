@@ -17,7 +17,7 @@
 <html lang = "en">
 <head>
 	<meta charset="ISO-8859-1">
-	<meta name="author" content= "Adinolfi Giacinto">
+	<meta name="author" content= "Adinolfi Giacinto, Emanuele Giammarino, Vincenzo Palcone">
 	 
 	<title>Store</title>
 	
@@ -79,17 +79,6 @@
 
 <jsp:include page="common/futher.jsp"/>
 
-
-<script>
-function toggle() 
-{
-	if(document.getElementById("navbar").style.display=="none"){
-		document.getElementById("navbar").style.display="block";
-	}else{
-		document.getElementById("navbar").style.display="none";
-		}
-}
-</script>
 
 </body>
 </html>

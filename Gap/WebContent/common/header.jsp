@@ -3,6 +3,9 @@
 
 
 <header>	
+
+<a href="javascript:void(0)" class="btn-menu" onclick=toggle()>&#9776;</a>
+	
 	<div>
 		<p align="left">
 		<a href="Index.jsp"><img src = "Elementi/logo.png" width="75" height="75"></a>
@@ -17,10 +20,11 @@
 	 </div >
 	 
 	<%
+	UtenteBean utente = new UtenteBean();
 	HttpSession sessione = request.getSession(false);
 	   if (sessione != null)
 	   {
-			UtenteBean utente = (UtenteBean) sessione.getAttribute("utente");
+			utente = (UtenteBean) sessione.getAttribute("utente");
 			if(utente != null)
 			{
 			%>
@@ -73,7 +77,6 @@
 	<li><a href="#">Chi siamo</a></li>
 	
 	<% 
-	UtenteBean utente = (UtenteBean) session.getAttribute("utente"); 
 	if(utente != null)
 		if(utente.getRuolo().equals("amministratore"))
 		{%>
@@ -81,6 +84,17 @@
 		<%} %>
 </h3></ul>
 </nav>
+
+<script>
+function toggle() 
+{
+	if(document.getElementById("navbar").style.display=="none"){
+		document.getElementById("navbar").style.display="block";
+	}else{
+		document.getElementById("navbar").style.display="none";
+		}
+}
+</script>
 
 
 

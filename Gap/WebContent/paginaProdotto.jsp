@@ -30,8 +30,6 @@
 <jsp:include page="common/header.jsp"/>
 
 <div class="immagine">
-	
-	
 	<%
 		ProdottoBean prodotto = new ProdottoBean(); 
 		prodotto = (ProdottoBean) request.getAttribute("prodotto");
@@ -73,11 +71,28 @@
 				  <%} 
 				}%>
 				</div>
-		  		<p id="demo"></p>
+		  		<p id="demo" Style="color:red"></p>
+		
+		<%	
+		
+		HttpSession sessione = request.getSession(false);
+		   if (sessione != null)
+		   {
+			   UtenteBean utente = (UtenteBean) sessione.getAttribute("utente");
+				if(utente != null)
+				{
+			%> 
+					<button type="submit" name="bottone" onclick="aggiungiAlCarrello('<%=prodotto.getNome()%>','<%=utente.getNome()%>')"> Aggiungi al carrello</button>
+			<%	}
+				else
+				{ %>
+					<button type="submit" name="bottone" onclick="cane()"> Aggiungi al carrello</button>
+			<% 	} 
+		   }
+		    %>	
 		
 		
-		
-		<button type="submit" name="bottone" onclick="aggiungiAlCarrello('<%=prodotto.getNome()%>')"> Aggiungi al carrello</button>
+
 	</div>	
 </fieldset>
 	
@@ -95,7 +110,7 @@ var id = null;
 		//alert(id);
 	}
 	
-	function aggiungiAlCarrello(nome)
+	function aggiungiAlCarrello(nome,utente)
 	{
 		
 		if(id==null)
@@ -104,27 +119,28 @@ var id = null;
 			return;
 			}
 		else
-			document.getElementById("demo").innerHTML = "";
-
+			document.getElementById("demo").innerHTML = "";	
 			//alert(JSON.stringify(oggetto));
-			
-			//var url = 'CarrelloControl?nome=' + encodeURIComponent(nome) + "&tipologiaMateriale=" + encodeURIComponent(tipologiaMateriale) + "&colore=" + encodeURIComponent(colore);
-			
-			var url = 'CarrelloControl?nome=' + encodeURIComponent(nome) + "&idMateriale=" + encodeURIComponent(id);
+				var url = 'CarrelloControl?nome=' + encodeURIComponent(nome) + "&idMateriale=" + encodeURIComponent(id);
 
-			
-			var xhr = new XMLHttpRequest();
-			xhr.onreadystatechange = //alla risposta della servlet
-				function() //aumenta di 1 unità il carrello
-				{
-					if(xhr.readyState == 4 && xhr.status == 200)
+				var xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = //alla risposta della servlet
+					function() //aumenta di 1 unità il carrello
 					{
-						var response = JSON.parse(xhr.responseText); //stringa che contiene la risposta da parte del server
-						document.getElementById("carrello").innerHTML = response.number;
+						if(xhr.readyState == 4 && xhr.status == 200)
+						{
+							var response = JSON.parse(xhr.responseText); //stringa che contiene la risposta da parte del server
+							document.getElementById("carrello").innerHTML = response.number;
+						}
 					}
-				}
-			xhr.open("GET",url,true);
-			xhr.send(null);
+				xhr.open("GET",url,true);
+				xhr.send(null);
+	}
+	
+	function cane()
+	{
+			document.getElementById("demo").innerHTML = "Devi essere loggato per poter visualizzare/inserire prodotti all'interno del carrello";
+			return;
 	}
 </script>
 

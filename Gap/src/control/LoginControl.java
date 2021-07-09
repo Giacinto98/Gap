@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
+import model.CarrelloBean;
 import model.LoginModel;
 import model.UtenteBean;
 
@@ -42,6 +43,7 @@ public class LoginControl extends HttpServlet {
 			{
 				HttpSession sessione = request.getSession(true); //restituisce la sessione se esiste, altrimenti la crea nuova
 				sessione.setAttribute("utente", utente);
+				sessione.setAttribute("carrello", new CarrelloBean());
 				String index1 = response.encodeURL("/Index.jsp"); //URL rewriting
 				//System.out.println(index1);
 					getServletContext().getRequestDispatcher(index1).forward(request, response); //rimandiamo l'output alla parte view (jsp)			

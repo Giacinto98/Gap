@@ -38,6 +38,7 @@
 <body>
 
 <jsp:include page="common/header.jsp"/>
+
 <section id=StampaProdotti style="margin: 3px 3px 3px 3px;">
 
 <table class="tabellaProdotti">

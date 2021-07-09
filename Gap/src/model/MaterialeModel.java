@@ -53,9 +53,33 @@ public class MaterialeModel implements InterfacciaDAO <MaterialeBean>
 	}
 
 	@Override
-	public MaterialeBean doRetrieveByKey(String order) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public MaterialeBean doRetrieveByKey(String id) throws SQLException {
+		Connection connection = null; //creo connessione 
+		PreparedStatement preparedStatement = null;
+		String selectSQL = "Select * from materiale where id = '"+ id +"';";
+		MaterialeBean materiale = new MaterialeBean ();
+		try
+		{
+			connection = ds.getConnection(); //recuperiamo la connessione dal datasource passato in input nel costruttore della classe
+			preparedStatement = connection.prepareStatement(selectSQL); //accediamo alla connessione e passiamo alla funzione la stringa SQL
+			ResultSet rs = preparedStatement.executeQuery(); //esguiamo la query come facevamo nanche in db del primo sempestre
+			while(rs.next()) //scorriamo i valori che ci vengono restituiti e li mettima nel bean dedicato a questa tabella
+			{
+				materiale.setId(rs.getInt("Id"));
+				materiale.setTipologiaMateriale(rs.getString("Tipologia_Materiale"));
+				materiale.setColore(rs.getString("Colore"));
+			}
+		}
+		finally { //rilasiamo tutte le risorse che abbiamo
+			try {
+			if(preparedStatement != null)
+				preparedStatement.close();
+			} finally {
+			if(connection != null)
+				connection.close();
+			}
+		}
+		return materiale;
 	}
 
 	@Override

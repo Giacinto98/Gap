@@ -9,11 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import model.CarrelloBean;
 import model.ProdottoBean;
 import model.ProdottoModel;
 
@@ -27,23 +29,20 @@ public class CarrelloControl extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource"); 
 		String nome = request.getParameter("nome");
-		String colore = request.getParameter("colore");
-		ProdottoModel prodotto = new ProdottoModel(ds);
-		ProdottoBean bean = new ProdottoBean();
-		
-		try {
-			bean = prodotto.doRetrieveByKey(nome);
-		} catch (SQLException e) {
-			System.out.println("Errore ricerca prodotto");
-			e.printStackTrace();
+		String idMateriale = request.getParameter("idMateriale");
+		CarrelloBean carrello = new CarrelloBean();
+		HttpSession sessione = request.getSession(false);
+		if (sessione != null)
+		{
+			 carrello = (CarrelloBean) sessione.getAttribute("carrello");
 		}
 		
-		//Assegna al bean carrello
 		
+		carrello.inserisciElemento(ds, nome, idMateriale);
 		response.setContentType("application/json");
 		JSONObject json = new JSONObject();
 		try {
-			json.put("number", 1);
+			json.put("number", carrello.getQuantita());
 		} catch (JSONException e) {
 			System.out.println("Eccezione numero elementi carrello");
 			e.printStackTrace();

@@ -68,7 +68,7 @@
 					{
 					MaterialeBean materiale = (MaterialeBean) it.next(); //metto nel bean riferito alla tabella dei prodotti il prodotto i-esimo	
 			%> 
-					<img class="bordo"  title="<%=materiale.getTipologiaMateriale()%>_<%=materiale.getColore()%>"  onclick="selezionaColore ('<%=materiale.getTipologiaMateriale()%>_<%=materiale.getColore()%>')" 
+					<img class="bordo"  title="<%=materiale.getTipologiaMateriale()%>_<%=materiale.getColore()%>"  onclick="selezionaColore ('<%=materiale.getId()%>')" 
 					 height=30 width=30 src="Materiali/<%=materiale.getTipologiaMateriale()%>_<%=materiale.getColore()%>.jpg " alt="Card image cap">
 				  <%} 
 				}%>
@@ -77,7 +77,7 @@
 		
 		
 		
-		<button type="submit" name="bottone" onclick="aggiungiAlCarrello('<%=prodotto.getNome()%>')" value="<%=prodotto.getNome()%>"> Aggiungi al carrello</button>
+		<button type="submit" name="bottone" onclick="aggiungiAlCarrello('<%=prodotto.getNome()%>')"> Aggiungi al carrello</button>
 	</div>	
 </fieldset>
 	
@@ -88,17 +88,17 @@
 
 
 <script type="text/javascript">
-var colore = null;
-
-	function selezionaColore (c)
+var id = null;
+	function selezionaColore (identificativo)
 	{
-		colore = c;
+		id = identificativo;
+		//alert(id);
 	}
 	
 	function aggiungiAlCarrello(nome)
 	{
 		
-		if(colore==null)
+		if(id==null)
 			{
 			document.getElementById("demo").innerHTML = "Scegliere una tipologia di materiale per il prodotto";
 			return;
@@ -108,7 +108,10 @@ var colore = null;
 
 			//alert(JSON.stringify(oggetto));
 			
-			var url = 'CarrelloControl?nome=' + encodeURIComponent(nome) + "&colore=" + encodeURIComponent(colore);
+			//var url = 'CarrelloControl?nome=' + encodeURIComponent(nome) + "&tipologiaMateriale=" + encodeURIComponent(tipologiaMateriale) + "&colore=" + encodeURIComponent(colore);
+			
+			var url = 'CarrelloControl?nome=' + encodeURIComponent(nome) + "&idMateriale=" + encodeURIComponent(id);
+
 			
 			var xhr = new XMLHttpRequest();
 			xhr.onreadystatechange = //alla risposta della servlet

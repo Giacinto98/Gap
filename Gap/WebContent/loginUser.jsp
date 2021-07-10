@@ -16,7 +16,7 @@
 <fieldset>
      <legend><h2>Log in</h2></legend>
      <div align = "center">
-     	<p><img src = "Elementi/logo.png" width="100" height="100" align="center"></p>
+     	<p><a href="Index.jsp"><img src = "Elementi/logo.png" width="100" height="100" align="center"></a></p>
      	<p><label for="username">Login</label></p>
      	<p><input id="username" type="text" name="username" placeholder="enter email" required> </p>
        	<p><label for="password">Password</label></p>

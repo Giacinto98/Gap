@@ -28,53 +28,7 @@
 </head>
 <body>
 
-<header >
-<p>	<div>
-		<p align="left">
-		<a href="Index.jsp"><img src = "Elementi/logo.png" width="75" height="75"></a>
-		</p>
-	</div>
-	<div>
-	<p align="center" >
-		<input id = "s" type="text" name="ricerca" >
-		<input type="submit" name= "ricerca" value="Ricerca" placeholder="Nome prodotto" >
-		</p>
-	 </div >
-	 
-	 	<div >
-	 	 <p class="logRec" align="right" >
-	 	<a  class="link" title="login" href="inserisci link"> LOGIN</a> 
-	 	<a  class="link" title="registrazione" href="Registrazione.jsp" >/REG</a>
-		</p>
-		</div>    
-		
-	<a href="javascript:void(0)" class="btn-menu" onclick=toggle()>&#9776;</a>
-	 
-</header>
-
-<nav id="navbar" >
-<ul><h3>
-
-	<li><a class="dropdown" href="#">Poltrone</a>
-		<div class="dropdown-content">
-			<a href="#">Manuali</a>
-			<a href="#">Elettriche</a>
-			<a href="#">Pouf</a>
-		</div>
-	</li>
-	<li><a href="#" class="dropdown">Pareti Attrezzate</a>
-		<div class="dropdown-content">
-			<a href="#">PA1</a>
-			<a href="#">PA2</a>
-			<a href="#">PA3</a>
-		</div>
-	</li>
-	<li><a href="#">Chi siamo</a></li>
-</h3></ul>
-
-</nav>
-
-
+<jsp:include page="common/header.jsp"/>
 
 <form action="RegControl" method="post">
 
@@ -140,16 +94,9 @@
 	</div>
 </fieldset>
 
-<script type="text/javascript">
+<jsp:include page="common/futher.jsp"/>
 
-	function toggle() 
-	{
-		if(document.getElementById("navbar").style.display=="none"){
-			document.getElementById("navbar").style.display="block";
-		}else{
-			document.getElementById("navbar").style.display="none";
-		}
-	}
+<script type="text/javascript">
 
 	function validateEmail(email)
 	{
@@ -191,12 +138,6 @@
 	}
 	
 </script>
-
-
-<footer style="background:grey; color:white;margin:10px 0px 0px 0px">
-<p align="center">GRAZIE DELLA VISIONE PER SUPPORTARE IL SITO POTETE DONARE AL SEGUENTE IBAN:(iserire qui ibad di Emanuele)
-</p>
-</footer>
 
 </body>
 </html>

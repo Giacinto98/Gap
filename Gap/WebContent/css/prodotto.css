@@ -1,7 +1,6 @@
 @charset "ISO-8859-1";
 .immagine{
 	width:100%;
-	position:relative;
 }
 .immagineFoto{
 	margin:5px 0 0 0 ;
@@ -21,8 +20,8 @@
 @media screen and (max-width:680px){
 .immagine{
 	width:100%;
-	position:relative;
 }
+
 .immagineFoto{
 	margin:5px 0 0 0 ;
 	float:left;

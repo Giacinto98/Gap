@@ -21,9 +21,10 @@
 	 
 	<title>Store</title>
 	
-	<link href="css/responsive.css" rel="stylesheet" type="text/css">
 	<link href="css/index.css" rel="stylesheet" type="text/css">
 	<link href="css/generale.css" rel="stylesheet" type="text/css">
+	<link href="css/responsive.css" rel="stylesheet" type="text/css">
+	
 	
 <style>
 	div {

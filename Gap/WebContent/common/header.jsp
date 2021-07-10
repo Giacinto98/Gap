@@ -29,10 +29,9 @@
 			{
 			%>
 			<div class="sposta" >
-			
 				<p class="sposta"><a href="profilo.jsp"><img src = "Elementi/profilo.png" width="30" height="30"></a>
 				<%=utente.getNome()%></p>
-			</div>
+			
 			<% 
 			CarrelloBean carrello = (CarrelloBean) sessione.getAttribute ("carrello");
 			if(carrello != null)
@@ -40,7 +39,7 @@
 				<p class="sposta"><a href="logout.jsp"><img src = "Elementi/logout.png" width="35" height="35"></a>
 				<a href="carrello.jsp"><img src = "Elementi/carrello.png" width="35" height="35"></a></p>
 				<span id="carrello"><%=carrello.getQuantita() %></span>
-			
+			</div>
 			<%}
 			}
 	 		else 

@@ -22,12 +22,49 @@ public class CarrelloBean implements Serializable
 		quantita = -1;
 	}
 	
+	public ProdottoBean getIndex(int j)
+	{
+		for(int i=0; i<prodotti.size(); i++)
+		{
+			if(i == j)
+				return prodotti.get(i);
+		}
+		return null;
+	}
+	
+	public float getPrezzoTotale()
+	{
+		float tot=0;
+		for(int i=0; i<prodotti.size(); i++)
+		{
+			if(prodotti.get(i).getSconto() > 0)
+			{
+				float sconto = prodotti.get(i).getPrezzo() - ((prodotti.get(i).getPrezzo() * prodotti.get(i).getSconto())/100);
+				tot += (prodotti.get(i).getQuantita()) * sconto;
+			}
+			else
+				tot += (prodotti.get(i).getQuantita()) * (prodotti.get(i).getPrezzo());
+		}
+		return tot;
+	}
+	
+	public ArrayList<ProdottoBean> getProdotti ()
+	{
+		return prodotti;
+	}
+	
+	public ArrayList<MaterialeBean> getMateriali ()
+	{
+		return materiali;
+	}
 	
 
 	public void inserisciElemento(DataSource ds, String nome, String id) 
 	{
 		ProdottoModel modelProd = new ProdottoModel (ds);
 		ProdottoBean prodotto = new ProdottoBean ();
+		MaterialeModel modelMater = new MaterialeModel (ds);
+		MaterialeBean materiale = new MaterialeBean();
 		
 		try {
 			prodotto = modelProd.doRetrieveByKey(nome);
@@ -36,29 +73,12 @@ public class CarrelloBean implements Serializable
 			e.printStackTrace();
 		} 
 		
-		/*int j=0;
-		for(; j<prodotti.size(); j++)
-		{
-			if(prodotto.getCodice() == prodotti.get(j).getCodice())
-			{
-				break;
-			}
-		}
-		
-		if (j >= prodotti.size())
-		{
-			prodotto.setQuantita(1);
-		}*/
-		
-		MaterialeModel modelMater = new MaterialeModel (ds);
-		MaterialeBean materiale = new MaterialeBean();
-		
 		try {
 			materiale = modelMater.doRetrieveByKey(id);
 		} catch (SQLException e) {
 			System.out.println("Errore ricerca materiale associato al prodotto");
 			e.printStackTrace();
-		} 
+		}
 		
 		int i=0;
 		for(; i<prodotti.size(); i++)
@@ -67,13 +87,16 @@ public class CarrelloBean implements Serializable
 			{
 				if(materiali.get(i).getId() == materiale.getId())
 				{
-					prodotto.setQuantita(prodotto.getQuantita() + 1);
+					int quantita=prodotti.get(i).getQuantita() + 1;
+					prodotti.get(i).setQuantita(quantita);
+					break;
 				}
 			}
 		}
 		
 		if(i >= prodotti.size())
 		{
+			int count = 1;
 			prodotto.setQuantita(1);
 			prodotti.add(prodotto);
 			materiali.add(materiale);
@@ -155,6 +178,9 @@ public class CarrelloBean implements Serializable
 	
 	public int getQuantita()
 	{
-		return prodotti.size();
+		int count=0;
+		for(int i=0; i<prodotti.size();i++)
+			count += prodotti.get(i).getQuantita();
+		return count;
 	}	
 }

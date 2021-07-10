@@ -126,7 +126,6 @@ border-collapse: collapse;
 }
 
 .tabellaProdotti td, .tabellaProdotti th{
-margin-left:10%;
 border:1px solid #0088b3;
 display:inline-block;	
 }

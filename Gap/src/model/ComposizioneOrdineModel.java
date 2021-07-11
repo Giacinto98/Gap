@@ -33,8 +33,7 @@ private DataSource ds = null;
 	public void doSave(ComposizioneBean item) throws SQLException {
 		Connection connection = null; //creo connessione 
 		PreparedStatement preparedStatement = null;
-		String updateSQL = "insert into composizione (Num_ordine,codice,quantita) values ("+item.getNumeroOrdine()+","+item.getCodiceProdotto()+","+item.getQuantia()+");";
-		System.out.println(updateSQL);
+		String updateSQL = "insert into composizione (Num_ordine,codice,quantita,Id_Materiale) values ("+item.getNumeroOrdine()+","+item.getCodiceProdotto()+","+item.getQuantita()+","+item.getIdMateriale()+");";
 		try
 		{
 			connection = ds.getConnection(); //recuperiamo la connessione dal datasource passato in input nel costruttore della classe

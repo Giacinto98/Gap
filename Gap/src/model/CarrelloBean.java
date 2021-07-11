@@ -22,6 +22,26 @@ public class CarrelloBean implements Serializable
 		quantita = -1;
 	}
 	
+	public void stampaProdotti ()
+	{
+		for (int i =0; i<prodotti.size();i++)
+		{
+			System.out.println(prodotti.get(i).getCodice());
+		}
+		System.out.println();
+		System.out.println();
+	}
+	
+	public MaterialeBean getIndexMateriale(int j)
+	{
+		for(int i=0; i<materiali.size(); i++)
+		{
+			if(i == j)
+				return materiali.get(i);
+		}
+		return null;
+	}
+	
 	public ProdottoBean getIndex(int j)
 	{
 		for(int i=0; i<prodotti.size(); i++)

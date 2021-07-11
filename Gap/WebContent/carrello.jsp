@@ -25,7 +25,7 @@
 <jsp:include page="common/header.jsp"/>
 
 	<%
-	HttpSession sessione = request.getSession(false);
+	 HttpSession sessione = request.getSession(false);
 	if (sessione != null)
 	{
 		CarrelloBean carrello = (CarrelloBean) sessione.getAttribute ("carrello");
@@ -44,8 +44,8 @@
 				<% 
 				}
 				//sessione.setAttribute("array", prodotti);
-				%> 
 				
+				%> 
 				<form method = "GET" action = "AcquistoControl"> 
   				<button type="submit" name="Acquista">Acquista</button>  
 				</form>
@@ -61,7 +61,7 @@
 			}
 		}
     }
-	%>
+	%>-->
 
 
 

@@ -18,40 +18,6 @@ private DataSource ds = null;
 	{
 		this.ds = ds;
 	}
-
-	public OrdineBean getOrdine(OrdineBean ordine) throws SQLException
-	{
-		OrdineBean ordine1 = new OrdineBean();
-		Connection connection = null; //creo connessione 
-		PreparedStatement preparedStatement = null;
-		String selectSQL = "select * from ordine where email = '"+ordine.getEmail()+"' and prezzo_totale= "+ordine.getPrezzoTotale()+" and num_prodotti="+ordine.getNumeroProdotti()+" and data_Ordine = '"+ordine.getDataOrdine()+"'";
-		try {
-			connection = ds.getConnection(); //recuperiamo la connessione dal datasource passato in input nel costruttore della classe
-			preparedStatement = connection.prepareStatement(selectSQL); //accediamo alla connessione e passiamo alla funzione la stringa SQL
-			ResultSet rs = preparedStatement.executeQuery(); //esguiamo la query come facevamo nanche in db del primo sempestre
-			while(rs.next()) //scorriamo i valori che ci vengono restituiti e li mettima nel bean dedicato a questa tabella
-			{
-				ordine1.setEmail(rs.getString("email"));
-				ordine1.setNumeroOrdine(rs.getInt("num_ordine"));
-				ordine1.setNumeroProdotti(rs.getInt("Num_Prodotti"));
-				String data = rs.getString("data_ordine");
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-				LocalDate localDate = LocalDate.parse(data, formatter);
-				ordine1.setDataOrdine(localDate);
-				ordine1.setPrezzoTotale(rs.getInt("Prezzo_Totale"));
-			}
-		} finally { //rilasiamo tutte le risorse che abbiamo
-			try {
-			if(preparedStatement != null)
-				preparedStatement.close();
-			} finally {
-			if(connection != null)
-				connection.close();
-			}
-		}
-		System.out.println(ordine1.getNumeroOrdine());
-		return ordine1; //ritorniamo la lista dei prodotti presi dal database.
-	}
 	
 	@Override
 	public OrdineBean doRetrieveByKey(String code) throws SQLException {
@@ -69,7 +35,7 @@ private DataSource ds = null;
 	public void doSave(OrdineBean ordine) throws SQLException {
 		Connection connection = null; //creo connessione 
 		PreparedStatement preparedStatement = null;
-		String updateSQL = "insert into ordine (Email,Prezzo_Totale,Num_Prodotti,data_Ordine) values ('"+ordine.getEmail()+"',"+ordine.getPrezzoTotale()+","+ordine.getNumeroProdotti()+",'"+ordine.getDataOrdine()+"');";
+		String updateSQL = "insert into ordine (Num_Ordine,Email,Prezzo_Totale,Num_Prodotti,data_Ordine) values ("+ ordine.getNumeroOrdine() +",'"+ordine.getEmail()+"',"+ordine.getPrezzoTotale()+","+ordine.getNumeroProdotti()+",'"+ordine.getDataOrdine()+"');";
 		try
 		{
 			connection = ds.getConnection(); //recuperiamo la connessione dal datasource passato in input nel costruttore della classe

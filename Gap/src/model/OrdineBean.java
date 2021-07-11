@@ -7,7 +7,7 @@ public class OrdineBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	int numeroOrdine;
+	double numeroOrdine;
 	String email;
 	float prezzoTotale;
 	int numeroProdotti;
@@ -21,11 +21,11 @@ public class OrdineBean implements Serializable {
 		numeroProdotti = -1;
 	}
 
-	public int getNumeroOrdine() {
+	public double getNumeroOrdine() {
 		return numeroOrdine;
 	}
 
-	public void setNumeroOrdine(int numeroOrdine) {
+	public void setNumeroOrdine(double numeroOrdine) {
 		this.numeroOrdine = numeroOrdine;
 	}
 

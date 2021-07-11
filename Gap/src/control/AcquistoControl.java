@@ -15,6 +15,8 @@ import model.ComposizioneBean;
 import model.ComposizioneOrdineModel;
 import model.OrdineBean;
 import model.OrdineModel;
+import model.ProdottoBean;
+import model.ProdottoModel;
 import model.UtenteBean;
 
 
@@ -38,6 +40,8 @@ public class AcquistoControl extends HttpServlet {
 		
 		if(carrello != null )
 		{
+			double casuale = Math.random() * 100000;
+			ordine.setNumeroOrdine(casuale);
 			ordine.setEmail(utente.getEmail());
 			ordine.setNumeroProdotti(carrello.getQuantita());
 			ordine.setDataOrdine(LocalDate.now());
@@ -49,31 +53,40 @@ public class AcquistoControl extends HttpServlet {
 				System.out.println("Eccezione salvataggio ordine in tabella");
 				e.printStackTrace();
 			}
+			
+			ProdottoModel prodottoModel = new ProdottoModel(ds);
 			ComposizioneOrdineModel composizioneModel = new ComposizioneOrdineModel(ds);
 			ComposizioneBean composizione = new ComposizioneBean();
-			for(int i=0; i<carrello.getQuantita();i++)
+			
+			int i=0;
+			while(i<carrello.getProdotti().size())
 			{	
+				composizione.setIdMateriale(carrello.getIndexMateriale(i).getId());
 				composizione.setCodiceProdotto(carrello.getIndex(i).getCodice());
+				composizione.setNumeroOrdine(casuale);
+				composizione.setQuantita(carrello.getIndex(i).getQuantita());
 				
-				try {
-					composizione.setNumeroOrdine(modelOrdine.getOrdine(ordine).getNumeroOrdine());
-				} catch (SQLException e1) {
-					System.out.println("Eccezione ricerca ordine");
-					e1.printStackTrace();
-				}
-				
-				composizione.setQuantia(carrello.getIndex(i).getQuantita());
 				try {
 					composizioneModel.doSave(composizione);
 				} catch (SQLException e) {
 					System.out.println("Eccezione salvataggio composizione ordine");
 					e.printStackTrace();
 				}
-			}
-			
+				
+				try {
+					ProdottoBean prodotto = carrello.getIndex(i);
+					//System.out.println(carrello.getIndex(i).getCodice());
+					prodottoModel.doUpdate(prodotto);
+				} catch (SQLException e) {
+					System.out.println("Eccezione salvataggio quantità modificata del prodotto");
+					e.printStackTrace();
+				}
+				i++;
+			}	
 		}
 		else
-			System.out.println("errore passaggio prodotti");
+			System.out.println("Errore passaggio prodotti");
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

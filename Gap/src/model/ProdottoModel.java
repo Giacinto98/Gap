@@ -105,7 +105,56 @@ public class ProdottoModel implements InterfacciaDAO <ProdottoBean>
 
 	@Override
 	public void doUpdate(ProdottoBean item) throws SQLException {
-		// TODO Auto-generated method stub
+		Connection connection = null; //creo connessione 
+		PreparedStatement preparedStatement = null;
+		ProdottoBean bean = new ProdottoBean();
+		String SelectSQL = "select * from prodotto where codice = "+item.getCodice()+";";
+		try {
+			connection = ds.getConnection(); //recuperiamo la connessione dal datasource passato in input nel costruttore della classe
+			preparedStatement = connection.prepareStatement(SelectSQL); //accediamo alla connessione e passiamo alla funzione la stringa SQL
+			ResultSet rs = preparedStatement.executeQuery(); //esguiamo la query come facevamo nanche in db del primo sempestre
+			while(rs.next()) //scorriamo i valori che ci vengono restituiti e li mettima nel bean dedicato a questa tabella
+			{
+				bean.setCodice(rs.getInt("codice"));
+				bean.setNome(rs.getString("nome"));
+				bean.setAltezza(rs.getInt("altezza"));
+				bean.setProfondita(rs.getInt("profondita"));
+				bean.setLarghezza(rs.getInt("larghezza"));
+				bean.setTipologia(rs.getString("tipologia"));
+				bean.setQuantita(rs.getInt("quantita"));
+				bean.setPrezzo(rs.getInt("prezzo"));
+				bean.setSconto(rs.getInt("sconto"));
+			}
+			
+		} finally { //rilasiamo tutte le risorse che abbiamo
+			try {
+			if(preparedStatement != null)
+				preparedStatement.close();
+			} finally {
+			if(connection != null)
+				connection.close();
+			}
+		}
+			
+		
+		try
+		{
+			int quantita = (bean.getQuantita() - item.getQuantita());
+			String UpdateSQL = "Update prodotto set quantita = '"+quantita+"' where codice = '"+item.getCodice()+"';";
+			System.out.println(UpdateSQL);
+			connection = ds.getConnection(); //recuperiamo la connessione dal datasource passato in input nel costruttore della classe
+			preparedStatement = connection.prepareStatement(UpdateSQL); //accediamo alla connessione e passiamo alla funzione la stringa SQL
+			preparedStatement.executeUpdate(); //esguiamo la query come facevamo nanche in db del primo sempestre
+		}
+		finally { //rilasiamo tutte le risorse che abbiamo
+			try {
+			if(preparedStatement != null)
+				preparedStatement.close();
+			} finally {
+			if(connection != null)
+				connection.close();
+			}
+		}
 		
 	}
 

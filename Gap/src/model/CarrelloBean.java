@@ -22,6 +22,16 @@ public class CarrelloBean implements Serializable
 		quantita = -1;
 	}
 	
+	public int getIndexDiUnProdotto(int codiceProdotto, int idMateriale)
+	{
+		for(int i=0; i<prodotti.size();i++)
+		{
+			if((prodotti.get(i).getCodice() == codiceProdotto) && (materiali.get(i).getId() == idMateriale))
+				return i;
+		}
+		return -1;
+	}
+	
 	public void stampaProdotti ()
 	{
 		for (int i =0; i<prodotti.size();i++)
@@ -159,11 +169,7 @@ public class CarrelloBean implements Serializable
 						prodotti.get(i).setQuantita(quantita);
 					}
 					else
-					{
-						prodotti.remove(i);
-						materiali.remove(i);
-						return;
-					}
+						break;
 				}
 			}
 		}
@@ -178,12 +184,9 @@ public class CarrelloBean implements Serializable
 			{
 				if(materiali.get(i).getId() == idMateriale)
 				{
-					if(prodotti.get(i).getQuantita() > 1)
-					{
 						int quantita = prodotti.get(i).getQuantita();
 						quantita = quantita + 1 ;
 						prodotti.get(i).setQuantita(quantita);
-					}
 				}
 			}
 		}

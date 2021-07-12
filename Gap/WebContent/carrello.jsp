@@ -24,10 +24,11 @@
 <body>
 <jsp:include page="common/header.jsp"/>
 
+
 	<%
-	 HttpSession sessione = request.getSession(false);
+	HttpSession sessione = request.getSession(false);
 	if (sessione != null)
-	{
+	{float prezzoTot=0;
 		CarrelloBean carrello = (CarrelloBean) sessione.getAttribute ("carrello");
 		if(carrello != null)
 		{
@@ -35,33 +36,154 @@
 			{
 				//codice se carrello ha elementi
 				ArrayList <ProdottoBean> prodotti = carrello.getProdotti();
-				for (int i=0; i<prodotti.size(); i++)
-				{
+				ArrayList<MaterialeBean> materiali = carrello.getMateriali();
 				 %>
-				 <%=prodotti.get(i).getNome()%>
-				 <%=prodotti.get(i).getQuantita()%>
-				  <br>
-				<% 
+				 
+				<div class="immagine" style="position:relative;">
+				<table class="tabellaProdCarrello">
+				<tr>
+					
+			
+				<%
+				int i=0;
+				for (; i<prodotti.size(); i++)
+				{
+				float sconto=0;
+				 %>
+
+<td>
+<div id = "sezioneProdotto" style="text-align:center">	
+<%
+	if(prodotti.get(i).getSconto() > 0){
+		sconto = prodotti.get(i).getPrezzo() - ((prodotti.get(i).getPrezzo() * prodotti.get(i).getSconto())/100);
+		prezzoTot = prezzoTot +(sconto * prodotti.get(i).getQuantita());}
+	else{
+		prezzoTot = prezzoTot + (prodotti.get(i).getPrezzo() * prodotti.get(i).getQuantita());}
+		%> 		
+<img class="immagineFoto" src="Elementi/<%=prodotti.get(i).getNome()%>.jpg" alt="<%=prodotti.get(i).getNome()%>">				 
+ Nome:<h2><%=prodotti.get(i).getNome()%></h2>
+ 
+ Materiale :
+ <img class="bordo"  title="<%=materiali.get(i).getTipologiaMateriale()%>_<%=materiali.get(i).getColore()%>"  
+height=30 width=30 src="Materiali/<%=materiali.get(i).getTipologiaMateriale()%>_<%=materiali.get(i).getColore()%>.jpg " 
+alt="Card image cap"><%=materiali.get(i).getTipologiaMateriale()%>
+
+<br> 
+ <%
+	if(prodotti.get(i).getSconto() > 0){
+	%>		
+ 		Importo:<b><%=sconto%></b><br>
+<%	}
+	else{
+		%>
+		Importo:<b><%=prodotti.get(i).getPrezzo()%></b>	<br>
+	<%}
+%> 
+
+</div>	
+
+<div class="divQuantita">
+
+<button type="button" onclick="funzioneMeno('<%=prodotti.get(i).getCodice()%>','<%=materiali.get(i).getId()%>')"> - </button> 
+<span id = "<%=prodotti.get(i).getCodice()%>_<%=materiali.get(i).getId()%>"><%=prodotti.get(i).getQuantita()%></span>
+<button type="button" onclick="funzionePiu('<%=prodotti.get(i).getCodice()%>','<%=materiali.get(i).getId()%>')"> + </button> 
+<button type="button" onclick="rimuovi('<%=prodotti.get(i).getCodice()%>','<%=materiali.get(i).getId()%>')"> Rimuovi </button> 
+
+</div>	
+
+</td> 
+	<% 
 				}
-				//sessione.setAttribute("array", prodotti);
-				
-				%> 
-				<form method = "GET" action = "AcquistoControl"> 
-  				<button type="submit" name="Acquista">Acquista</button>  
-				</form>
+				%>				
+	</tr>
+		    
+</table>
+<fieldset class="bordinoCarrello">
+<div class="immagineDesc">
+<h2>TOTALE ORDINE</h2>
+N° di prodotti <b id ="totale"><%=carrello.getQuantita()%></b><br>
+Importo= <b id="importo"> <%=prezzoTot%></b>
+<form method = "GET" action = "AcquistoControl"> 
+<button type="submit" name="Acquista">Acquista</button>  
+</form>
+</div>
+</fieldset>
+</div>			
 				<%
 			}
 			else
 			{
-				//codice se carrello è vuoto
 				%> 
-				
-
+				<h1 align="center"> Nessun elemento presente all'interno del carrello </h1>
 				<%
 			}
 		}
-    }
-	%>-->
+	}
+	
+	%>
+
+<script>
+function funzionePiu(idProdotto, idMateriale)
+{
+	var url = 'AumentoProdottoCarrello?codiceProdotto=' + encodeURIComponent(idProdotto) + "&idMateriale=" + encodeURIComponent(idMateriale); 
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = //alla risposta della servlet
+		function() //aumenta di 1 unità il carrello
+		{
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				var response = JSON.parse(xhr.responseText);
+				var stringa = response.riferimento;
+				document.getElementById(stringa).innerHTML = response.quantita;
+				document.getElementById("totale").innerHTML = response.totale;
+				document.getElementById("importo").innerHTML = response.prezzoTot;
+			}
+		}
+	xhr.open("GET",url,true);
+	xhr.send(null);
+	
+}
+
+function funzioneMeno(idProdotto, idMateriale)
+{
+	var url = 'DiminuzioneProdottoCarrello?codiceProdotto=' + encodeURIComponent(idProdotto) + "&idMateriale=" + encodeURIComponent(idMateriale); 
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = //alla risposta della servlet
+		function() //aumenta di 1 unità il carrello
+		{
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				var response = JSON.parse(xhr.responseText);
+				var stringa = response.riferimento;
+					document.getElementById(stringa).innerHTML = response.quantita;
+					document.getElementById("totale").innerHTML = response.totale;
+					document.getElementById("importo").innerHTML = response.prezzoTot;
+			}
+		}
+	xhr.open("GET",url,true);
+	xhr.send(null);
+}
+
+function rimuovi(idProdotto, idMateriale)
+{
+	var url = 'RimozioneDaCarrello?codiceProdotto=' + encodeURIComponent(idProdotto) + "&idMateriale=" + encodeURIComponent(idMateriale); 
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = //alla risposta della servlet
+		function() //aumenta di 1 unità il carrello
+		{
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				var response = JSON.parse(xhr.responseText);
+				var stringa = response.riferimento;
+					document.getElementById(stringa).innerHTML = response.quantita;
+					document.getElementById("totale").innerHTML = response.totale;
+					document.getElementById("importo").innerHTML = response.prezzoTot;
+			}
+		}
+	xhr.open("GET",url,true);
+	xhr.send(null);
+}
+</script>
 
 
 

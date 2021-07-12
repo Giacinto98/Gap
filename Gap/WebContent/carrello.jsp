@@ -52,7 +52,8 @@
 				 %>
 
 <td>
-<div id = "sezioneProdotto" style="text-align:center">	
+<div id = "<%=prodotti.get(i).getCodice()%>_<%=materiali.get(i).getId()%>sezioneProdotto" style="text-align:center">	
+<div>
 <%
 	if(prodotti.get(i).getSconto() > 0){
 		sconto = prodotti.get(i).getPrezzo() - ((prodotti.get(i).getPrezzo() * prodotti.get(i).getSconto())/100);
@@ -89,6 +90,7 @@ alt="Card image cap"><%=materiali.get(i).getTipologiaMateriale()%>
 <button type="button" onclick="funzionePiu('<%=prodotti.get(i).getCodice()%>','<%=materiali.get(i).getId()%>')"> + </button> 
 <button type="button" onclick="rimuovi('<%=prodotti.get(i).getCodice()%>','<%=materiali.get(i).getId()%>')"> Rimuovi </button> 
 
+</div>
 </div>	
 
 </td> 
@@ -99,7 +101,7 @@ alt="Card image cap"><%=materiali.get(i).getTipologiaMateriale()%>
 		    
 </table>
 <fieldset class="bordinoCarrello">
-<div class="immagineDesc">
+<div id="barra" class="immagineDesc">
 <h2>TOTALE ORDINE</h2>
 N° di prodotti <b id ="totale"><%=carrello.getQuantita()%></b><br>
 Importo= <b id="importo"> <%=prezzoTot%></b>
@@ -141,7 +143,6 @@ function funzionePiu(idProdotto, idMateriale)
 		}
 	xhr.open("GET",url,true);
 	xhr.send(null);
-	
 }
 
 function funzioneMeno(idProdotto, idMateriale)
@@ -175,14 +176,19 @@ function rimuovi(idProdotto, idMateriale)
 			{
 				var response = JSON.parse(xhr.responseText);
 				var stringa = response.riferimento;
-					document.getElementById(stringa).innerHTML = response.quantita;
-					document.getElementById("totale").innerHTML = response.totale;
-					document.getElementById("importo").innerHTML = response.prezzoTot;
+				document.getElementById(stringa).innerHTML = "";
+				document.getElementById("totale").innerHTML = response.totale;
+				document.getElementById("importo").innerHTML = response.prezzoTot;
+				var totaleElementi = response.totale;
+				if(totaleElementi == 0)
+					document.getElementById("barra").innerHTML ="<h1>Nessun elemento presente all'interno del carrello</h1>";
 			}
 		}
 	xhr.open("GET",url,true);
 	xhr.send(null);
 }
+
+
 </script>
 
 

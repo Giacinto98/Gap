@@ -61,16 +61,15 @@
 	<ul><h3>
 	<li><a class="dropdown" href="#">Poltrone</a>
 		<div class="dropdown-content">
-			<a href="#">Manuali</a>
-			<a href="#">Elettriche</a>
-			<a href="#">Pouf</a>
+			<a href="./TipologiaControl?tipo=manuale">Manuale</a>
+			<a href="./TipologiaControl?tipo=elettrica">Elettricha</a>
+			<a href="./TipologiaControl?tipo=pouf">Pouf</a>
 		</div>
 	</li>
 	<li><a href="#" class="dropdown">Pareti Attrezzate</a>
 		<div class="dropdown-content">
-			<a href="#">PA1</a>
-			<a href="#">PA2</a>
-			<a href="#">PA3</a>
+			<a href="./TipologiaControl?tipo=moderna">Moderna</a>
+			<a href="./TipologiaControl?tipo=classica">Classica</a>
 		</div>
 	</li>
 	<li><a href="#">Chi siamo</a></li>

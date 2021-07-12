@@ -33,11 +33,14 @@ public class RimozioneDaCarrello extends HttpServlet {
 		{
 			 carrello = (CarrelloBean) sessione.getAttribute("carrello");
 		}
-		carrello.eliminaProdotto(codiceProdotto, idMateriale);
-		JSONObject json = new JSONObject();
+		int codiceRimozione = carrello.getIndexDiUnProdotto(codiceProdotto, idMateriale);
+				JSONObject json = new JSONObject();
 		try {
-			//vedere id a cui si riferisce la rimozione nel dom
+			String riferimento = carrello.getIndex(codiceRimozione).getCodice() + "_" + carrello.getIndexMateriale(codiceRimozione).getId() + "sezioneProdotto";			
+			carrello.eliminaProdotto(codiceProdotto, idMateriale);
+			json.put("riferimento", riferimento);
 			json.put("prezzoTot", carrello.getPrezzoTotale());
+			json.put("totale", carrello.getQuantita());
 		} catch (JSONException e) {
 			System.out.println("Eccezione numero elementi carrello");
 			e.printStackTrace();

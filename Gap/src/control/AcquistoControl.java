@@ -3,6 +3,8 @@ package control;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -86,6 +88,8 @@ public class AcquistoControl extends HttpServlet {
 		}
 		else
 			System.out.println("Errore passaggio prodotti");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/acquistoEffettuato.jsp");
+		dispatcher.forward(request, response);
 		
 	}
 

@@ -61,9 +61,7 @@ public class ProdottoModel implements InterfacciaDAO <ProdottoBean>
 	public Collection<ProdottoBean> doRetriveAll(String order) throws SQLException {
 		Connection connection = null; //creo connessione 
 		PreparedStatement preparedStatement = null;
-		
 		String selectSQL = "select * from prodotto order by sconto desc;";
-		
 		Collection<ProdottoBean> prodotti = new LinkedList<ProdottoBean>(); //arrey di prodotti che vengono recuperati dal database e poi inseriti nell'array
 		
 		try {

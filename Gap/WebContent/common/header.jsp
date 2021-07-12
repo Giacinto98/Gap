@@ -72,13 +72,13 @@
 			<a href="./TipologiaControl?tipo=classica">Classica</a>
 		</div>
 	</li>
-	<li><a href="#">Chi siamo</a></li>
+	<li><a href="./chiSiamo.jsp">Chi siamo</a></li>
 	
 	<% 
 	if(utente != null)
 		if(utente.getRuolo().equals("amministratore"))
 		{%>
-		<li><a href="#">Amministratore</a></li>
+		<li><a href="./AdminControl">Amministratore</a></li>
 		<%} %>
 </h3></ul>
 </nav>

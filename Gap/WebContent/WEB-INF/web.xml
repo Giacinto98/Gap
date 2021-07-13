@@ -35,10 +35,9 @@
     <res-auth>Container</res-auth>
   </resource-ref>
 
-  
+ 
  <security-role>
  	<role-name>amministratore</role-name>
  </security-role>
- 
 
   </web-app>

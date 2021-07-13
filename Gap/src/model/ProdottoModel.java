@@ -97,8 +97,24 @@ public class ProdottoModel implements InterfacciaDAO <ProdottoBean>
 
 	@Override
 	public void doSave(ProdottoBean item) throws SQLException {
-		// TODO Auto-generated method stub
-		
+		Connection connection = null; //creo connessione 
+		PreparedStatement preparedStatement = null;
+		String insertSQL = "Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('"+item.getNome()+"',"+item.getAltezza()+","+item.getProfondita()+","+item.getLarghezza()+",'"+item.getTipologia()+"',"+item.getQuantita()+","+item.getPrezzo()+","+item.getSconto()+");";
+
+		try {
+			connection = ds.getConnection(); //recuperiamo la connessione dal datasource passato in input nel costruttore della classe
+			preparedStatement = connection.prepareStatement(insertSQL); //accediamo alla connessione e passiamo alla funzione la stringa SQL
+			preparedStatement.executeUpdate(); //esguiamo la query come facevamo nanche in db del primo sempestre
+			
+		} finally { //rilasiamo tutte le risorse che abbiamo
+			try {
+			if(preparedStatement != null)
+				preparedStatement.close();
+			} finally {
+			if(connection != null)
+				connection.close();
+			}
+		}	
 	}
 
 	@Override

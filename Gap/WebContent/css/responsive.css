@@ -71,6 +71,19 @@ border-collapse: collapse;
 border:1px solid black;
 display:inline-block;	
 }
+.tabellaCiao
+{
+	width: 100%;
+	margin-left:0;
+	margin-right:0;
+border-collapse: collapse;
+
+}
+.tabellaCiao td, .tabellaCiao th{
+
+border:1px solid black;
+display:inline-block;	
+}
 .bordinoCarrello{
 	
 	width: 100%;

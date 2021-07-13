@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="java.util.*, model.* , java.lang.*"%>
-
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="ISO-8859-1">
 	<title>Insert title here</title>
+	
+	<link href="css/index.css" rel="stylesheet" type="text/css">
 	<link href="css/indexAdmin.css" rel="stylesheet" type="text/css">
 	<link href="css/prodotto.css" rel="stylesheet" type="text/css">
 	<link href="css/generale.css" rel="stylesheet" type="text/css">
@@ -21,9 +21,9 @@
 			padding:0;
 		}
 </style>
-
 </head>
-<body >
+<body>
+	
 <header>	
 
 <a href="javascript:void(0)" class="btn-menu" onclick=toggle()>&#9776;</a>
@@ -81,52 +81,31 @@
 
 <nav id="navbar">
 	<ul><h3>
-	<li><a href="admin/modifica.jsp" class="dropdown">Modifica</a></li>
+	<li><a href="./paginaAdmin.jsp" class="dropdown">Pagina Ordini</a></li>
 </h3></ul>
-</nav>
+</nav>	
 
-<h1 align="center">Monitora gli ordini degli utenti</h1>
 
-<%
-	response.encodeURL("paginaAdmin.jsp"); //URL rewriting
-	Collection<?> ordini = (Collection<?>) request.getAttribute("ordini"); //leggo dalla request l'attributo products che ha la lista degli oggetti 
+<form action="ModificaControl" method="POST" enctype = "multipart/form-data">
+	<fieldset> <legend>Aggiungi Prodotto</legend>
+		Nome Prodotto <input type = "text" name="nome" required>
+		Altezza <input type = "text" name="altezza" required>
+		Profondita' <input type = "text" name="profondita" required>
+		Larghezza <input type = "text" name="larghezza" required>
+		Tipologia <input type = "text" name="tipologia" required>
+		Quantita' <input type = "text" name="quantita" required>
+		Prezzo <input type = "text" name="prezzo" required>
+		Sconto <input type = "text" name="sconto" required>
+		Carica immagine <input type="file" name="immagine" size="50" >
+		<input type="submit" value="Aggiungi Prodotto">
+	</fieldset>
+</form>
 	
-	if(ordini == null){ //se non sono riuscito a prednere i prodotti e non ho l'errore, c'è qualche problema
-%>   
-
-<h1>Non sono stati ancora effettuati ordini nel magazzino.</h1>
-
-<%
-}
-else
-	if(ordini != null && ordini.size() > 0) //controllo se ci sono prodotti all'interno dell'array
-	{%>
-	<table class="tabellaCiao">
-	<tr>
-		
-	<%
-		Iterator<?> it = ordini.iterator(); //iteriamo i prodotti
-		while(it.hasNext()) //fin quando ho prodotti
-		{
-		OrdineBean bean = (OrdineBean) it.next(); //metto nel bean riferito alla tabella dei prodotti il prodotto i-esimo	
-%>
-<td> 
-	<div >
-Ordine n°:  <b><%=bean.getNumeroOrdine()%></b>&nbsp;
-E-mail: <b><%=bean.getEmail()%></b><br>
-N° prodotti: <b><%=bean.getNumeroProdotti()%></b>
-Importo: <b><%=bean.getPrezzoTotale()%></b>
-<br>
-
-</div>
-
-</td>
-<% }
-} %>
-
-</tr>		    
-</table>
-
+	
+	
+	
+	
+	
 <footer style="background:grey; color:white;margin:100px 0px 0px 0px">
 	<p align="center">GRAZIE DELLA VISIONE PER SUPPORTARE IL SITO POTETE DONARE AL SEGUENTE IBAN:(iserire qui ibad di Emanuele)</p></footer>
 
@@ -141,6 +120,7 @@ function toggle()
 		}
 }
 </script>
-
+	
+	
 </body>
 </html>

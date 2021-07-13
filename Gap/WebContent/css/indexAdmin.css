@@ -117,14 +117,17 @@ nav li:hover .dropdown-content a{
 }
 
 
-.tabellaProdotti
+
+.tabellaCiao
 {
 	width: 100%;
 border-collapse: collapse;
 
 }
 
-.tabellaProdotti td, .tabellaProdotti th{
+.tabellaCiao td, .tabellaCiao th{
+	margin-left:5px;
+	margin-top:5px;
 border:1px solid #0088b3;
 display:inline-block;	
 }

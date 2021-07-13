@@ -86,7 +86,41 @@
 </h3></ul>
 </nav>
 
-<jsp:include page="common/futher.jsp"/>
+<h1 align="center">Monitora gli ordini degli utenti</h1>
+
+<%
+	response.encodeURL("paginaAdmin.jsp"); //URL rewriting
+	Collection<?> ordini = (Collection<?>) request.getAttribute("ordini"); //leggo dalla request l'attributo products che ha la lista degli oggetti 
+	
+	if(ordini == null){ //se non sono riuscito a prednere i prodotti e non ho l'errore, c'è qualche problema
+%>   
+
+<h1>Non sono stati ancora effettuati ordini nel magazzino.</h1>
+
+<%
+}
+else
+	if(ordini != null && ordini.size() > 0) //controllo se ci sono prodotti all'interno dell'array
+	{
+		Iterator<?> it = ordini.iterator(); //iteriamo i prodotti
+		while(it.hasNext()) //fin quando ho prodotti
+		{
+		OrdineBean bean = (OrdineBean) it.next(); //metto nel bean riferito alla tabella dei prodotti il prodotto i-esimo	
+%>
+
+<b><%=bean.getNumeroOrdine()%></b>&nbsp;
+<b><%=bean.getEmail()%></b>
+<br>
+
+<% }
+} %>
+
+
+
+<footer style="background:grey; color:white;margin:100px 0px 0px 0px">
+	<p align="center">GRAZIE DELLA VISIONE PER SUPPORTARE IL SITO POTETE DONARE AL SEGUENTE IBAN:(iserire qui ibad di Emanuele)</p></footer>
+
+
 <script>
 function toggle() 
 {

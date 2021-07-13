@@ -58,4 +58,28 @@ nav ul li{
 border:1px solid #00ff40;
 display:inline-block;	
 }
+.tabellaProdCarrello
+{
+	width: 100%;
+	margin-left:0;
+	margin-right:0;
+border-collapse: collapse;
+
+}
+.tabellaProdCarrello td, .tabellaProdCarrello th{
+
+border:1px solid black;
+display:inline-block;	
+}
+.bordinoCarrello{
+	
+	width: 100%;
+
+}
+.immagineDesc2{
+width:100%;
+margin-right:0;
+margin-left:0;
+
+}
 }

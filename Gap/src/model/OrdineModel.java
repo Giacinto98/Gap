@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,8 +43,8 @@ private DataSource ds = null;
 				bean.setNumeroOrdine(rs.getInt("num_ordine"));
 				bean.setNumeroProdotti(rs.getInt("num_prodotti"));
 				String data = rs.getString("data_Ordine");
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-				LocalDate localDate = LocalDate.parse(data, formatter);
+				//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+				LocalDate localDate = LocalDate.parse(data);
 				bean.setDataOrdine(localDate);
 				bean.setPrezzoTotale(rs.getFloat("Prezzo_Totale"));
 				ordini.add(bean);

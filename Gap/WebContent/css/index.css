@@ -129,3 +129,31 @@ border-collapse: collapse;
 border:1px solid #0088b3;
 display:inline-block;	
 }
+.tabellaProdCarrello
+{position:left;
+	width:50%;
+	height:auto;
+	margin-left:25%;
+	margin-right:25%;
+border-collapse: collapse;
+
+
+}
+.tabellaProdCarrello td, .tabellaProdCarrello th{
+
+
+border:1px solid Purple;
+display:inline-block;	
+
+}
+.totProdotti{
+text-align:center;
+}
+.bordinoCarrello{
+	position:right;
+	width:50%;
+	
+}
+.divQuantita{
+	text-align:right;
+}

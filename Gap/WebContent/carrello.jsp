@@ -39,7 +39,7 @@
 				ArrayList<MaterialeBean> materiali = carrello.getMateriali();
 				 %>
 				 
-				<div class="immagine" style="position:relative;">
+				<div class="immagine" >
 				<table class="tabellaProdCarrello">
 				<tr>
 					
@@ -52,6 +52,8 @@
 				 %>
 
 <td>
+<div style="float: right;clear: right;">
+
 <div id = "<%=prodotti.get(i).getCodice()%>_<%=materiali.get(i).getId()%>sezioneProdotto" style="text-align:center">	
 <div>
 <%
@@ -63,7 +65,6 @@
 		%> 		
 <img class="immagineFoto" src="Elementi/<%=prodotti.get(i).getNome()%>.jpg" alt="<%=prodotti.get(i).getNome()%>">				 
  Nome:<h2><%=prodotti.get(i).getNome()%></h2>
- 
  Materiale :
  <img class="bordo"  title="<%=materiali.get(i).getTipologiaMateriale()%>_<%=materiali.get(i).getColore()%>"  
 height=30 width=30 src="Materiali/<%=materiali.get(i).getTipologiaMateriale()%>_<%=materiali.get(i).getColore()%>.jpg " 
@@ -93,23 +94,30 @@ alt="Card image cap"><%=materiali.get(i).getTipologiaMateriale()%>
 </div>
 </div>	
 
+</div>
 </td> 
+
+</tr>
+
 	<% 
 				}
 				%>				
-	</tr>
+
 		    
 </table>
-<fieldset class="bordinoCarrello">
-<div id="barra" class="immagineDesc">
-<h2>TOTALE ORDINE</h2>
+
+
+<div id="barra" class="immagineDesc2"  >
+<fieldset >
+<h2 >TOTALE ORDINE</h2>
 N° di prodotti <b id ="totale"><%=carrello.getQuantita()%></b><br>
-Importo= <b id="importo"> <%=prezzoTot%></b>
+<h3>Importo Totale</h3><b id="importo"> <%=prezzoTot%></b>
 <form method = "GET" action = "AcquistoControl"> 
-<button type="submit" name="Acquista">Acquista</button>  
+<button type="submit" name="Acquista">Acquista</button>
 </form>
-</div>
+
 </fieldset>
+</div>
 </div>			
 				<%
 			}

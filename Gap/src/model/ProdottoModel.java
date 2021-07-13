@@ -117,6 +117,28 @@ public class ProdottoModel implements InterfacciaDAO <ProdottoBean>
 		}	
 	}
 
+	public void doUpdateProdotto (ProdottoBean item) throws SQLException
+	{
+		Connection connection = null; //creo connessione 
+		PreparedStatement preparedStatement = null;
+		String UpdateSQL = "Update prodotto set quantita="+item.getQuantita()+",sconto="+item.getSconto()+",prezzo="+item.getPrezzo()+" where codice = "+item.getCodice()+";";
+		try
+		{
+			connection = ds.getConnection(); //recuperiamo la connessione dal datasource passato in input nel costruttore della classe
+			preparedStatement = connection.prepareStatement(UpdateSQL); //accediamo alla connessione e passiamo alla funzione la stringa SQL
+			preparedStatement.executeUpdate(); //esguiamo la query come facevamo nanche in db del primo sempestre
+		}
+		finally { //rilasiamo tutte le risorse che abbiamo
+			try {
+			if(preparedStatement != null)
+				preparedStatement.close();
+			} finally {
+			if(connection != null)
+				connection.close();
+			}
+		}
+	}
+	
 	@Override
 	public void doUpdate(ProdottoBean item) throws SQLException {
 		Connection connection = null; //creo connessione 
@@ -155,7 +177,6 @@ public class ProdottoModel implements InterfacciaDAO <ProdottoBean>
 		{
 			int quantita = (bean.getQuantita() - item.getQuantita());
 			String UpdateSQL = "Update prodotto set quantita = '"+quantita+"' where codice = '"+item.getCodice()+"';";
-			System.out.println(UpdateSQL);
 			connection = ds.getConnection(); //recuperiamo la connessione dal datasource passato in input nel costruttore della classe
 			preparedStatement = connection.prepareStatement(UpdateSQL); //accediamo alla connessione e passiamo alla funzione la stringa SQL
 			preparedStatement.executeUpdate(); //esguiamo la query come facevamo nanche in db del primo sempestre
@@ -174,8 +195,41 @@ public class ProdottoModel implements InterfacciaDAO <ProdottoBean>
 
 	@Override
 	public void doDelete(ProdottoBean item) throws SQLException {
-		// TODO Auto-generated method stub
+		Connection connection = null; //creo connessione 
+		PreparedStatement preparedStatement = null;
+		String UpdateSQL = "DELETE FROM prodotto WHERE codice="+item.getCodice()+";";
+		String UpdateSQL1 = "DELETE FROM composto WHERE codice="+item.getCodice()+";";
 		
+		try
+		{
+			connection = ds.getConnection(); //recuperiamo la connessione dal datasource passato in input nel costruttore della classe
+			preparedStatement = connection.prepareStatement(UpdateSQL1); //accediamo alla connessione e passiamo alla funzione la stringa SQL
+			preparedStatement.executeUpdate(); //esguiamo la query come facevamo nanche in db del primo sempestre
+		}
+		finally { //rilasiamo tutte le risorse che abbiamo
+			try {
+			if(preparedStatement != null)
+				preparedStatement.close();
+			} finally {
+			if(connection != null)
+				connection.close();
+			}
+		}
+		
+		try
+		{
+			connection = ds.getConnection(); //recuperiamo la connessione dal datasource passato in input nel costruttore della classe
+			preparedStatement = connection.prepareStatement(UpdateSQL); //accediamo alla connessione e passiamo alla funzione la stringa SQL
+			preparedStatement.executeUpdate(); //esguiamo la query come facevamo nanche in db del primo sempestre
+		}
+		finally { //rilasiamo tutte le risorse che abbiamo
+			try {
+			if(preparedStatement != null)
+				preparedStatement.close();
+			} finally {
+			if(connection != null)
+				connection.close();
+			}
+		}
 	}
-
 }

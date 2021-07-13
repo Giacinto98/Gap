@@ -3,9 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>JSP Form Upload</title>
+<title></title>
 </head>
 <body>
+
+
 <%
    String message = (String)request.getAttribute("message");
    String error = (String)request.getAttribute("error");
@@ -15,7 +17,8 @@
 <% if(message != null && !message.equals("")) { %>	
 	<p><%=message %>
 <% } %>	
-
+<div style="position:relative">
+<div style="width: 30%; float:left;" >
 	<form method="post" action="fileupload" name="echo" enctype="multipart/form-data">
 		<fieldset> <legend>Aggiungi Prodotto</legend>
 		Nome Prodotto <input type = "text" name="nome" required> <br>
@@ -26,7 +29,6 @@
 		Quantita' <input type = "text" name="quantita" required> <br>
 		Prezzo <input type = "text" name="prezzo" required> <br>
 		Sconto <input type = "text" name="sconto" required> <br>
-		
 		<legend>Materiali</legend>
 		<fieldset> 
 		Abelia (monocromo)<input type="checkbox" name = "abelia_monocromo" value="2"> <br>
@@ -45,8 +47,34 @@
 		<input type="reset" value="Reset">
 		</fieldset>
 	</form>
-<% if(error != null && !error.equals("")) { %>	
-	<p style="color:red;"><%=error %>
-<% } %>	
+</div>
+
+
+<div Style="width: 30%; float:center;">
+	<fieldset><legend>Modifica Prodotto</legend>
+		<form method="get" action="ModificaControl">
+			Codice<input type = "text" name="codice" required> <br>
+			Prezzo <input type = "text" name="prezzo" required> <br>
+			Sconto <input type = "text" name="sconto" required> <br>
+			Quantita <input type = "text" name="quantita" required> <br>
+			<input type="submit" value="Modifica Prodotto">
+			<input type="reset" value="Reset">
+		</form>
+	</fieldset> 
+</div>
+
+
+<div Style="width: 30%; float:right;">
+	<fieldset><legend>Rimuovi Prodotto</legend>
+		<form method="get" action="RemoveControl">
+		Codice<input type = "text" name="codice" required> <br>
+		<input type="submit" value="Rimuovi Prodotto">
+		</form>
+	</fieldset> 
+</div>
+
+</div>
+	
+	
 </body>
 </html>

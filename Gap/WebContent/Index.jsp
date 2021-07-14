@@ -31,12 +31,13 @@
 	width:100%;
 	margin:0;
 	padding:0;
+	
 	}
 </style>	
 	
 </head>
 
-<body>
+<body id="body">
 
 <jsp:include page="common/header.jsp"/>
 

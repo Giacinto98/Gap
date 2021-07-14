@@ -1,0 +1,15 @@
+@charset "ISO-8859-1";
+
+.tabella
+{
+	 background-color: white;
+	 table-layout: auto;
+ 	 width: 800px;
+ 	 border-radius: 10px;
+}
+
+fieldset
+{
+	border-radius: 10px;
+	border-color:#0088b3;
+}

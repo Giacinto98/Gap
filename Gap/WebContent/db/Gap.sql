@@ -53,14 +53,6 @@ Sconto int not null,
 primary key(Codice)
 )auto_increment=1;
 
-create table immagine(
-Id int not null auto_increment,
-Codice int not null,
-foto mediumblob not null,
-primary key (Id),
-foreign key (Codice) references Prodotto (Codice) on update cascade on delete cascade
-)auto_increment=1;
-
 create table recensione (
 Testo varchar(250) not null,
 Data_Recensione date not null,
@@ -72,11 +64,11 @@ foreign key (Codice) references Prodotto (Codice) on update cascade on delete ca
 );
 
 create table Ordine(
-Num_Ordine int auto_increment,
+Num_Ordine int,
 Email char(25) not null,
-Prezzo_Totale int not null,
+Prezzo_Totale int not null,   
 Num_Prodotti int not null,
-data_Ordine date not null,
+data_Ordine varchar(15) not null,
 primary key(Num_ordine),
 foreign key(Email) references Utente(Email) 
 )auto_increment=1;
@@ -85,10 +77,11 @@ create table Composizione
 (
 Num_Ordine int not null,
 Codice int not null,
+Id_Materiale varchar(20),
 Quantita int not null,
-primary key(Num_Ordine, Codice),
-foreign key(Codice) references Prodotto(Codice),
-foreign key(Num_Ordine) references Ordine(Num_ordine)
+primary key(Num_ordine, Codice, Id_Materiale),
+foreign key(Codice) references Prodotto(Codice) on delete cascade on update cascade,
+foreign key(Num_Ordine) references Ordine(Num_ordine) 
 );
 
 Create table Materiale
@@ -111,10 +104,10 @@ foreign key(Id) references Materiale(Id) on update cascade on delete cascade
 Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ("zeus",150,50,75,"manuale",15,150,15);
 Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('arrow',175,120,100,'elettrica',200,250,0);
 Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('markus',162,90,150,'letto',20,200,3);
-Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('hugò',158,50,75,'manuale',15,150,0);
+Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('hugo',158,50,75,'manuale',15,150,0);
 Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('robert',145,50,75,'letto',15,150,15);
 Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('silandrio',120,50,80,'manuale',25,100,23);
-Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('pouf',45,60,100,'pouf',150,20,0);
+Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('rana',45,60,100,'pouf',150,20,0);
 Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('zelbio',25,70,75,'pouf',15,150,15);
 Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('attr1',240,58,205,'moderna',25,250,5);
 Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('attr2',236,65,200,'classica',150,300,0);
@@ -124,7 +117,7 @@ Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezz
 
 Insert into Materiale (Id,Tipologia_Materiale,Colore) values (1,'pelle','rosso'); 
 Insert into Materiale (Id,Tipologia_Materiale,Colore) values (2,'abelia','monocromo'); 
-Insert into Materiale (Id,Tipologia_Materiale,Colore) values (3,'begonia','marrone');
+Insert into Materiale (Id,Tipologia_Materiale,Colore) values (3,'bergonia','marrone');
 Insert into Materiale (Id,Tipologia_Materiale,Colore) values (4,'lilum','blu');
 Insert into Materiale (Id,Tipologia_Materiale,Colore) values (5,'liroe','bianco'); 
 Insert into Materiale (Id,Tipologia_Materiale,Colore) values (6,'pelle','nero'); 
@@ -134,6 +127,7 @@ Insert into Materiale (Id,Tipologia_Materiale,Colore) values (9,'pelle','beige')
 Insert into Materiale (Id,Tipologia_Materiale,Colore) values (10,'solidago','monocromo');
 
 
+Insert into Composto (Id,Codice) values (1,2);
 Insert into Composto (Id,Codice) values (1,7);
 Insert into Composto (Id,Codice) values (1,8);
 Insert into Composto (Id,Codice) values (1,5);
@@ -141,6 +135,7 @@ Insert into Composto (Id,Codice) values (2,1);
 Insert into Composto (Id,Codice) values (3,4);
 Insert into Composto (Id,Codice) values (3,5);
 Insert into Composto (Id,Codice) values (3,7);
+Insert into Composto (Id,Codice) values (4,3);
 Insert into Composto (Id,Codice) values (4,6);
 Insert into Composto (Id,Codice) values (4,7);
 Insert into Composto (Id,Codice) values (4,1);
@@ -148,10 +143,15 @@ Insert into Composto (Id,Codice) values (4,2);
 Insert into Composto (Id,Codice) values (4,10);
 Insert into Composto (Id,Codice) values (5,11);
 Insert into Composto (Id,Codice) values (5,12);
+Insert into Composto (Id,Codice) values (6,1);
 Insert into Composto (Id,Codice) values (6,9);
 Insert into Composto (Id,Codice) values (7,2);
 Insert into Composto (Id,Codice) values (8,3);
+Insert into Composto (Id,Codice) values (9,8);
 Insert into Composto (Id,Codice) values (9,4);
+Insert into Composto (Id,Codice) values (9,5);
+Insert into Composto (Id,Codice) values (9,6);
+
 
 Insert into Utente (CF,Nome,Cognome,Email,Passw) values ('dnlgnt98a05g813p','Giacinto','Adinolfi','giaci95@live.it','root');
 Insert into Utente (CF,Nome,Cognome,Email,Passw) values ('dnlotp254689541d','Vincenzo','Palcone','vincenzo85@gmail.com','root');

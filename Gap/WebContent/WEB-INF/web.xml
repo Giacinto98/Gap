@@ -40,4 +40,15 @@
  	<role-name>amministratore</role-name>
  </security-role>
 
+
+<error-page>
+        <error-code>403</error-code>
+        <location>/errore403.html</location>
+</error-page>
+
+ <error-page>
+        <location>/erroreGenerico.html</location>
+ </error-page>
+
+
   </web-app>

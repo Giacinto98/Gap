@@ -6,12 +6,11 @@
 	<meta charset="ISO-8859-1">
 	<title>Insert title here</title>
 	
-	<link href="css/index.css" rel="stylesheet" type="text/css">
-	<link href="css/indexAdmin.css" rel="stylesheet" type="text/css">
-	<link href="css/prodotto.css" rel="stylesheet" type="text/css">
-	<link href="css/generale.css" rel="stylesheet" type="text/css">
-	<link href="css/responsive.css" rel="stylesheet" type="text/css">
-	<link href="admin/admin.css" rel="stylesheet" type="text/css">
+	<link href="../css/indexAdmin.css" rel="stylesheet" type="text/css">
+	<link href="../css/admin.css" rel="stylesheet" type="text/css">
+	<link href="../css/prodotto.css" rel="stylesheet" type="text/css">
+	<link href="../css/generale.css" rel="stylesheet" type="text/css">
+	<link href="../css/responsive.css" rel="stylesheet" type="text/css">
 	
 <style>
 		div 
@@ -29,54 +28,12 @@
 <a href="javascript:void(0)" class="btn-menu" onclick=toggle()>&#9776;</a>
 	
 	<div>
-		<p align="left">
-		<a href="Index.jsp"><img src = "Elementi/logo.png" width="75" height="75"></a>
+		<p align="center">
+		<a href="../Index.jsp"><img src = "../Elementi/logo.png" width="75" height="75"></a>
 		<p align="center">
 	</div>
 	
-	<div>
-		<p align="center" >
-		<input id = "s" type="text" name="ricerca" >
-		<a href="ricerca.jsp"><img src = "Elementi/ricerca.png" width="25" height="25"></a>
-		</p>
-	 </div >
-	 
-	<%
-	UtenteBean utente = new UtenteBean();
-	HttpSession sessione = request.getSession(false);
-	   if (sessione != null)
-	   {
-			utente = (UtenteBean) sessione.getAttribute("utente");
-			if(utente != null)
-			{
-			%>
-			<div class="sposta" >
-				<p class="sposta"><a href="profilo.jsp"><img src = "Elementi/profilo.png" width="30" height="30"></a>
-				<%=utente.getNome()%></p>
-			
-			<% 
-			CarrelloBean carrello = (CarrelloBean) sessione.getAttribute ("carrello");
-			if(carrello != null)
-			{ %>
-				<p class="sposta"><a href="logout.jsp"><img src = "Elementi/logout.png" width="35" height="35"></a>
-				<a href="carrello.jsp"><img src = "Elementi/carrello.png" width="35" height="35"></a></p>
-				<span id="carrello"><%=carrello.getQuantita() %></span>
-			</div>
-			<%}
-			}
-	 		else 
-	 		{
-			 %>
-			 
-	<div>
-	 	<p class="logRec" align="right" >
-	 	<a  class="link" title="login" href="loginUser.jsp"> LOGIN</a> 
-	 	<a  class="link" title="registrazione" href="Registrazione.jsp" >/REG</a>
-		</p>
-	</div> 
-		
-		<%	}
-		} 	%>
+	
 </header>
 
 <nav id="navbar">
@@ -86,29 +43,63 @@
 </nav>	
 
 
-<form action="ModificaControl" method="POST" enctype = "multipart/form-data">
-	<fieldset> <legend>Aggiungi Prodotto</legend>
-		Nome Prodotto <input type = "text" name="nome" required>
-		Altezza <input type = "text" name="altezza" required>
-		Profondita' <input type = "text" name="profondita" required>
-		Larghezza <input type = "text" name="larghezza" required>
-		Tipologia <input type = "text" name="tipologia" required>
-		Quantita' <input type = "text" name="quantita" required>
-		Prezzo <input type = "text" name="prezzo" required>
-		Sconto <input type = "text" name="sconto" required>
-		Carica immagine <input type="file" name="immagine" size="50" >
+<div id="modificaAmministratore">
+<div id="left">
+	<form method="post" action="../fileupload" name="echo" enctype="multipart/form-data">
+		<fieldset> <legend>Aggiungi Prodotto</legend>
+		Nome Prodotto <input type = "text" name="nome" required> <br>
+		Altezza <input type = "text" name="altezza" required> <br>
+		Profondita' <input type = "text" name="profondita" required> <br>
+		Larghezza <input type = "text" name="larghezza" required> <br>
+		Tipologia <input type = "text" name="tipologia" required> <br>
+		Quantita' <input type = "text" name="quantita" required> <br>
+		Prezzo <input type = "text" name="prezzo" required> <br>
+		Sconto <input type = "text" name="sconto" required> <br>
+		<legend>Materiali</legend>
+		<fieldset> 
+		Abelia (monocromo)<input type="checkbox" name = "abelia_monocromo" value="2"> <br>
+		Bergonia (marrone)<input type="checkbox" name = "bergonia_marrone" value="3"> <br>
+		Lilum (blu)<input type="checkbox" name = "lilum_blu" value="4"> <br>
+		Liroe (bianco)<input type="checkbox" name = "liroe_bianco" value="5"> <br>
+		Pelle (beige)<input type="checkbox" name = "pelle_beige" value="9"> <br>
+		Pelle (nero)<input type="checkbox" name = "pelle_nero" value="6"> <br>
+		Pelle (ombra)<input type="checkbox" name = "pelle_ombra" value="7"> <br>
+		Pelle (rosso)<input type="checkbox" name = "pelle_rosso" value="1"> <br>
+		Santolina (bordeaux)<input type="checkbox" name = "santolina_bordeaux" value="8"> <br>
+		Solidago (monocromo)<input type="checkbox" name = "solidago_monocromo" value="10"> <br>
+		</fieldset> 
+		Carica immagine <input type="file" name="file" accept="image/*" size="50" multiple /> <br>
 		<input type="submit" value="Aggiungi Prodotto">
-	</fieldset>
-</form>
-	
-	
-	
-	
-	
-	
-<footer style="background:grey; color:white;margin:100px 0px 0px 0px">
-	<p align="center">GRAZIE DELLA VISIONE PER SUPPORTARE IL SITO POTETE DONARE AL SEGUENTE IBAN:(iserire qui ibad di Emanuele)</p></footer>
+		<input type="reset" value="Reset">
+		</fieldset>
+	</form>
+</div>
 
+
+
+<div id="right">
+	<fieldset><legend>Modifica Prodotto</legend>
+		<form method="get" action="../ModificaControl">
+			Codice<input type = "text" name="codice" required> <br>
+			Prezzo <input type = "text" name="prezzo" required> <br>
+			Sconto <input type = "text" name="sconto" required> <br>
+			Quantita <input type = "text" name="quantita" required> <br>
+			<input type="submit" value="Modifica Prodotto">
+			<input type="reset" value="Reset">
+		</form>
+	</fieldset> 
+</div>
+
+<div id="center">
+	<fieldset><legend>Rimuovi Prodotto</legend>
+		<form method="get" action="../RemoveControl">
+		Codice<input type = "text" name="codice" required> <br>
+		<input type="submit" value="Rimuovi Prodotto">
+		</form>
+	</fieldset> 
+</div>
+</div>
+	
 
 <script>
 function toggle() 
@@ -120,7 +111,9 @@ function toggle()
 		}
 }
 </script>
-	
+
+<footer style="background:grey; color:white;margin:100px 0px 0px 0px">
+	<p align="center">GRAZIE DELLA VISIONE PER SUPPORTARE IL SITO POTETE DONARE AL SEGUENTE IBAN:(iserire qui ibad di Emanuele)</p></footer>
 	
 </body>
 </html>

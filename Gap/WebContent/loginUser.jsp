@@ -13,7 +13,7 @@
 <body>
 
 <form action="LoginControl" method="get"> 
-<fieldset>
+<fieldset id="demo">
      <legend><h2>Log in</h2></legend>
      <div align = "center">
      	<p><a href="Index.jsp"><img src = "Elementi/logo.png" width="100" height="100" align="center"></a></p>
@@ -26,5 +26,15 @@
      </div> 
 </fieldset>
 </form> 
+
+<script>
+
+function controlloPassword()
+{
+	document.getElementById("demo").innerHTML = "Password cambiata correttamente";
+}
+	
+</script>
+
 </body>
 </html>

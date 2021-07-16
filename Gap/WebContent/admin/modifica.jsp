@@ -112,8 +112,6 @@ function toggle()
 }
 </script>
 
-<footer style="background:grey; color:white;margin:100px 0px 0px 0px">
-	<p align="center">GRAZIE DELLA VISIONE PER SUPPORTARE IL SITO POTETE DONARE AL SEGUENTE IBAN:(iserire qui ibad di Emanuele)</p></footer>
 	
 </body>
 </html>

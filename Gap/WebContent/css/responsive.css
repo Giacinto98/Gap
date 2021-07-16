@@ -49,6 +49,8 @@ nav ul li{
 	width:100%;
 }
 
+#profilo{display:block;}
+#iconaProfilo{	display:none;}
 
 .tabellaProdotti td, .tabellaProdotti th{
 
@@ -99,4 +101,21 @@ margin-left:0;
 #left{width:100%;margin-top:10px;}
 #right{width:100%;margin-top:10px;}
 #center{width:100%;margin-top:10px;}
+
+
+.tabellaRecensioni{
+	
+		width:100%;
+	margin-left:0%;
+	margin-right:0%;
+}
+
+.tabellaRecensioni td, .tabellaRecensioni th{
+	margin-top:200px;
+}
+
+.recensioneDiv{
+width: 100%;
+	
+}
 }

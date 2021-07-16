@@ -21,10 +21,63 @@ public class LoginModel implements InterfacciaDAO <UtenteBean> {
 		this.ds = ds;
 	}
 	
+	
+	public void nuovaPassword(UtenteBean utente) throws SQLException
+	{
+		Connection connection = null; //creo connessione 
+		PreparedStatement preparedStatement = null;
+		String updateSQL ="update utente set passw = '"+ utente.getPassword()+"' where email = '"+utente.getEmail()+"';";
+		try {
+			connection = ds.getConnection(); //recuperiamo la connessione dal datasource passato in input nel costruttore della classe
+			preparedStatement = connection.prepareStatement(updateSQL); //accediamo alla connessione e passiamo alla funzione la stringa SQL
+			preparedStatement.executeUpdate(); //esguiamo la query come facevamo nanche in db del primo sempestre		
+		} finally { //rilasiamo tutte le risorse che abbiamo
+			try {
+			if(preparedStatement != null)
+				preparedStatement.close();
+			} finally {
+			if(connection != null)
+				connection.close();
+			}
+		}
+	}
+	
 	@Override
 	public UtenteBean doRetrieveByKey(String code) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection connection = null; //creo connessione 
+		PreparedStatement preparedStatement = null;
+		//inserire join per prendere ruolo nellla stringa
+		String selectSQL = "select * from utente where Email='"+code+"';";
+		UtenteBean user = new UtenteBean(); 
+		
+		try {
+			connection = ds.getConnection(); //recuperiamo la connessione dal datasource passato in input nel costruttore della classe
+			preparedStatement = connection.prepareStatement(selectSQL); //accediamo alla connessione e passiamo alla funzione la stringa SQL
+			ResultSet rs = preparedStatement.executeQuery(); //esguiamo la query come facevamo nanche in db del primo sempestre
+			while(rs.next()) //scorriamo i valori che ci vengono restituiti e li mettima nel bean dedicato a questa tabella
+			{
+				user.setCf(rs.getString("CF"));
+				user.setNome(rs.getString("Nome"));
+				user.setCognome(rs.getString("Cognome"));
+				user.setEmail(rs.getString("Email"));
+				user.setPassword(rs.getString("Passw"));
+				user.setIndirizzo(rs.getString("Indirizzo_Fatturazione"));
+				user.setTelefono(rs.getString("Telefono"));
+				user.setRuolo("");
+			}
+			//System.out.println(user.getEmail() +"  "+ user.getPassword() );
+			
+		} finally { //rilasiamo tutte le risorse che abbiamo
+			try {
+			if(preparedStatement != null)
+				preparedStatement.close();
+			} finally {
+			if(connection != null)
+				connection.close();
+			}
+		}
+		return user; //ritorna l'utente cercato all'interno del database
+		
 	}
 	
 	public UtenteBean cercaUtente (String email, String password) throws SQLException
@@ -73,7 +126,6 @@ public class LoginModel implements InterfacciaDAO <UtenteBean> {
 
 	@Override
 	public void doSave(UtenteBean item) throws SQLException {
-		// TODO Auto-generated method stub
 		
 	}
 

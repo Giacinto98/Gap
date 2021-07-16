@@ -16,6 +16,8 @@ import model.MaterialeBean;
 import model.MaterialeModel;
 import model.ProdottoBean;
 import model.ProdottoModel;
+import model.RecensioneBean;
+import model.RecensioneModel;
 
 
 @WebServlet("/CercaProdottoControl")
@@ -30,6 +32,8 @@ public class CercaProdottoControl extends HttpServlet {
 		ProdottoModel model = new ProdottoModel (ds); //creiamo un product model che abbiamo instaziato e che ci permette di recuperare i dati che poi inserirà nel bean da leggere
 		ProdottoBean prodotto = new ProdottoBean();
 		MaterialeModel matModel = new MaterialeModel(ds);
+		RecensioneModel recensione = new RecensioneModel(ds);
+		Collection<RecensioneBean> recensioni = new LinkedList<RecensioneBean>();
 		Collection<MaterialeBean> materiali = new LinkedList<MaterialeBean>();
 		
 		try {
@@ -46,10 +50,20 @@ public class CercaProdottoControl extends HttpServlet {
 			e.printStackTrace();
 		} 
 		
+		String x =  Integer.toString(prodotto.getCodice());
+		System.out.print(x);
+		try {
+			recensioni = recensione.doRetriveAll(x);
+		} catch (SQLException e) {
+			System.out.print("ERRORE RICERCA RECENSIONE cerca prodotto RIGA 57");
+			e.printStackTrace();
+		}
+		
 		if(prodotto != null)
 			{
 			request.setAttribute("materiali", materiali);
 			request.setAttribute("prodotto", prodotto);
+			request.setAttribute("recensioni",recensioni);
 			getServletContext().getRequestDispatcher("/paginaProdotto.jsp").forward(request, response);
 			}
 	}

@@ -1,7 +1,7 @@
 @charset "ISO-8859-1";
 
 body{
-	background-color:#EEE0E5;
+	background-color:#e6e6fa;
 }
 
 .btn-menu{
@@ -48,7 +48,7 @@ div.logRec{
 nav{
 
 	display:inline-block;
-	background-color:#EEE0E5;
+	background-color:#e6e6fa;
 	color:white;
 	width:100%; 
 	text-align:center;
@@ -116,6 +116,8 @@ nav li:hover  {
 	background-color:#EEE0E5;
 }
 
+#profilo{display:none;}
+
 nav li:hover .dropdown-content a{
 	display:block
 }
@@ -171,3 +173,4 @@ text-align:center;
 .divQuantita{
 	text-align:right;
 }
+

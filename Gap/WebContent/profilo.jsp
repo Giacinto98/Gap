@@ -15,6 +15,13 @@
 	<link href="css/prodotto.css" rel="stylesheet" type="text/css">
 	<link href="css/generale.css" rel="stylesheet" type="text/css">
 	<link href="css/profilo.css" rel="stylesheet" type="text/css">
+	<link href="css/popUp.css" rel="stylesheet" type="text/css" media='all'>
+	
+	<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.3/jquery.min.js'></script>
+	<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js'></script>
+	<script type='text/javascript' src='http://demo.persaper.it/js/demo.js'></script>
+	
+	
 	
 	<style>
 		div 
@@ -34,12 +41,13 @@ HttpSession sessione = request.getSession(false);
 	   if (sessione != null)
 	   {
 			UtenteBean utente = (UtenteBean) sessione.getAttribute("utente");
+
 %>
 
 
 <h1 align= "center">Benvenuto <%=utente.getNome()%></h1>
 
-<table align="center" class= "tabella">
+<table id="demo" align="center" class= "tabella">
 <tr>
 <th>
 <fieldset><legend><h3>Info Profilo</h3></legend>
@@ -54,9 +62,9 @@ HttpSession sessione = request.getSession(false);
 	<fieldset>
      	<legend><h3>Impostazioni</h3></legend>
      	<h5>Modificia password dell'account</h5>
-     	<button>Modifica Password</button>
+     	<button onclick="location.href='cambioPassword.jsp'">Modifica Password</button>
      	<h5>Visualizza le tue informazioni pesonali</h5>
-     	<button>Visualizza</button><br>
+     	<button onClick="cercaUtente('<%=utente.getEmail()%>')">Visualizza</button>
 	</fieldset>
 	
 </fieldset>
@@ -64,10 +72,39 @@ HttpSession sessione = request.getSession(false);
 </tr>
 </table>
 
+<div class="demo-container">
+
+	
+
+</div>
 
 <%} %>
 
 <jsp:include page="common/futher.jsp"/>
+
+
+
+<script>
+
+function cercaUtente(email)
+{
+	var url = 'RecuperoDatiUtenteControl?email=' + encodeURIComponent(email);
+  	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = 
+	function() 
+	{
+		if(xhr.readyState == 4 && xhr.status == 200)
+		{
+			var response = JSON.parse(xhr.responseText);
+			document.getElementById("demo").innerHTML = "<h3>Codice Fiscale: " + response.cf + "<br>Nome: " + response.nome + "<br>Cognome: " + response.cognome + "<br>Email: " + response.email + "<br>Password: Non visibile per questioni di sicurezza<br>Indirizzo: " + response.indirizzo + "<br>Telefono: " + response.telefono + "</h3><a href= 'profilo.jsp' >Indietro</a>";		
+		}
+	}
+	xhr.open("GET",url,true);
+	xhr.send(null);	
+}
+
+
+</script>
 
 </body>
 </html>

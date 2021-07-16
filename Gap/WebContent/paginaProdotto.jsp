@@ -10,10 +10,10 @@
 
 <title>Prodotto</title>
 	
-	<link href="css/responsive.css" rel="stylesheet" type="text/css">
 	<link href="css/index.css" rel="stylesheet" type="text/css">
 	<link href="css/prodotto.css" rel="stylesheet" type="text/css">
 	<link href="css/generale.css" rel="stylesheet" type="text/css">
+	<link href="css/responsive.css" rel="stylesheet" type="text/css">
 	
 	<style>
 		div 
@@ -36,7 +36,7 @@
 		Collection<?> materiali = (Collection<?>) request.getAttribute("materiali");	
 	%>
 	
-	<img class="immagineFoto" src="Elementi/<%=prodotto.getNome()%>.jpg" alt="<%=prodotto.getNome()%>">
+	<img class="immagineFoto" src="Elementi/<%=prodotto.getNome()%>.jpg" alt="<%=prodotto.getNome()%>" Style="height:500px; width:800px;"}>
 
 <fieldset class="bordino">
 	<div class="immagineDesc">
@@ -95,10 +95,36 @@
 
 	</div>	
 </fieldset>
-	
 </div>
-
-
+<p align=center style="margin-top:200px">RECENSIONI</p>
+<table class="tabellaRecensioni">
+<tr>
+<%
+	Collection<?> recensioni = (Collection<?>) request.getAttribute("recensioni");
+if(recensioni != null && recensioni.size() > 0) //controllo se ci sono prodotti all'interno dell'array
+{
+	Iterator<?> it = recensioni.iterator(); //iteriamo i prodotti
+	while(it.hasNext()) //fin quando ho prodotti
+	{
+	RecensioneBean bean = (RecensioneBean) it.next(); 
+%>
+<td> 
+<div class="recensioneDiv">
+<fieldset>
+Utente=<%=bean.getEmail() %> <br>
+Recensione = <%=bean.getTesto()%>
+</fieldset>
+</div>
+  	</td>
+  	</tr> 
+		<% }
+		}else{ %>
+		<h3>Non sono presenti recensioni per questo prodotto</h3>
+		<%}%>
+		
+	
+		    
+</table>
 <jsp:include page="common/futher.jsp"/>
 
 

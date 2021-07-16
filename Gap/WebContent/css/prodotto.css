@@ -2,12 +2,15 @@
 .immagine{
 	width:100%;
 }
+
 .immagineFoto{
 	margin:5px 0 0 0 ;
 	float:left;
-	min-width:300px;
-	max-width:45%;
+	width:400px;
+	height:400px;
+	margin-left:50px;
 }
+
 .immagineDesc{
 	margin:5px 0 0 0 ;
 	text-align:center;

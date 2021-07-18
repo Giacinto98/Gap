@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1" import="java.util.*, model.* , java.lang.*" %>
 
 <style>
+
 * {
   box-sizing: border-box;
 }

@@ -2,8 +2,11 @@ package model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Collection;
+import java.util.LinkedList;
 
 import javax.sql.DataSource;
 
@@ -26,7 +29,6 @@ public class CompostoModel implements InterfacciaDAO<CompostoBean>{
 
 	@Override
 	public Collection<CompostoBean> doRetriveAll(String order) throws SQLException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -55,7 +55,7 @@ HttpSession sessione = request.getSession(false);
 	<fieldset>
      	<legend><h3>I tuoi ordini</h3></legend>
      	<h5>Visualizza gli ordini che hai effettuato</h5>
-     	<button>Visualizza</button>
+     	<button onClick="location.href='VisualizzaOrdiniControl'">Visualizza</button>
 	</fieldset>
 </th>
 <th>

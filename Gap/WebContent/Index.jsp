@@ -63,7 +63,7 @@
   			<div class="card-body">
     	<h3 class="card-title"><%=bean.getNome()%> <%if(bean.getSconto()>0) {%> <b style="color:red;"> &nbsp;&nbsp; SCONTO <%=bean.getSconto()%> &percnt; </b> <%} %></h3>
     	<p class="card-text">Apri per maggiori iformazioni </p>
-    	<form action="CercaProdottoControl" method="get"> <button  type="submit" name="bottone" value="<%=bean.getNome()%>">Apri Prodotto</button> </form>
+    	<form action="CercaProdottoControl" method="get"> <button type="submit" name="bottone" value="<%=bean.getNome()%>">Apri Prodotto</button> </form>
 		</div>
 		</div>
 

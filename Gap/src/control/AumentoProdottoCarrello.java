@@ -36,20 +36,16 @@ public class AumentoProdottoCarrello extends HttpServlet {
 		{
 			 carrello = (CarrelloBean) sessione.getAttribute("carrello");
 		}
-	//System.out.println("Quantita non aggiornata " +  carrello.getIndex(carrello.getIndexDiUnProdotto(codiceProdotto, idMateriale)).getQuantita());
-		carrello.aumentaQuantitaProdotto(codiceProdotto, idMateriale);
+			carrello.aumentaQuantitaProdotto(codiceProdotto, idMateriale);
 		int codiceAumento = carrello.getIndexDiUnProdotto(codiceProdotto, idMateriale);
 		if(codiceAumento != -1)
 		{
-	//System.out.println("Quantita aggiornata = " +  carrello.getIndex(carrello.getIndexDiUnProdotto(codiceProdotto, idMateriale)).getQuantita());
-			//int quantita = carrello.getIndex(codiceAumento).getQuantita();
-			//carrello.getIndex(codiceAumento).setQuantita(quantita);
 			JSONObject json = new JSONObject();
 			try {
 				json.put("quantita", carrello.getIndex(codiceAumento).getQuantita());
 				json.put("totale", carrello.getQuantita());
 				String riferimento = carrello.getIndex(codiceAumento).getCodice() + "_" + carrello.getIndexMateriale(codiceAumento).getId();
-	//System.out.println(riferimento);		
+			
 				json.put("riferimento", riferimento);
 				json.put("prezzoTot", carrello.getPrezzoTotale());
 			} catch (JSONException e) {

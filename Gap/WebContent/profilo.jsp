@@ -8,6 +8,7 @@
 	<meta name="author" content= "Adinolfi Giacinto">
 	<meta charset="ISO-8859-1">
 
+
 <title>Prodotto</title>
 	
 	<link href="css/responsive.css" rel="stylesheet" type="text/css">
@@ -47,9 +48,10 @@ HttpSession sessione = request.getSession(false);
 
 <h1 align= "center">Benvenuto <%=utente.getNome()%></h1>
 
-<table id="demo" align="center" class= "tabella">
+<table id="demo" align="center" class= "tabella" style="width:100%;">
 <tr>
 <th>
+
 <fieldset><legend><h3>Info Profilo</h3></legend>
 
 	<fieldset>

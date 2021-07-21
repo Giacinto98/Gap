@@ -13,3 +13,17 @@ fieldset
 	border-radius: 10px;
 	border-color:#0088b3;
 }
+
+@media screen and (max-width:680px){
+	
+.tabella{
+	width:100%;
+	margin-left:0;
+	margin-right:0;
+}	
+
+.tabella th{
+	width:100%;
+	display:inline-table;
+}
+}

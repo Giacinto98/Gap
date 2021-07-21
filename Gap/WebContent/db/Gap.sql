@@ -31,15 +31,6 @@ create table Utente_Ruolo(
     foreign key (Ruolo) references Ruolo(Nome) on update cascade on delete cascade
 );
 
-create table carta (
-Numero char(16) not null,
-Anno_scadenza date not null,
-Proprietario varchar(50) not null,
-Email char(25) not null,
-primary key (Numero),
-foreign key (Email) references Utente(Email) on update cascade on delete cascade
-);
-
 create table Prodotto(
 Codice int not null auto_increment,
 Nome varchar(15) not null,

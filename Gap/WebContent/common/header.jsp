@@ -151,7 +151,7 @@ input[type=submit] {
 	<% 
 	if(utente != null){
 		 %>
-		 <li id="profilo"><a href="./AdminControl">Profilo</a></li>
+		 <li id="profilo"><a href="./profilo.jsp">Profilo</a></li>
 		<% 	
 	if(utente.getRuolo().equals("amministratore"))
 		{%>

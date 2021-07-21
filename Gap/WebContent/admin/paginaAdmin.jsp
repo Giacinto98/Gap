@@ -65,7 +65,7 @@ else
 		OrdineBean bean = (OrdineBean) it.next(); //metto nel bean riferito alla tabella dei prodotti il prodotto i-esimo	
 %>
 <td> 
-	<div >
+	<div style="width:20rem;height:5rem;">
 Ordine n°:  <b><%=bean.getNumeroOrdine()%></b>&nbsp;
 E-mail: <b><%=bean.getEmail()%></b><br>
 N° prodotti: <b><%=bean.getNumeroProdotti()%></b>
@@ -81,9 +81,19 @@ Importo: <b><%=bean.getPrezzoTotale()%></b>
 </tr>		    
 </table>
 
-<footer style="background:grey; color:white;margin:100px 0px 0px 0px">
-	<p align="center">GRAZIE DELLA VISIONE PER SUPPORTARE IL SITO POTETE DONARE AL SEGUENTE IBAN:(iserire qui ibad di Emanuele)</p></footer>
+<footer style="background:#0088b3; border-radius: 5px; color:white;margin:100px 0 0 0;height:100px;">
+	
+	<div style="float:left;margin-top:10px;">
+		<a href="Index.jsp"><img src = "Elementi/logo.png" width="75" height="75"></a>
 
+<span style="margin-left:40%;">
+	SEGUICI:
+	<img src = "Elementi/instagram.png" width="50" height="50">
+	<img src = "Elementi/facebook.png" width="50" height="50">
+	
+</span>
+</div>
+</footer>
 
 <script>
 function toggle() 

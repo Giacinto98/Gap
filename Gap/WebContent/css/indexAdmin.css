@@ -126,7 +126,7 @@ border-collapse: collapse;
 }
 
 .tabellaCiao td, .tabellaCiao th{
-	margin-left:5px;
+	margin-left:2%;
 	margin-top:5px;
 border:1px solid #0088b3;
 display:inline-block;	

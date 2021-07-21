@@ -114,7 +114,7 @@ public class RegControl extends HttpServlet {
 		}
 		else
 		{
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/regEffettuata.html");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/regEffettuata.jsp");
 			dispatcher.forward(request, response);
 		}
 	}

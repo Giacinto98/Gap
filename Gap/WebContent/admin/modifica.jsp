@@ -51,8 +51,17 @@
 		Altezza <input type = "text" name="altezza" required> <br>
 		Profondita' <input type = "text" name="profondita" required> <br>
 		Larghezza <input type = "text" name="larghezza" required> <br>
-		Tipologia <input type = "text" name="tipologia" required> <br>
-		Quantita' <input type = "text" name="quantita" required> <br>
+			
+		<label for="tipologia">Tipologia</label>
+		<select name="tipologia" form="formModifica">
+		<option value="manuale">Manuale</option>
+		<option value="elettrica">Elettrica</option>
+		<option value="pouf">Pouf</option>
+		<option value="moderna">Moderna</option>
+		<option value="classica">Classica</option>
+		</select>
+		
+		<br>Quantita' <input type = "text" name="quantita" required> <br>
 		Prezzo <input type = "text" name="prezzo" required> <br>
 		Sconto <input type = "text" name="sconto" required> <br>
 		<legend>Materiali</legend>
@@ -100,6 +109,19 @@
 </div>
 </div>
 	
+<footer style="background:#0088b3; border-radius: 5px; color:white;margin:100px 0 0 0;height:100px;">
+	
+	<div style="float:left;margin-top:10px;">
+		<a href="Index.jsp"><img src = "Elementi/logo.png" width="75" height="75"></a>
+
+<span style="margin-left:40%;">
+	SEGUICI:
+	<img src = "Elementi/instagram.png" width="50" height="50">
+	<img src = "Elementi/facebook.png" width="50" height="50">
+	
+</span>
+</div>
+</footer>
 
 <script>
 function toggle() 

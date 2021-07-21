@@ -63,7 +63,7 @@
 	else{
 		prezzoTot = prezzoTot + (prodotti.get(i).getPrezzo() * prodotti.get(i).getQuantita());}
 		%> 		
-<img class="immagineFoto" src="Elementi/<%=prodotti.get(i).getNome()%>.jpg" alt="<%=prodotti.get(i).getNome()%>">				 
+<img class="immagineCarrello" src="Elementi/<%=prodotti.get(i).getNome()%>.jpg" alt="<%=prodotti.get(i).getNome()%>">				 
  Nome:<h2><%=prodotti.get(i).getNome()%></h2>
  Materiale :
  <img class="bordo"  title="<%=materiali.get(i).getTipologiaMateriale()%>_<%=materiali.get(i).getColore()%>"  
@@ -110,7 +110,7 @@ alt="Card image cap"><%=materiali.get(i).getTipologiaMateriale()%>
 <div id="barra" class="immagineDesc2"  >
 <fieldset >
 <h2 >TOTALE ORDINE</h2>
-N∞ di prodotti <b id ="totale"><%=carrello.getQuantita()%></b><br>
+N¬∞ di prodotti <b id ="totale"><%=carrello.getQuantita()%></b><br>
 <h3>Importo Totale</h3><b id="importo"> <%=prezzoTot%></b>
 <form method = "GET" action = "AcquistoControl"> 
 <button type="submit" name="Acquista">Acquista</button>
@@ -138,14 +138,14 @@ function funzionePiu(idProdotto, idMateriale)
 	var url = 'AumentoProdottoCarrello?codiceProdotto=' + encodeURIComponent(idProdotto) + "&idMateriale=" + encodeURIComponent(idMateriale); 
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = //alla risposta della servlet
-		function() //aumenta di 1 unit‡ il carrello
+		function() //aumenta di 1 unit√† il carrello
 		{
 			if(xhr.readyState == 4 && xhr.status == 200)
 			{
 				var response = JSON.parse(xhr.responseText);
 				var stringa = response.riferimento;
 				document.getElementById(stringa).innerHTML = response.quantita;
-				document.getElementById("totale").innerHTML = response.totale;
+				document.getElementById("carrello").innerHTML = response.totale;
 				document.getElementById("importo").innerHTML = response.prezzoTot;
 			}
 		}
@@ -158,14 +158,14 @@ function funzioneMeno(idProdotto, idMateriale)
 	var url = 'DiminuzioneProdottoCarrello?codiceProdotto=' + encodeURIComponent(idProdotto) + "&idMateriale=" + encodeURIComponent(idMateriale); 
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = //alla risposta della servlet
-		function() //aumenta di 1 unit‡ il carrello
+		function() //aumenta di 1 unit√† il carrello
 		{
 			if(xhr.readyState == 4 && xhr.status == 200)
 			{
 				var response = JSON.parse(xhr.responseText);
 				var stringa = response.riferimento;
 					document.getElementById(stringa).innerHTML = response.quantita;
-					document.getElementById("totale").innerHTML = response.totale;
+					document.getElementById("carrello").innerHTML = response.totale;
 					document.getElementById("importo").innerHTML = response.prezzoTot;
 			}
 		}
@@ -178,14 +178,14 @@ function rimuovi(idProdotto, idMateriale)
 	var url = 'RimozioneDaCarrello?codiceProdotto=' + encodeURIComponent(idProdotto) + "&idMateriale=" + encodeURIComponent(idMateriale); 
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = //alla risposta della servlet
-		function() //aumenta di 1 unit‡ il carrello
+		function() //aumenta di 1 unit√† il carrello
 		{
 			if(xhr.readyState == 4 && xhr.status == 200)
 			{
 				var response = JSON.parse(xhr.responseText);
 				var stringa = response.riferimento;
 				document.getElementById(stringa).innerHTML = "";
-				document.getElementById("totale").innerHTML = response.totale;
+				document.getElementById("carrello").innerHTML = response.totale;
 				document.getElementById("importo").innerHTML = response.prezzoTot;
 				var totaleElementi = response.totale;
 				if(totaleElementi == 0)

@@ -31,7 +31,7 @@
 
 <div class="immagine">
 	<%
-	    response.encodeURL("/paginaProdotto.jsp");
+		String url = response.encodeURL("CarrelloControl");
 		ProdottoBean prodotto = new ProdottoBean(); 
 		prodotto = (ProdottoBean) request.getAttribute("prodotto");
 		Collection<?> materiali = (Collection<?>) request.getAttribute("materiali");	
@@ -166,9 +166,10 @@ var id = null;
 			}
 		else
 			document.getElementById("demo").innerHTML = "";	
-			//alert(JSON.stringify(oggetto));
-				var url = 'CarrelloControl?nome=' + encodeURIComponent(nome) + "&idMateriale=" + encodeURIComponent(id);
-
+		
+			    var url = '<%=url%>' + "?nome=" + encodeURIComponent(nome) + "&idMateriale=" + encodeURIComponent(id);
+			    console.log(url);
+				//var url = 'CarrelloControl?nome=' + encodeURIComponent(nome) + "&idMateriale=" + encodeURIComponent(id);
 				var xhr = new XMLHttpRequest();
 				xhr.onreadystatechange = //alla risposta della servlet
 					function() //aumenta di 1 unità il carrello

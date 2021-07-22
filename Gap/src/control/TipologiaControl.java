@@ -18,7 +18,6 @@ public class TipologiaControl extends HttpServlet {
        
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.encodeURL("ManualiControl");
 		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource"); //recuperiamo il datasource
 		String tipo = request.getParameter("tipo");
 		TipologiaModel model = new TipologiaModel(ds);
@@ -29,7 +28,7 @@ public class TipologiaControl extends HttpServlet {
 		catch (SQLException e) {
 			System.out.println(e); //sampiamo per visualizzarla duante la fase di debugghing nella console
 		}
-		getServletContext().getRequestDispatcher("/prodottoSpecifico.jsp").forward(request, response); //rimandiamo l'output alla parte view (jsp)
+		getServletContext().getRequestDispatcher(response.encodeURL("/prodottoSpecifico.jsp")).forward(request, response); //rimandiamo l'output alla parte view (jsp)
 	}
 
 	

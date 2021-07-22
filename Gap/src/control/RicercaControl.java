@@ -22,7 +22,6 @@ public class RicercaControl extends HttpServlet {
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource"); 
-		response.encodeURL("RemoveControl");
 		ProdottoBean bean = new ProdottoBean();
 		ProdottoModel model = new ProdottoModel(ds);
 		try {
@@ -32,7 +31,7 @@ public class RicercaControl extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("prodotto", bean);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/paginaProdotto.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(response.encodeURL("/paginaProdotto.jsp"));
 		dispatcher.forward(request, response);
 	}
 

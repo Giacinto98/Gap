@@ -18,7 +18,6 @@ public class VisualizzaOrdiniControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.encodeURL("VisualizzaOrdiniControl");
 		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource"); //recuperiamo il datasource
 		UtenteBean user = new UtenteBean();
 		OrdineModel model = new OrdineModel(ds);
@@ -36,7 +35,7 @@ public class VisualizzaOrdiniControl extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("ordini", ordini);
-		getServletContext().getRequestDispatcher("/paginaOrdiniUtente.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher(response.encodeURL("/paginaOrdiniUtente.jsp")).forward(request, response);
 		
 	}
 

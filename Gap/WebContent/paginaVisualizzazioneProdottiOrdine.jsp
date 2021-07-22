@@ -28,15 +28,12 @@
 <jsp:include page="common/header.jsp"/>
 
 <%
-	response.encodeURL("paginaVisualizzazioneProdottiOrdine.jsp");
 	UtenteBean utente = new UtenteBean();
 	HttpSession sessione = request.getSession(false);
    if (sessione != null)
    {
 		utente = (UtenteBean) sessione.getAttribute("utente");
    }	
-	 //URL rewriting
-	//dobbiamo verificare che passiamo per la servlete che recupera le informazioni sulla tabella store per poi stamparla
 	Collection<?> prodotti = (Collection<?>) request.getAttribute("prodotti"); //leggo dalla request l'attributo products che ha la lista degli oggetti 
 	Collection<?> recensioni = (Collection<?>) request.getAttribute("recensioni"); //leggo dalla request l'attributo products che ha la lista degli oggetti 
 %>
@@ -62,7 +59,8 @@
     	<%if(recensione.getTesto().equals(""))
     	{%>
     	<%=recensione.getTesto()%>
-    	<button  type="submit" onClick="location.href='scriviRecensione.jsp?codice=<%=bean.getCodice()%>'" name="bottone" value="<%=bean.getNome()%>">Recensisci</button></h3>
+    	<%String url = response.encodeURL("scriviRecensione.jsp?codice="+bean.getCodice());%>
+    	<button  type="submit" onClick="location.href='<%=url%>'" name="bottone" value="<%=bean.getNome()%>">Recensisci</button></h3>
 		<%} %>
 		</div>
 		</div>

@@ -33,7 +33,7 @@ public class RemoveControl extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Index.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(response.encodeURL("/Index.jsp"));
 		dispatcher.forward(request, response);
 	}
 

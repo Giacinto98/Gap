@@ -43,7 +43,7 @@ public class RecensioneControl extends HttpServlet {
 			System.out.println("Errore salvataggio recensione nel database");
 			e.printStackTrace();
 		}
-		getServletContext().getRequestDispatcher("/recensioneEffettuata.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher(response.encodeURL("/recensioneEffettuata.jsp")).forward(request, response);
 	}
 
 	

@@ -26,7 +26,6 @@
 
 <body>
 	<% 
-	response.encodeURL("scriviRecensione.jsp");
 	UtenteBean utente = new UtenteBean();
 	HttpSession sessione = request.getSession(false);
    if (sessione != null)
@@ -39,7 +38,7 @@
 <h2 align="center">Inserisci qui la tua recensione</h2>
 
 <table align="center" Style="width:500px">
-<form id="pippo" action="RecensioneControl" method="get">
+<form id="pippo" action="<%=response.encodeURL("RecensioneControl")%>" method="get">
 	<input type="hidden" name="codice" value="<%=codice%>">
 	<input type="hidden" name="email" value="<%=utente.getEmail()%>">
 	<tr><td><label><%=utente.getNome()%> <%=utente.getCognome()%>:</label></td></tr>

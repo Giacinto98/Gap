@@ -31,7 +31,7 @@ public class ProdottoControl extends HttpServlet {
 			System.out.println(e); //sampiamo per visualizzarla duante la fase di debugghing nella console
 			request.setAttribute("errore", e.getMessage()); //creiamo un attributo errore dove mettiamo l'errore che abbiamo avuto nel lancio dell'eccezione
 		}
-		getServletContext().getRequestDispatcher("/Index.jsp").forward(request, response); //rimandiamo l'output alla parte view (jsp)
+		getServletContext().getRequestDispatcher(response.encodeURL("/Index.jsp")).forward(request, response); //rimandiamo l'output alla parte view (jsp)
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

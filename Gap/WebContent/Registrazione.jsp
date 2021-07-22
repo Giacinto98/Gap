@@ -209,7 +209,7 @@ function ControlloFinale()
 	if(cont == 0)
 	{
 		console.log("Funzionato");
-		document.form.action = "RegControl";
+		document.form.action = "<%=response.encodeURL("RegControl")%>";
 		document.form.submit();
 	}
 	else

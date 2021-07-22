@@ -28,7 +28,6 @@
 <jsp:include page="common/header.jsp"/>
 
 <%
-	response.encodeURL("paginaOrdiniUtente.jsp");
 	UtenteBean utente = new UtenteBean();
 	HttpSession sessione = request.getSession(false);
    if (sessione != null)
@@ -44,6 +43,7 @@
 		while(it.hasNext()) //fin quando ho prodotti
 		{
 		OrdineBean ordine = (OrdineBean) it.next();
+		String url = response.encodeURL("ComposizioneControl?idOrdine="+ordine.getNumeroOrdine());
 %>
 
 	<table align="center" 
@@ -60,7 +60,7 @@
 		<tr><td>Ordine effettuato il:</td><td> <%=ordine.getDataOrdine()%></td></tr>
 		<tr><td>Inviato a:</td><td> <%=utente.getNome()%> <%=utente.getCognome()%></td></tr>
 		<tr><td>Numero di elementi:</td><td> <%=ordine.getNumeroProdotti()%> </td></tr>
-		<tr><td>Prodotti:</td><td><button onclick="location.href='ComposizioneControl?idOrdine=<%=ordine.getNumeroOrdine()%>'">Visualizza Prodotti</button></td></tr>
+		<tr><td>Prodotti:</td><td><button onclick="location.href='<%=url%>'">Visualizza Prodotti</button></td></tr>
 		<tr><td>Prezzo totale:</td><td> <%=ordine.getPrezzoTotale()%>
 	</table>	
 	

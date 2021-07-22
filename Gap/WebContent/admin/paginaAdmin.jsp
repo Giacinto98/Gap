@@ -30,7 +30,7 @@
 	 
 <div>
 	<p align="center">
-	<a href="./Index.jsp"><img src = "Elementi/logo.png" width="75" height="75"></a>
+	<a href="<%=response.encodeURL("./Index.jsp")%>"> <img src = "Elementi/logo.png" width="75" height="75"> </a>
 	<p align="center">
 </div>
 					
@@ -38,14 +38,13 @@
 
 <nav id="navbar">
 	<ul><h3>
-	<li><a href="./admin/modifica.jsp" class="dropdown">Modifica</a></li>
+	<li><a href="<%=response.encodeURL("./admin/modifica.jsp")%>" class="dropdown">Modifica</a></li>
 </h3></ul>
 </nav>
 
 <h1 align="center">Monitora gli ordini degli utenti</h1>
 
 <%
-	response.encodeURL("paginaAdmin.jsp"); //URL rewriting
 	Collection<?> ordini = (Collection<?>) request.getAttribute("ordini"); //leggo dalla request l'attributo products che ha la lista degli oggetti 
 	
 	if(ordini == null){ 

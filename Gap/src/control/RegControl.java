@@ -109,12 +109,12 @@ public class RegControl extends HttpServlet {
 		if(error != null && !error.equals(""))
 		{
 			request.setAttribute("error", error);
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Registrazione.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(response.encodeURL("/Registrazione.jsp"));
 			dispatcher.forward(request, response);
 		}
 		else
 		{
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/regEffettuata.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(response.encodeURL("/regEffettuata.jsp"));
 			dispatcher.forward(request, response);
 		}
 	}

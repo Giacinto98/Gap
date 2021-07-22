@@ -29,7 +29,7 @@
 <body>
 <jsp:include page="common/header.jsp"/>
 
-<h1 align="center">Recensione effettuata con successo. Torna alla pagina <a href="profilo.jsp">profilo</a> </h1>
+<h1 align="center">Recensione effettuata con successo. Torna alla pagina <a href="<%=response.encodeURL("profilo.jsp")%>">profilo</a> </h1>
 
 <jsp:include page="common/futher.jsp"/>
 

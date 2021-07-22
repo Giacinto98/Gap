@@ -94,6 +94,7 @@ input[type=submit] {
 	 <!-- </div> -->
 	 
 	<%
+	//response.encodeURL("header.jsp");
 	UtenteBean utente = new UtenteBean();
 	HttpSession sessione = request.getSession(false);
 	   if (sessione != null)
@@ -122,8 +123,8 @@ input[type=submit] {
 			 
 	<div>
 	 	<p class="logRec" align="right" >
-	 	<a  class="link" title="login" href="loginUser.jsp"> LOGIN</a> 
-	 	<a  class="link" title="registrazione" href="Registrazione.jsp" >/REG</a>
+	 	<a  class="link" title="login" Style="text-decoration: none; transition:0.5s;" href="<%=response.encodeURL("loginUser.jsp")%>"> LOGIN</a> |
+	 	<a  class="link" title="registrazione" Style="text-decoration: none; transition:0.5s" href="Registrazione.jsp" >REG</a>
 		</p>
 	</div> 
 		

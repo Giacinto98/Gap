@@ -64,7 +64,8 @@ public class CercaProdottoControl extends HttpServlet {
 			request.setAttribute("materiali", materiali);
 			request.setAttribute("prodotto", prodotto);
 			request.setAttribute("recensioni",recensioni);
-			getServletContext().getRequestDispatcher("/paginaProdotto.jsp").forward(request, response);
+			
+			getServletContext().getRequestDispatcher(response.encodeURL("/paginaProdotto.jsp")).forward(request, response);
 			}
 	}
 

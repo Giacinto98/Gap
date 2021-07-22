@@ -31,6 +31,7 @@
 
 <div class="immagine">
 	<%
+	    response.encodeURL("/paginaProdotto.jsp");
 		ProdottoBean prodotto = new ProdottoBean(); 
 		prodotto = (ProdottoBean) request.getAttribute("prodotto");
 		Collection<?> materiali = (Collection<?>) request.getAttribute("materiali");	
@@ -61,12 +62,21 @@
 				if(materiali != null && materiali.size() > 0) //controllo se ci sono prodotti all'interno dell'array
 				{
 			%> <div> <% 
+					Iterator<?> it1 = materiali.iterator(); //iteriamo i prodotti
+					String array = "";
+					while(it1.hasNext()) //fin quando ho prodotti
+					{
+						MaterialeBean materiale = (MaterialeBean) it1.next(); //metto nel bean riferito alla tabella dei prodotti il prodotto i-esimo	
+						array+=materiale.getId();
+					}
+					
 					Iterator<?> it = materiali.iterator(); //iteriamo i prodotti
+					 //metto nel bean riferito alla tabella dei prodotti il prodotto i-esimo	
 					while(it.hasNext()) //fin quando ho prodotti
 					{
-					MaterialeBean materiale = (MaterialeBean) it.next(); //metto nel bean riferito alla tabella dei prodotti il prodotto i-esimo	
-			%> 
-					<img class="bordo"  title="<%=materiale.getTipologiaMateriale()%>_<%=materiale.getColore()%>"  onclick="selezionaColore ('<%=materiale.getId()%>')" 
+						MaterialeBean materiale = (MaterialeBean) it.next();
+				  %> 
+					<img class="bordo" id="<%=materiale.getId()%>" title="<%=materiale.getTipologiaMateriale()%>_<%=materiale.getColore()%>"  onclick="selezionaColore('<%=materiale.getId()%>','<%=array%>')"
 					 height=30 width=30 src="Materiali/<%=materiale.getTipologiaMateriale()%>_<%=materiale.getColore()%>.jpg " alt="Card image cap">
 				  <%} 
 				}%>
@@ -130,11 +140,21 @@ Recensione = <%=bean.getTesto()%>
 
 <script type="text/javascript">
 var id = null;
-	function selezionaColore (identificativo)
+
+	function selezionaColore (identificativo,array)
 	{
-		id = identificativo;
-		//alert(id);
+	id = identificativo;
+	var i=0;
+	
+	while(i<array.length)
+	{
+		if(array.charAt(i)!="" && array.charAt(i) == identificativo)
+			document.getElementById(identificativo).style.border = "3px solid #0088b3";
+		else if(array.charAt(i)!=" ")
+			document.getElementById(array.charAt(i)).style.border = "none";
+		i++;
 	}
+}
 	
 	function aggiungiAlCarrello(nome,utente)
 	{

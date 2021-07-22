@@ -12,6 +12,7 @@
 <link href="css/index.css" rel="stylesheet" type="text/css">
 <link href="css/responsive.css" rel="stylesheet" type="text/css">	
 
+
 <style>
 	div 
 	{
@@ -46,7 +47,7 @@
  	<%  } %>
     	
     
-    	<table style= >
+    	<table align="center" >
     		<tr>
     			<th>CF</th>
     			<th><input onBlur="controllaCF(cf)" type="text" id="cf" class="clasinp" placeholder="Codie fiscale" name="cf" required> </th>
@@ -94,9 +95,15 @@
     			<th><input type="text" id="indirizzo" onBlur="ControlloIndirizzo(this.value)" placeholder="Indirizzo n°" name="indirizzo" required> </th>
     			<th><span id="in" style="font-weight: bold;">*</span></th>
     		</tr>
-    		
+    		<tr>
+    			<th><input type="button" Style="{
+												border-radius: 5px;
+    											border: 3px solid #0088b3;
+    											background-color:#0088b3;
+    											color: white;
+												}" value="Registrati" onClick="ControlloFinale()"></th>
+    		</tr>
     	</table>
-    <input type="button" value="Registrati" onClick="ControlloFinale()">
 	</form>
 	</div>
 </fieldset>

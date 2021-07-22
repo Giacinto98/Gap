@@ -34,7 +34,7 @@
 <jsp:include page="common/header.jsp"/>
 	
 	<p align="center"><h1 >Acquisto effettuato correttamente</h1></p>
-	<p align="center"><h2>Torna alla <a href="Index.jsp">HOME PAGE</a></h2></p>
+	<p align="center"><h2>Torna alla <a href="<%=response.encodeURL("Index.jsp")%>">HOME PAGE</a></h2></p>
 
 <jsp:include page="common/futher.jsp"/>
 </body>

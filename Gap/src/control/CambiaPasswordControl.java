@@ -51,7 +51,7 @@ public class CambiaPasswordControl extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/profilo.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(response.encodeURL("/profilo.jsp"));
 		dispatcher.forward(request, response);
 	
 	}

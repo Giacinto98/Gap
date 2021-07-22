@@ -28,7 +28,7 @@
 
 <fieldset id="demo" align="center">
     <legend><h2 align="center">Inserire nuova password</h2></legend>
-	<form action ="CambiaPasswordControl" method="post"> 
+	<form action ="<%=response.encodeURL("CambiaPasswordControl")%>" method="post"> 
 		<input type="password" placeholder="Password" name="password" required>
 		<input type="submit" name="Password">
 	</form>

@@ -30,7 +30,6 @@ public class AcquistoControl extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource"); 
-		response.encodeURL("AcquistoControl");
 		UtenteBean utente = new UtenteBean();
 		HttpSession sessione = request.getSession(false);
 		if (sessione != null)
@@ -88,7 +87,7 @@ public class AcquistoControl extends HttpServlet {
 		}
 		else
 			System.out.println("Errore passaggio prodotti");
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/acquistoEffettuato.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(response.encodeURL("/acquistoEffettuato.jsp"));
 		dispatcher.forward(request, response);
 		
 	}

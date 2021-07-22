@@ -27,7 +27,6 @@ public class ComposizioneControl extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.encodeURL("VisualizzaOrdiniControl");
 		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource"); //recuperiamo il datasource
 		String numeroOrdine = request.getParameter("idOrdine");
 		Collection<ComposizioneBean> composizioni = new LinkedList<ComposizioneBean>();
@@ -73,7 +72,7 @@ public class ComposizioneControl extends HttpServlet {
 		}
 		request.setAttribute("recensioni", recensioni);
 		request.setAttribute("prodotti", prodotti);
-		getServletContext().getRequestDispatcher("/paginaVisualizzazioneProdottiOrdine.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher(response.encodeURL("/paginaVisualizzazioneProdottiOrdine.jsp")).forward(request, response);
 	}
 
 	

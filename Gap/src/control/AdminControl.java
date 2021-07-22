@@ -30,7 +30,7 @@ public class AdminControl extends HttpServlet {
 		catch (SQLException e) {
 			System.out.println(e); //sampiamo per visualizzarla duante la fase di debugghing nella console
 		}
-		getServletContext().getRequestDispatcher("/admin/paginaAdmin.jsp").forward(request, response); //rimandiamo l'output alla parte view (jsp)
+		getServletContext().getRequestDispatcher(response.encodeURL("/admin/paginaAdmin.jsp")).forward(request, response); //rimandiamo l'output alla parte view (jsp)
 	}
 
 

@@ -38,14 +38,14 @@
 
 <nav id="navbar">
 	<ul><h3>
-	<li><a href="./paginaAdmin.jsp" class="dropdown">Pagina Ordini</a></li>
+	<li><a href="<%=response.encodeURL("./paginaAdmin.jsp")%>" class="dropdown">Pagina Ordini</a></li>
 </h3></ul>
 </nav>	
 
 
 <div id="modificaAmministratore">
 <div id="left">
-	<form method="post" action="../fileupload" name="echo" enctype="multipart/form-data">
+	<form method="post" action="<%=response.encodeURL("../fileupload")%>" name="echo" enctype="multipart/form-data">
 		<fieldset> <legend>Aggiungi Prodotto</legend>
 		Nome Prodotto <input type = "text" name="nome" required> <br>
 		Altezza <input type = "text" name="altezza" required> <br>
@@ -88,7 +88,7 @@
 
 <div id="right">
 	<fieldset><legend>Modifica Prodotto</legend>
-		<form method="get" action="../ModificaControl">
+		<form method="get" action="<%=response.encodeURL("../ModificaControl")%>">
 			Codice<input type = "text" name="codice" required> <br>
 			Prezzo <input type = "text" name="prezzo" required> <br>
 			Sconto <input type = "text" name="sconto" required> <br>
@@ -101,7 +101,7 @@
 
 <div id="center">
 	<fieldset><legend>Rimuovi Prodotto</legend>
-		<form method="get" action="../RemoveControl">
+		<form method="get" action="<%=response.encodeURL("../RemoveControl")%>">
 		Codice<input type = "text" name="codice" required> <br>
 		<input type="submit" value="Rimuovi Prodotto">
 		</form>
@@ -109,15 +109,6 @@
 </div>
 </div>
 	
-<footer style="background:#0088b3; border-radius: 5px; color:white;margin:100px 0 0 0;height:100px;">
-	
-	<div style="float:left;margin-top:10px;">
-		<a href="Index.jsp"><img src = "Elementi/logo.png" width="75" height="75"></a>
-
-<span style="margin-left:40%;">
-	SEGUICI:
-	<img src = "Elementi/instagram.png" width="50" height="50">
-	<img src = "Elementi/facebook.png" width="50" height="50">
 	
 </span>
 </div>

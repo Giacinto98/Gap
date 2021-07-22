@@ -71,20 +71,22 @@ input[type=submit] {
 }
 </style>
 
+
 <header>	
 
 <a href="javascript:void(0)" class="btn-menu" onclick=toggle()>&#9776;</a>
 	
 	<div>
 		<p align="left">
-		<a href="Index.jsp"><img src = "Elementi/logo.png" width="75" height="75"></a>
+		<%String url = response.encodeURL("Index.jsp");%>
+		<a href="<%=url%>"><img src = "Elementi/logo.png" width="75" height="75"></a>
 		<p align="center">
 	</div>
 	
 	<!-- <div> -->
 	
-	
-<form autocomplete="off" action="RicercaControl" method="get">
+<%String url1 = response.encodeURL("RicercaControl");%>
+<form autocomplete="off" action="<%=url1%>" method="get">
   <div class="autocomplete" style=" width:150px; top:20px; height: 35px; ">
     <input id="myInput"  type="text" name="ricerca" placeholder="Ricerca per nome">
   </div>
@@ -94,7 +96,6 @@ input[type=submit] {
 	 <!-- </div> -->
 	 
 	<%
-	//response.encodeURL("header.jsp");
 	UtenteBean utente = new UtenteBean();
 	HttpSession sessione = request.getSession(false);
 	   if (sessione != null)
@@ -104,7 +105,8 @@ input[type=submit] {
 			{
 			%>
 			<div class="sposta" >
-				<p class="sposta" id="iconaProfilo"><a href="profilo.jsp"><img src = "Elementi/profilo.png" width="30" height="30"></a>
+			<%String url2 = response.encodeURL("profilo.jsp");%>
+				<p class="sposta" id="iconaProfilo"><a href="<%=url2%>"><img src = "Elementi/profilo.png" width="30" height="30"></a>
 				<%=utente.getNome()%></p>
 			
 			<% 
@@ -112,7 +114,8 @@ input[type=submit] {
 			if(carrello != null)
 			{ %>
 				<p class="sposta"><a href="logout.jsp"><img src = "Elementi/logout.png" width="35" height="35"></a>
-				<a href="carrello.jsp"><img src = "Elementi/carrello.png" width="35" height="35"></a></p>
+				<%String url3 = response.encodeURL("carrello.jsp");%>
+				<a href="<%=url3%>"><img src = "Elementi/carrello.png" width="35" height="35"></a></p>
 				<span id="carrello"><%=carrello.getQuantita() %></span>
 			</div>
 			<%}
@@ -124,7 +127,7 @@ input[type=submit] {
 	<div>
 	 	<p class="logRec" align="right" >
 	 	<a  class="link" title="login" Style="text-decoration: none; transition:0.5s;" href="<%=response.encodeURL("loginUser.jsp")%>"> LOGIN</a> |
-	 	<a  class="link" title="registrazione" Style="text-decoration: none; transition:0.5s" href="Registrazione.jsp" >REG</a>
+	 	<a  class="link" title="registrazione" Style="text-decoration: none; transition:0.5s" href="<%=response.encodeURL("Registrazione.jsp")%>" >REG</a>
 		</p>
 	</div> 
 		
@@ -136,27 +139,27 @@ input[type=submit] {
 	<ul><h3>
 	<li><a class="dropdown" href="#">Poltrone</a>
 		<div class="dropdown-content">
-			<a href="./TipologiaControl?tipo=manuale">Manuale</a>
-			<a href="./TipologiaControl?tipo=elettrica">Elettricha</a>
-			<a href="./TipologiaControl?tipo=pouf">Pouf</a>
+			<a href="<%=response.encodeURL("./TipologiaControl?tipo=manuale")%>">Manuale</a>
+			<a href="<%=response.encodeURL("./TipologiaControl?tipo=elettrica")%>">Elettricha</a>
+			<a href="<%=response.encodeURL("./TipologiaControl?tipo=pouf")%>">Pouf</a>
 		</div>
 	</li>
 	<li><a href="#" class="dropdown">Pareti Attrezzate</a>
 		<div class="dropdown-content">
-			<a href="./TipologiaControl?tipo=moderna">Moderna</a>
-			<a href="./TipologiaControl?tipo=classica">Classica</a>
+			<a href="<%=response.encodeURL("./TipologiaControl?tipo=moderna")%>">Moderna</a>
+			<a href="<%=response.encodeURL("./TipologiaControl?tipo=classica")%>">Classica</a>
 		</div>
 	</li>
-	<li><a href="./chiSiamo.jsp">Chi siamo</a></li>
+	<li><a href="<%=response.encodeURL("./chiSiamo.jsp")%>">Chi siamo</a></li>
 	
 	<% 
 	if(utente != null){
 		 %>
-		 <li id="profilo"><a href="./profilo.jsp">Profilo</a></li>
+		 <li id="profilo"><a href="<%=response.encodeURL("./profilo.jsp")%>">Profilo</a></li>
 		<% 	
 	if(utente.getRuolo().equals("amministratore"))
 		{%>
-		<li><a href="./AdminControl">Amministratore</a></li>
+		<li><a href="<%=response.encodeURL("./AdminControl")%>">Amministratore</a></li>
 		
 		<%} }%>
 </h3></ul>

@@ -6,7 +6,7 @@
 <meta charset="ISO-8859-1">
 	<meta name="author" content= "Adinolfi Giacinto, Emanuele Giammarino, Vincenzo Palcone">
 	 
-	<title>Store</title>
+	<title>Chi siamo</title>
 	
 	<link href="css/index.css" rel="stylesheet" type="text/css">
 	<link href="css/generale.css" rel="stylesheet" type="text/css">

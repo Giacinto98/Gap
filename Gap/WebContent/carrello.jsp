@@ -26,6 +26,10 @@
 
 
 	<%
+	String url=response.encodeURL("AumentoProdottoCarrello");
+	String url1=response.encodeURL("DiminuzioneProdottoCarrello");
+	String url2=response.encodeURL("RimozioneDaCarrello");
+	
 	HttpSession sessione = request.getSession(false);
 	if (sessione != null)
 	{float prezzoTot=0;
@@ -112,7 +116,7 @@ alt="Card image cap"><%=materiali.get(i).getTipologiaMateriale()%>
 <h2 >TOTALE ORDINE</h2>
 N° di prodotti <b id ="totale"><%=carrello.getQuantita()%></b><br>
 <h3>Importo Totale</h3><b id="importo"> <%=prezzoTot%></b>
-<form method = "GET" action = "AcquistoControl"> 
+<form method = "GET" action = "<%=response.encodeURL("AcquistoControl")%>"> 
 <button type="submit" name="Acquista">Acquista</button>
 </form>
 
@@ -135,7 +139,8 @@ N° di prodotti <b id ="totale"><%=carrello.getQuantita()%></b><br>
 <script>
 function funzionePiu(idProdotto, idMateriale)
 {
-	var url = 'AumentoProdottoCarrello?codiceProdotto=' + encodeURIComponent(idProdotto) + "&idMateriale=" + encodeURIComponent(idMateriale); 
+	var url = '<%=url%>'+"?codiceProdotto=" + encodeURIComponent(idProdotto) + "&idMateriale=" + encodeURIComponent(idMateriale);
+	//var url = 'AumentoProdottoCarrello?codiceProdotto=' + encodeURIComponent(idProdotto) + "&idMateriale=" + encodeURIComponent(idMateriale); 
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = //alla risposta della servlet
 		function() //aumenta di 1 unità il carrello
@@ -155,7 +160,8 @@ function funzionePiu(idProdotto, idMateriale)
 
 function funzioneMeno(idProdotto, idMateriale)
 {
-	var url = 'DiminuzioneProdottoCarrello?codiceProdotto=' + encodeURIComponent(idProdotto) + "&idMateriale=" + encodeURIComponent(idMateriale); 
+	var url ='<%=url1%>'+"?codiceProdotto=" + encodeURIComponent(idProdotto) + "&idMateriale=" + encodeURIComponent(idMateriale);
+	//var url = 'DiminuzioneProdottoCarrello?codiceProdotto=' + encodeURIComponent(idProdotto) + "&idMateriale=" + encodeURIComponent(idMateriale); 
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = //alla risposta della servlet
 		function() //aumenta di 1 unità il carrello
@@ -175,7 +181,8 @@ function funzioneMeno(idProdotto, idMateriale)
 
 function rimuovi(idProdotto, idMateriale)
 {
-	var url = 'RimozioneDaCarrello?codiceProdotto=' + encodeURIComponent(idProdotto) + "&idMateriale=" + encodeURIComponent(idMateriale); 
+	var url = '<%=url2%>'+"?codiceProdotto=" + encodeURIComponent(idProdotto) + "&idMateriale=" + encodeURIComponent(idMateriale);
+	//var url = 'RimozioneDaCarrello?codiceProdotto=' + encodeURIComponent(idProdotto) + "&idMateriale=" + encodeURIComponent(idMateriale); 
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = //alla risposta della servlet
 		function() //aumenta di 1 unità il carrello

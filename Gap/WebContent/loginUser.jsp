@@ -16,7 +16,7 @@
 <fieldset id="demo">
      <legend><h2>Log in</h2></legend>
      <div align = "center">
-     	<p><a href="Index.jsp"><img src = "Elementi/logo.png" width="100" height="100" align="center"></a></p>
+     	<p><a href="<%=response.encodeURL("Index.jsp")%>"><img src = "Elementi/logo.png" width="100" height="100" align="center"></a></p>
      	<p><label for="username">Login</label></p>
      	<p><input id="username" type="text" name="username" placeholder="enter email" required> </p>
        	<p><label for="password">Password</label></p>
@@ -26,15 +26,6 @@
      </div> 
 </fieldset>
 </form> 
-
-<script>
-
-function controlloPassword()
-{
-	document.getElementById("demo").innerHTML = "Password cambiata correttamente";
-}
-	
-</script>
 
 </body>
 </html>

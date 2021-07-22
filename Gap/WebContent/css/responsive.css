@@ -5,12 +5,14 @@ display:flex;
 background-color:#0088b3;
 }
 
+.tabellaProdotti
+{
+	margin-left:50px;
+}
 
 .tabellaProdotti td, .tabellaProdotti th{
 	
-	margin-left:12%;
-	
-border:1px solid #0088b3;
+margin: 5px;
 display:inline-block;	
 }
 
@@ -32,10 +34,12 @@ display:inline-block;
 
 
 header{
-display:flex;
-background-color:#0000a0;
-width:100%;
-height:auto;
+display: flex;
+background-color:#0088b3;
+margin: -10px;
+height:100px;
+text-align:center;
+height:100px;
 }
 
 
@@ -52,14 +56,27 @@ nav ul li{
 #profilo{display:block;}
 #iconaProfilo{	display:none;}
 
-.tabellaProdotti td, .tabellaProdotti th{
 
-	margin-left:20%;
-	margin-right:25%;
-	
-border:1px solid #00ff40;
-display:inline-block;	
+.tabellaProdotti
+{
+	margin:0px;
+	width:100%;
+	margin-left:0px;
 }
+
+
+.tabellaProdotti td, .tabellaProdotti th{
+margin-left: auto;
+margin-right: auto;
+}
+
+
+#carta
+{
+	width:100%;
+	/*margin-right:30px;*/
+}
+
 .tabellaProdCarrello
 {
 	width: 100%;
@@ -68,6 +85,7 @@ display:inline-block;
 border-collapse: collapse;
 
 }
+
 .tabellaProdCarrello td, .tabellaProdCarrello th{
 
 border:1px solid black;
@@ -81,11 +99,14 @@ display:inline-block;
 border-collapse: collapse;
 
 }
-.tabellaCiao td, .tabellaCiao th{
 
-border:1px solid black;
+.tabellaProdotti td, .tabellaProdotti th{
+margin-top:20px;
+margin-left:20%;
+margin-right:25%;
 display:inline-block;	
 }
+
 .bordinoCarrello{
 	
 	width: 100%;
@@ -119,3 +140,28 @@ width: 100%;
 	
 }
 }
+
+@media screen and (max-width:520px){
+		header{
+
+background-color:#0088b3;
+}
+.tabellaProdotti{
+	width: 100%;
+	margin-left:0;
+	margin-right:0;
+border-collapse: collapse;
+	
+}
+.tabellaProdotti td, .tabellaProdotti th{
+	width: 100%;
+margin-left:auto;
+margin-right:auto;
+display:inline-block;	
+}
+#carta{
+	width:80%;
+	margin-left: 40px;
+	}
+}
+

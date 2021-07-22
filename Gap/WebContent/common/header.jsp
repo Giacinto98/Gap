@@ -11,7 +11,6 @@ body {
   font: 16px Arial;  
 }
 
-/the container must be positioned relative:/
 .autocomplete {
   position: relative;
   display: inline-block;
@@ -20,14 +19,14 @@ body {
 input {
   border: 1px solid transparent;
   background-color: #f1f1f1;
-  padding: 10px;
+  padding: 5px;
   font-size: 16px;
 }
 
 input[type=text] {
-  background-color: #f1f1f1;
+  background-color: #e6e6fa;
   width: 100%;
-  height: 30px;
+  height: 25px;
   border-radius: 5px;
   
 }
@@ -59,12 +58,12 @@ input[type=submit] {
   border-bottom: 1px solid #d4d4d4; 
 }
 
-/when hovering an item:/
+
 .autocomplete-items div:hover {
   background-color: #e9e9e9; 
 }
 
-/when navigating through the items using the arrow keys:/
+
 .autocomplete-active {
   background-color: DodgerBlue !important; 
   color: #ffffff; 
@@ -90,7 +89,7 @@ input[type=submit] {
   <div class="autocomplete" style=" width:150px; top:20px; height: 35px; ">
     <input id="myInput"  type="text" name="ricerca" placeholder="Ricerca per nome">
   </div>
-  <input type="submit" style="height: 30px">
+  <input type="submit" name="richerca" style="margin-top: 20px; height:30px; ">
 </form>
 
 	 <!-- </div> -->
@@ -124,7 +123,7 @@ input[type=submit] {
 	 		{
 			 %>
 			 
-	<div>
+	<div Style="margin-right:8px">
 	 	<p class="logRec" align="right" >
 	 	<a  class="link" title="login" Style="text-decoration: none; transition:0.5s;" href="<%=response.encodeURL("loginUser.jsp")%>"> LOGIN</a> |
 	 	<a  class="link" title="registrazione" Style="text-decoration: none; transition:0.5s" href="<%=response.encodeURL("Registrazione.jsp")%>" >REG</a>

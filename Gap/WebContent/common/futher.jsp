@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
-<footer style="background:#0088b3; border-radius: 5px; color:white;margin:100px 0 0 0;height:100px;">
+<footer style="background:#0088b3; color:white; margin-bottom: -10px; margin-top: 20px; margin-right: -10px; margin-left:-10px; height:100px;">
 	
 	<div style="float:left;margin-top:10px;">
 		<a href="Index.jsp"><img src = "Elementi/logo.png" width="75" height="75"></a>

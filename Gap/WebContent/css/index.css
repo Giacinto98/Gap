@@ -16,10 +16,9 @@ body{
 header{
 display: flex;
 background-color: #0088b3;
-width:100%;
+margin: -10px;
 height:100px;
 text-align:center;
-border-radius: 5px;
 }
 
 
@@ -46,80 +45,90 @@ div.logRec{
 
 
 nav{
-
+	margin:10px;
 	display:inline-block;
 	background-color:#e6e6fa;
-	color:white;
 	width:100%; 
 	text-align:center;
 }
 
 nav ul{
+	border-radius: 5px;
 	list-style-type:none;
 	margin:0;
 	padding:0;
-	
+	border-radius:5px;
 }
 nav li a{
+	border-radius: 5px;
 	text-decoration:none;
 	color:black;
 	padding:15px;
+	border-radius:5px;
+}
+
+nav li a:hover{
+	color:white;
+	border-radius: 5px;
 }
 
 nav li{
-	
+	border-radius: 5px;
 	display: inline-table;
 	padding: 15 px;
 }
 
 nav li:hover  {
-	
-	background-color:Pink;
-	color:red;
+	border-radius: 5px;
+	background-color:#0088b3;
+	color:white;
 	text-decoration:none;
 	text-align:left;
 	
 }
 
 .dropdown-content a:hover{
-	background-color:Pink;
-	color:red;
+	background-color:#0088b3;
+	color:white;
 	text-decoration:none;
-	
-	
+	border-radius:5px;
 }
 
 .dropdown-content{
-	
-	background-color:white;
+	border-radius:5px;
+	background-color:#e6e6fa;
 	position:absolute;
 	width:auto;
-
 }
+
+.dropdown:hover
+{
+	border-radius:5px;
+}
+
 .dropdown:hover .dropdown-content{
 	display:inline;
+	border-radius: 5px;
 }
 
 
 .dropdown{
 	padding:12px 16px;
+	border-radius:5px;
 }
 
 
 .dropdown-content a{
 	display: none;
 	padding: 15px;
-}
-
-#body
-{
-	background-color:#EEE0E5;
+	border-radius: 5px;
 }
 
 #profilo{display:none;}
 
 nav li:hover .dropdown-content a{
-	display:block
+	display:block;
+	border-radius:5px;
 }
 
 
@@ -136,15 +145,17 @@ nav li:hover .dropdown-content a{
 .tabellaProdotti
 {
 	width: 100%;
+	margin-right:1px;
     border-collapse: collapse;
     border-spacing: 10px;
 
 }
 
 .tabellaProdotti td, .tabellaProdotti th{
-
+margin:4.7px;
 display:inline-block;	
 }
+
 .tabellaProdCarrello
 {position:left;
 	width:50%;
@@ -155,9 +166,8 @@ border-collapse: collapse;
 
 
 }
+
 .tabellaProdCarrello td, .tabellaProdCarrello th{
-
-
 border:1px solid Purple;
 display:inline-block;	
 

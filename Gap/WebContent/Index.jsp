@@ -35,7 +35,7 @@
 	
 </head>
 
-<body id="body">
+<body>
 
 <jsp:include page="common/header.jsp"/>
 

@@ -35,8 +35,8 @@ public class RecensioneModel implements InterfacciaDAO <RecensioneBean>{
 				bean.setData(rs.getString("Data_Recensione"));
 				bean.setCodice(rs.getInt("Codice"));
 				bean.setEmail(rs.getString("Email"));
-				
 			}
+			
 		} finally { //rilasiamo tutte le risorse che abbiamo
 			try {
 			if(preparedStatement != null)

@@ -9,8 +9,9 @@
 	
 <title>Registrati</title>
 
+<link href="css/generale.css" rel="stylesheet" type="text/css">
 <link href="css/index.css" rel="stylesheet" type="text/css">
-<link href="css/responsive.css" rel="stylesheet" type="text/css">	
+<link href="css/responsive.css" rel="stylesheet" type="text/css">
 
 
 <style>
@@ -20,7 +21,38 @@
 		margin=0;
 		padding=0;
  	}
-	input:focus
+ 	
+ 	input[type=button]
+	{
+	padding:3px; 
+	height:28px;
+	border-radius: 5px;
+    border: 3px solid #0088b3;
+    background-color:#0088b3;
+    color: white;
+	box-shadow: 0px 15px 10px -10px rgba(0,0,0,0.4);
+    transition: all 0.5s;
+	}
+
+	input[type=button]:hover
+	{
+	box-shadow: 0px 45px 20px -30px rgba(0,0,0,0.2);
+    transform: translateY(-5px);
+	}
+
+ 	
+	input[type=text]:focus
+	{
+		background-color:#7fffd4;
+	}
+	
+	input[type=password]
+	{
+		height:25px;
+		border-radius: 5px;
+	}
+	
+	input[type=password]:focus
 	{
 		background-color:#7fffd4;
 	}
@@ -33,7 +65,7 @@
 
 <form name="form" method="post">
 
-<fieldset>
+<fieldset class="fieldReg">
 	<legend><h2>Registrazione</h2></legend>
      
 <div>    
@@ -96,17 +128,13 @@
     			<th><span id="in" style="font-weight: bold;">*</span></th>
     		</tr>
     		<tr>
-    			<th><input type="button" Style="{
-												border-radius: 5px;
-    											border: 3px solid #0088b3;
-    											background-color:#0088b3;
-    											color: white;
-												}" value="Registrati" onClick="ControlloFinale()"></th>
+    			<th><input type="button" value="Registrati" onClick="ControlloFinale()"></th>
     		</tr>
     	</table>
+    		</div>
+		</fieldset>
 	</form>
-	</div>
-</fieldset>
+
 
 <jsp:include page="common/futher.jsp"/>
 
@@ -208,12 +236,9 @@ function ControlloFinale()
 	
 	if(cont == 0)
 	{
-		console.log("Funzionato");
 		document.form.action = "<%=response.encodeURL("RegControl")%>";
 		document.form.submit();
 	}
-	else
-		console.log("errato");
 }
 
 

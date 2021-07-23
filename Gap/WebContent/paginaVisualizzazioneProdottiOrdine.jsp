@@ -44,31 +44,58 @@
 <%
 	if(prodotti != null)
 	{
+
 		Iterator<?> it = prodotti.iterator(); //iteriamo i prodotti
-		Iterator<?> itRec = recensioni.iterator();
-		while(it.hasNext() && itRec.hasNext()) //fin quando ho prodotti
+		//Iterator<?> itRec = recensioni.iterator();
+		while(it.hasNext()) //fin quando ho prodotti
 		{
-		ProdottoBean bean = (ProdottoBean) it.next();
-		RecensioneBean recensione = (RecensioneBean) itRec.next();
+
+			ProdottoBean bean = (ProdottoBean) it.next();
 %>
 	<td> 
 		<div id="carta" >
   		<img class="card-img-top" height=200 width=100% src="Elementi/<%=bean.getNome()%>.jpg " alt="Card image cap">
   			<div class="card-body">
     	<h3 align="center" class="card-title"><%=bean.getNome()%><br>
-    	<%if(recensione.getTesto().equals(""))
-    	{%>
-    	<%=recensione.getTesto()%>
-    	<%String url = response.encodeURL("scriviRecensione.jsp?codice="+bean.getCodice());%>
+    	
+    	<%
+    	Iterator<?> itRec = recensioni.iterator();
+		boolean variabile = true;
+    	while(itRec.hasNext())
+		{
+			RecensioneBean recensione = (RecensioneBean) itRec.next();
+System.out.println("T:"+ bean.getCodice() +" "+ recensione.getCodice() +" "+ recensione.getEmail() +" " + utente.getEmail());
+			if ((recensione.getCodice()== bean.getCodice()))
+			{
+				if((recensione.getEmail().equals(utente.getEmail())))
+				{
+System.out.println("Ciao");
+					variabile = false;
+					break;
+				}
+				else if(!(recensione.getEmail().equals(utente.getEmail())))
+				{
+System.out.println("Addio");
+					variabile = true;
+				}
+			}
+		}
+System.out.println(variabile);
+    	if(variabile)
+    	{
+		String url = response.encodeURL("scriviRecensione.jsp?codice="+bean.getCodice());%>
     	<button  type="submit" onClick="location.href='<%=url%>'" name="bottone" value="<%=bean.getNome()%>">Recensisci</button></h3>
-		<%} %>
+		<%}%>
 		</div>
 		</div>
   	</td> 
+  
+  	
+<% 	}
+}%> 			
+			
+		
 
-<%		}
-	}
-%>
 </tr>		    
 </table>
 

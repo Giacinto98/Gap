@@ -42,6 +42,7 @@ public class ComposizioneControl extends HttpServlet {
 		Collection<ProdottoBean> prodotti = new LinkedList<ProdottoBean>();
 		Iterator<ComposizioneBean> it = composizioni.iterator(); //iteriamo i prodotti
 		Collection<RecensioneBean> recensioni = new LinkedList<RecensioneBean>();
+		Collection<RecensioneBean> recensioniProdotto = new LinkedList<RecensioneBean>();
 		RecensioneModel modelRecensione = new RecensioneModel(ds);
 		
 		while(it.hasNext()) //fin quando ho prodotti
@@ -58,17 +59,23 @@ public class ComposizioneControl extends HttpServlet {
 			if(prodotto != null)
 				prodotti.add(prodotto);
 			else
-				System.out.println("Prodotto non inserito poichè = null");
+				System.out.println("Prodotto non inserito poichè uguale null");
 			
-			RecensioneBean recensione = new RecensioneBean();
 			String codice1 = Integer.toString(prodotto.getCodice());
 			try {
-				recensione = modelRecensione.doRetrieveByKey(codice1);
+				recensioniProdotto = modelRecensione.doRetriveAll(codice1);
+				Iterator<RecensioneBean> itertator = recensioniProdotto.iterator();
+				while(itertator.hasNext()) //fin quando ho prodotti
+				{
+					RecensioneBean recensione = (RecensioneBean) itertator.next(); 
+					recensioni.add(recensione);
+System.out.println(recensione.getCodice() + " " + recensione.getEmail());					
+				}
 			} catch (SQLException e) {
 				System.out.println("Errore recupero recensione del prodotto");
 				e.printStackTrace();
 			}
-				recensioni.add(recensione);
+				
 		}
 		request.setAttribute("recensioni", recensioni);
 		request.setAttribute("prodotti", prodotti);

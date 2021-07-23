@@ -30,9 +30,19 @@ public class RicercaControl extends HttpServlet {
 			System.out.println("Errore recupero del prodottoda ricercare");
 			e.printStackTrace();
 		}
-		request.setAttribute("prodotto", bean);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(response.encodeURL("/paginaProdotto.jsp"));
-		dispatcher.forward(request, response);
+		
+
+		if(bean.getCodice() != -1)
+		{
+			request.setAttribute("prodotto", bean);
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(response.encodeURL("/paginaProdotto.jsp"));
+			dispatcher.forward(request, response);
+		}
+		else
+		{
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(response.encodeURL("/paginaProdottoNonTrovato.jsp"));
+			dispatcher.forward(request, response);
+		}
 	}
 
 	

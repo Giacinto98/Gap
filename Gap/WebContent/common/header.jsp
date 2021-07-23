@@ -24,7 +24,6 @@ input {
 }
 
 input[type=text] {
-  background-color: #e6e6fa;
   width: 100%;
   height: 25px;
   border-radius: 5px;
@@ -87,9 +86,9 @@ input[type=submit] {
 <%String url1 = response.encodeURL("RicercaControl");%>
 <form autocomplete="off" action="<%=url1%>" method="get">
   <div class="autocomplete" style=" width:150px; top:20px; height: 35px; ">
-    <input id="myInput"  type="text" name="ricerca" placeholder="Ricerca per nome">
+    <input id="myInput" Style="background-color: #e6e6fa;"  type="text" name="ricerca" placeholder="Ricerca per nome">
   </div>
-  <input type="submit" name="richerca" style="margin-top: 20px; height:30px; ">
+  <input type="submit" name="richerca" style="margin-top: 20px; height:30px;">
 </form>
 
 	 <!-- </div> -->

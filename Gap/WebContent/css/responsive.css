@@ -57,25 +57,32 @@ nav ul li{
 #iconaProfilo{	display:none;}
 
 
-.tabellaProdotti
-{
-	margin:0px;
-	width:100%;
-	margin-left:0px;
+.tabellaProdotti{
+	width: 100%;
+	margin-left:0;
+	margin-right:0;
+border-collapse: collapse;
+	
 }
-
-
+.immagine{
+	margin-top:10px;
+	width:80%;
+	margin-left:auto;
+	margin-right:auto;
+	
+}
 .tabellaProdotti td, .tabellaProdotti th{
-margin-left: auto;
-margin-right: auto;
+margin-top:20px;
+	width: 70%;
+margin-left:15%;
+margin-right:15%;
+display:inline-block;	
 }
 
-
-#carta
-{
+#carta{
 	width:100%;
-	/*margin-right:30px;*/
-}
+
+	}
 
 .tabellaProdCarrello
 {

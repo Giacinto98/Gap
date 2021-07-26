@@ -113,7 +113,7 @@ input[type=submit] {
 			{ %>
 				<p class="sposta"><a href="logout.jsp"><img src = "Elementi/logout.png" width="35" height="35"></a>
 				<%String url3 = response.encodeURL("carrello.jsp");%>
-				<a href="<%=url3%>"><img src = "Elementi/carrello.png" width="35" height="35"></a></p>
+				<a href="<%=url3%>"><img src = "Elementi/carrello.png" style="margin-right:-20px;" width="35" height="35"></a></p>
 				<span id="carrello"><%=carrello.getQuantita() %></span>
 			</div>
 			<%}
@@ -125,7 +125,7 @@ input[type=submit] {
 	<div Style="margin-right:8px">
 	 	<p class="logRec" align="right" >
 	 	<a  class="link" title="login" Style="text-decoration: none; transition:0.5s;" href="<%=response.encodeURL("loginUser.jsp")%>"> LOGIN</a> |
-	 	<a  class="link" title="registrazione" Style="text-decoration: none; transition:0.5s" href="<%=response.encodeURL("Registrazione.jsp")%>" >REG</a>
+	 	<a  class="link" title="registrazione" Style="text-decoration: none; transition:0.5s" href="<%=response.encodeURL("Registrazione.jsp")%>" >SIGNUP</a>
 		</p>
 	</div> 
 		
@@ -263,6 +263,7 @@ function autocomplete(inp, arr) {
 }
 
 /An array containing all the country names in the world:/
+
 var countries = ["zeus","arrow","markus","hugo","robert","silandrio","rana","zelbio","attr1","attr2","attr3","attr4"];
 
 /initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:/

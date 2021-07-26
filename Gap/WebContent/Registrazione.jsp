@@ -100,19 +100,24 @@
     		
     		<tr>
     			<th>Email</th>
-    			<th><input type="text" id="email" onBlur= "validateEmail(email)" placeholder="email" name="email" required> </th>
+    			<th><input type="text" id="email" onBlur= "validateEmail(email)" placeholder="Email" name="email" required> </th>
     			<th><span id="em" style="font-weight: bold;">*</span></th>
     		</tr>
     		
     		<tr>
     			<th>Password</th>
-    			<th><input type="password"  id="pass" onBlur="controllaPassword(this.value)" placeholder="password" name="password" required></th>
+    			<th><input type="password"  id="pass" onBlur="controllaPassword(this.value)" placeholder="Password" name="password" required></th>
     			<th><span id="pa" style="font-weight: bold;">*</span></th>
+    		</tr>
+    		
+    		<tr style="margin-top:-50px" >
+    			<th></th>
+    			<th><div style="font-size:75%; color: #0088b3">(Almeno 6 caratteri, una maiuscola<br>una minuscola,un carattere speciale)</div></th>
     		</tr>
     		
     		<tr>
     			<th>Conferma Password</th>
-    			<th><input type="password" id="conferma" onBlur="controllaConfermaPassword(this.value)" placeholder="Password" name="conferma" required> </th>
+    			<th><input type="password" id="conferma" onBlur="controllaConfermaPassword(this.value)" placeholder="Conferma Password" name="conferma" required> </th>
     			<th><span id="co" style="font-weight: bold;">*</span></th>
     		</tr>
     		

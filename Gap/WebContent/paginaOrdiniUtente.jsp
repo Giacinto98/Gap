@@ -68,7 +68,7 @@
 		<tr><td>Inviato a:</td><td> <%=utente.getNome()%> <%=utente.getCognome()%></td></tr>
 		<tr><td>Numero di elementi:</td><td> <%=ordine.getNumeroProdotti()%> </td></tr>
 		<tr><td>Prodotti:</td><td><button onclick="location.href='<%=url%>'">Visualizza Prodotti</button></td></tr>
-		<tr><td>Prezzo totale:</td><td> <%=ordine.getPrezzoTotale()%>
+		<tr><td>Prezzo totale:</td><td> <%=ordine.getPrezzoTotale()%> &euro;
 	</table>	
 	
 

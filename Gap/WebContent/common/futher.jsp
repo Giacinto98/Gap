@@ -8,9 +8,8 @@
 
 <span style="margin-left:40%;">
 	SEGUICI:
-	<img src = "Elementi/instagram.png" width="50" height="50">
-	<img src = "Elementi/facebook.png" width="50" height="50">
-	
+	<img src = "Elementi/instagram.png" width="85" height="50" style="margin-left: -25px;">
+	<img src = "Elementi/facebook.png" width="50" height="50" style="margin-left: -25Px;">	
 </span>
 </div>
 </footer>

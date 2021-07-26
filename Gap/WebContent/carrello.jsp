@@ -45,7 +45,7 @@
 				 
 				<div class="immagine" >
 				<table class="tabellaProdCarrello">
-				<tr>
+				
 					
 			
 				<%
@@ -54,11 +54,11 @@
 				{
 				float sconto=0;
 				 %>
-
+<tr id = "<%=prodotti.get(i).getCodice()%>_<%=materiali.get(i).getId()%>sezioneProdotto">
 <td>
 <div style="float: right;clear: right; background-color: white; border-radius:10px;">
 
-<div id = "<%=prodotti.get(i).getCodice()%>_<%=materiali.get(i).getId()%>sezioneProdotto" style="text-align:center">	
+<div  style="text-align:center">	
 <div>
 <%
 	if(prodotti.get(i).getSconto() > 0){
@@ -78,11 +78,11 @@ alt="Card image cap"><%=materiali.get(i).getTipologiaMateriale()%>
  <%
 	if(prodotti.get(i).getSconto() > 0){
 	%>		
- 		Importo:<b><%=sconto%></b><br>
+ 		Importo:<b><%=sconto%> &euro;</b><br>
 <%	}
 	else{
 		%>
-		Importo:<b><%=prodotti.get(i).getPrezzo()%></b>	<br>
+		Importo:<b><%=prodotti.get(i).getPrezzo()%> &euro;</b><br>
 	<%}
 %> 
 
@@ -114,8 +114,8 @@ alt="Card image cap"><%=materiali.get(i).getTipologiaMateriale()%>
 <div id="barra" class="immagineDesc2"  >
 <fieldset class="fieldReg">
 <h2 >TOTALE ORDINE</h2>
-N° di prodotti <b id ="totale"><%=carrello.getQuantita()%></b><br>
-<h3>Importo Totale</h3><b id="importo"> <%=prezzoTot%></b>
+Numero di prodotti: <b id ="totale"><%=carrello.getQuantita()%></b><br>
+<h3>Importo Totale</h3><b id="importo"> <%=prezzoTot%> &euro; </b>
 <form method = "GET" action = "<%=response.encodeURL("AcquistoControl")%>"> 
 <button type="submit" name="Acquista">Acquista</button>
 </form>
@@ -193,7 +193,7 @@ function rimuovi(idProdotto, idMateriale)
 			{
 				var response = JSON.parse(xhr.responseText);
 				var stringa = response.riferimento;
-				document.getElementById(stringa).innerHTML = "";
+				document.getElementById(stringa).remove();
 				document.getElementById("carrello").innerHTML = response.totale;
 				document.getElementById("importo").innerHTML = response.prezzoTot;
 				document.getElementById("totale").innerHTML = response.totale;

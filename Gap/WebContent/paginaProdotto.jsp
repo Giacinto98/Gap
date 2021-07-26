@@ -49,9 +49,9 @@
 		<b>Tipologia: <%=prodotto.getTipologia()%></b>
 		<%if(prodotto.getSconto() > 0)
 	  	  { %>
-			<h3 style="color:red">Prezzo </h3> <h2><del><%=prodotto.getPrezzo()%></del>  $ </h2>
+			<h3 style="color:red">Prezzo </h3> <h2><del><%=prodotto.getPrezzo()%></del> &euro; </h2>
 	  		<%float sconto = prodotto.getPrezzo() - ((prodotto.getPrezzo() * prodotto.getSconto())/100); %>
-			<h3 style="color:red">Prezzo Scontato </h3> <h2><%=sconto%> $ <br> </h2>
+			<h3 style="color:red">Prezzo Scontato </h3> <h2><%=sconto%> &euro; <br> </h2>
 	   <% } 
 		
 		else 
@@ -164,8 +164,10 @@ var id = null;
 			return;
 			}
 		else
-			document.getElementById("aggiunta").innerHTML = "Prodotto inserito nel carrello";	
-		
+			{
+			document.getElementById("aggiunta").innerHTML = "Prodotto inserito nel carrello";
+			document.getElementById("demo").innerHTML = "";
+			}
 			    var url = '<%=url%>' + "?nome=" + encodeURIComponent(nome) + "&idMateriale=" + encodeURIComponent(id);
 			    console.log(url);
 				//var url = 'CarrelloControl?nome=' + encodeURIComponent(nome) + "&idMateriale=" + encodeURIComponent(id);

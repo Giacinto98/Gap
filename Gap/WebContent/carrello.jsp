@@ -56,7 +56,7 @@
 				 %>
 
 <td>
-<div style="float: right;clear: right;">
+<div style="float: right;clear: right; background-color: white; border-radius:10px;">
 
 <div id = "<%=prodotti.get(i).getCodice()%>_<%=materiali.get(i).getId()%>sezioneProdotto" style="text-align:center">	
 <div>
@@ -112,7 +112,7 @@ alt="Card image cap"><%=materiali.get(i).getTipologiaMateriale()%>
 
 
 <div id="barra" class="immagineDesc2"  >
-<fieldset >
+<fieldset class="fieldReg">
 <h2 >TOTALE ORDINE</h2>
 N° di prodotti <b id ="totale"><%=carrello.getQuantita()%></b><br>
 <h3>Importo Totale</h3><b id="importo"> <%=prezzoTot%></b>
@@ -150,6 +150,7 @@ function funzionePiu(idProdotto, idMateriale)
 				var response = JSON.parse(xhr.responseText);
 				var stringa = response.riferimento;
 				document.getElementById(stringa).innerHTML = response.quantita;
+				document.getElementById("totale").innerHTML = response.totale;
 				document.getElementById("carrello").innerHTML = response.totale;
 				document.getElementById("importo").innerHTML = response.prezzoTot;
 			}
@@ -172,6 +173,7 @@ function funzioneMeno(idProdotto, idMateriale)
 				var stringa = response.riferimento;
 					document.getElementById(stringa).innerHTML = response.quantita;
 					document.getElementById("carrello").innerHTML = response.totale;
+					document.getElementById("totale").innerHTML = response.totale;
 					document.getElementById("importo").innerHTML = response.prezzoTot;
 			}
 		}
@@ -194,6 +196,7 @@ function rimuovi(idProdotto, idMateriale)
 				document.getElementById(stringa).innerHTML = "";
 				document.getElementById("carrello").innerHTML = response.totale;
 				document.getElementById("importo").innerHTML = response.prezzoTot;
+				document.getElementById("totale").innerHTML = response.totale;
 				var totaleElementi = response.totale;
 				if(totaleElementi == 0)
 					document.getElementById("barra").innerHTML ="<h1>Nessun elemento presente all'interno del carrello</h1>";

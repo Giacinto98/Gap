@@ -34,10 +34,19 @@ public class VisualizzaOrdiniControl extends HttpServlet {
 			System.out.println("Errore ricerca ordini dell'utente");
 			e.printStackTrace();
 		}
-		request.setAttribute("ordini", ordini);
-		getServletContext().getRequestDispatcher(response.encodeURL("/paginaOrdiniUtente.jsp")).forward(request, response);
 		
-	}
+		
+		if(ordini.size() > 0)
+		{
+			request.setAttribute("ordini", ordini);
+			getServletContext().getRequestDispatcher(response.encodeURL("/paginaOrdiniUtente.jsp")).forward(request, response);
+		}
+		else
+		{
+			request.setAttribute("errore", "Non hai ancora effettuato ordini in questo account");
+			getServletContext().getRequestDispatcher(response.encodeURL("/paginaOrdiniUtente.jsp")).forward(request, response);
+		}
+}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

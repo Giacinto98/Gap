@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,7 +52,6 @@ public class CercaProdottoControl extends HttpServlet {
 		} 
 		
 		String x =  Integer.toString(prodotto.getCodice());
-		System.out.print(x);
 		try {
 			recensioni = recensione.doRetriveAll(x);
 		} catch (SQLException e) {
@@ -59,14 +59,18 @@ public class CercaProdottoControl extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		if(prodotto != null)
-			{
+		if(prodotto.getCodice() != -1 && prodotto != null)
+		{
 			request.setAttribute("materiali", materiali);
 			request.setAttribute("prodotto", prodotto);
 			request.setAttribute("recensioni",recensioni);
-			
 			getServletContext().getRequestDispatcher(response.encodeURL(response.encodeURL("/paginaProdotto.jsp"))).forward(request, response);
-			}
+		}
+		else
+		{
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(response.encodeURL("/paginaProdottoNonTrovato.jsp"));
+			dispatcher.forward(request, response);
+		}
 	}
 
 	

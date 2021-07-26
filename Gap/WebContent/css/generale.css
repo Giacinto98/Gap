@@ -18,13 +18,13 @@ button:hover
 
 .bordo
 {
-	border-radius: 5px;
+	border-radius: 10px;
     border: 3px ;
 }
 
 #submit
 {
-	border-radius: 5px;
+	border-radius: 10px;
     border: 3px solid #0088b3;
     background-color:#0088b3;
     color: white;

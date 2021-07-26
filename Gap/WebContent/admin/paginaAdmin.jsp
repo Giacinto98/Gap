@@ -1,29 +1,88 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="java.util.*, model.* , java.lang.*"%>
-
-<!DOCTYPE html>
-<html>
-
-<head>
-	<meta charset="ISO-8859-1">
+<meta charset="ISO-8859-1">
 	<title>Insert title here</title>
+	
 	<link href="css/indexAdmin.css" rel="stylesheet" type="text/css">
 	<link href="css/prodotto.css" rel="stylesheet" type="text/css">
 	<link href="css/generale.css" rel="stylesheet" type="text/css">
 	<link href="css/responsive.css" rel="stylesheet" type="text/css">
 	<link href="admin.css" rel="stylesheet" type="text/css">
-	
 <style>
-		div 
-		{
-			width:100%;
-			margin:0;
-			padding:0;
-		}
+
+* {
+  box-sizing: border-box;
+}
+div {
+	width:100%;
+	margin:0;
+	padding:0;
+	
+	}
+body {
+  font: 16px Arial;  
+}
+
+.autocomplete {
+  position: relative;
+  display: inline-block;
+}
+
+input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 5px;
+  font-size: 16px;
+}
+
+input[type=text] {
+  width: 100%;
+  height: 25px;
+  border-radius: 5px;
+  
+}
+
+input[type=submit] {
+  background-color: #e6e6fa;
+  color: bleck;
+  cursor: pointer;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /position the autocomplete items to be the same width as the container:/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff; 
+  border-bottom: 1px solid #d4d4d4; 
+}
+
+
+.autocomplete-items div:hover {
+  background-color: #e9e9e9; 
+}
+
+
+.autocomplete-active {
+  background-color: DodgerBlue !important; 
+  color: #ffffff; 
+}
+
 </style>
 
-</head>
-<body >
+
 <header>	
 
 <a href="javascript:void(0)" class="btn-menu" onclick=toggle()>&#9776;</a>
@@ -64,11 +123,11 @@ else
 		OrdineBean bean = (OrdineBean) it.next(); //metto nel bean riferito alla tabella dei prodotti il prodotto i-esimo	
 %>
 <td> 
-	<div style="width:20rem;height:5rem;">
-Ordine n°:  <b><%=bean.getNumeroOrdine()%></b>&nbsp;
-E-mail: <b><%=bean.getEmail()%></b><br>
-N° prodotti: <b><%=bean.getNumeroProdotti()%></b>
-Importo: <b><%=bean.getPrezzoTotale()%></b>
+	<div style="width:20rem;height:5rem; background-color:white;border-radius:5px;">
+<span style="color:#0088b3"> <b>Ordine n°:</b></span> <%=bean.getNumeroOrdine()%>&nbsp; <br>
+<span style="color:#0088b3"><b>Email:</b></span> <%=bean.getEmail()%><br>
+<span style="color:#0088b3"><b>N° prodotti:</b></span> <%=bean.getNumeroProdotti()%><br>
+<span style="color:#0088b3"><b>Importo:</b></span><%=bean.getPrezzoTotale()%><br>
 <br>
 
 </div>
@@ -80,19 +139,7 @@ Importo: <b><%=bean.getPrezzoTotale()%></b>
 </tr>		    
 </table>
 
-<footer style="background:#0088b3; border-radius: 5px; color:white;margin:100px 0 0 0;height:100px;">
-	
-	<div style="float:left;margin-top:10px;">
-		<a href="Index.jsp"><img src = "Elementi/logo.png" width="75" height="75"></a>
 
-<span style="margin-left:40%;">
-	SEGUICI:
-	<img src = "Elementi/instagram.png" width="50" height="50">
-	<img src = "Elementi/facebook.png" width="50" height="50">
-	
-</span>
-</div>
-</footer>
 
 <script>
 function toggle() 

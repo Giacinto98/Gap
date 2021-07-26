@@ -11,7 +11,7 @@ create table Utente(
 CF char(16) not null,
 Nome varchar(15) not null,
 Cognome varchar(15) not null,
-Email varchar(25) not null,
+Email varchar(50) not null,
 Passw varchar(50) not null, 
 Indirizzo_Fatturazione varchar(40),
 Telefono varchar(50),
@@ -24,7 +24,7 @@ create table Ruolo(
 );
 
 create table Utente_Ruolo(
-	Email varchar(25) not null,
+	Email varchar(50) not null,
     Ruolo varchar(15) not null,
     primary key(Email, Ruolo),
     foreign key (Email) references Utente(Email) on update cascade on delete cascade,
@@ -33,7 +33,7 @@ create table Utente_Ruolo(
 
 create table Prodotto(
 Codice int not null auto_increment,
-Nome varchar(15) not null,
+Nome varchar(25) not null,
 Altezza int not null,
 Profondita int not null,
 Larghezza int not null,
@@ -48,7 +48,7 @@ create table recensione (
 Testo varchar(250) not null,
 Data_Recensione date not null,
 Codice int not null,
-Email char(25) not null,
+Email char(50) not null,
 primary key (Email,Codice),
 foreign key (Email) references utente(Email) on update cascade on delete cascade,
 foreign key (Codice) references Prodotto (Codice) on update cascade on delete cascade
@@ -56,7 +56,7 @@ foreign key (Codice) references Prodotto (Codice) on update cascade on delete ca
 
 create table Ordine(
 Num_Ordine int,
-Email char(25) not null,
+Email char(50) not null,
 Prezzo_Totale int not null,   
 Num_Prodotti int not null,
 data_Ordine varchar(15) not null,
@@ -94,9 +94,9 @@ foreign key(Id) references Materiale(Id) on update cascade on delete cascade
 
 Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ("zeus",150,50,75,"manuale",15,150,15);
 Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('arrow',175,120,100,'elettrica',200,250,0);
-Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('markus',162,90,150,'letto',20,200,3);
+Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('markus',162,90,150,'manuale',20,200,3);
 Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('hugo',158,50,75,'manuale',15,150,0);
-Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('robert',145,50,75,'letto',15,150,15);
+Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('robert',145,50,75,'manuale',15,150,15);
 Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('silandrio',120,50,80,'manuale',25,100,23);
 Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('rana',45,60,100,'pouf',150,20,0);
 Insert into prodotto (Nome,Altezza,Profondita,Larghezza,Tipologia,Quantita,Prezzo,Sconto) values ('zelbio',25,70,75,'pouf',15,150,15);

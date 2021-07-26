@@ -88,7 +88,7 @@ border-collapse: collapse;
 
 .tabellaProdCarrello td, .tabellaProdCarrello th{
 
-border:1px solid black;
+
 display:inline-block;	
 }
 .tabellaCiao
@@ -167,6 +167,23 @@ display:inline-block;
 .fieldReg
 {
 	width: 100%;
+}
+
+.immagine{
+	margin-top:10px;
+	width:80%;
+	margin-left:auto;
+	margin-right:auto;
+	
+}
+
+.tabellaProdCarrello
+{
+	width: 100%;
+	margin-left:0;
+	margin-right:0;
+border-collapse: collapse;
+
 }
 
 }

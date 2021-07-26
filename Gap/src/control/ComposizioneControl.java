@@ -69,7 +69,7 @@ public class ComposizioneControl extends HttpServlet {
 				{
 					RecensioneBean recensione = (RecensioneBean) itertator.next(); 
 					recensioni.add(recensione);
-System.out.println(recensione.getCodice() + " " + recensione.getEmail());					
+				
 				}
 			} catch (SQLException e) {
 				System.out.println("Errore recupero recensione del prodotto");

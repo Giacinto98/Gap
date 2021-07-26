@@ -82,6 +82,7 @@
 				}%>
 				</div>
 		  		<p id="demo" Style="color:red"></p>
+		  		<p id="aggiunta" Style="color:#0088b3"></p>
 		
 		<%	
 		
@@ -99,15 +100,13 @@
 					<button type="submit" name="bottone" onclick="cane()"> Aggiungi al carrello</button>
 			<% 	} 
 		   }
-		    %>	
-		
-		
-
-	</div>	
+		    %>
+	</div>
 </fieldset>
 </div>
-<p align=center style="margin-top:200px">RECENSIONI</p>
-<table class="tabellaRecensioni">
+
+<p align=center style="margin-top:200px; color: #0088b3"><b>RECENSIONI</b></p>
+<table class="tabellaRecensioni" >
 <tr>
 <%
 	Collection<?> recensioni = (Collection<?>) request.getAttribute("recensioni");
@@ -119,10 +118,10 @@ if(recensioni != null && recensioni.size() > 0) //controllo se ci sono prodotti 
 	RecensioneBean bean = (RecensioneBean) it.next(); 
 %>
 <td> 
-<div class="recensioneDiv">
-<fieldset>
-Utente=<%=bean.getEmail() %> <br>
-Recensione = <%=bean.getTesto()%>
+<div class="recensioneDiv" >
+<fieldset class="fieldReg" style="margin-top:5px" >
+<h3><span style="color:#0088b3"><%=bean.getEmail() %> <br></span> </h3>
+<h4><%=bean.getTesto()%></h4>
 </fieldset>
 </div>
   	</td>
@@ -165,7 +164,7 @@ var id = null;
 			return;
 			}
 		else
-			document.getElementById("demo").innerHTML = "";	
+			document.getElementById("aggiunta").innerHTML = "Prodotto inserito nel carrello";	
 		
 			    var url = '<%=url%>' + "?nome=" + encodeURIComponent(nome) + "&idMateriale=" + encodeURIComponent(id);
 			    console.log(url);

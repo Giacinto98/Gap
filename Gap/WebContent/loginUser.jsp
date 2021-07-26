@@ -67,6 +67,12 @@
      <legend><h2>Log in</h2></legend>
      <div style="margin-top:-10px;" align = "center">
      	<p><a href="<%=response.encodeURL("Index.jsp")%>"><img src = "Elementi/logo.png" width="100" height="100" align="center"></a></p>
+     	<%
+			String errore = (String) request.getAttribute("errore");
+			if(errore != null)
+			{ %>
+				<div align="center" Style="color:red"><%=errore %></div>
+		  <%}%>
      	<p><b>Email</b></p>
      	<p><input id="username" type="text" name="username" style="width:300px; height:30px;" placeholder="Inserire email" required> </p>
        	<p><b>Password</b></p>
@@ -77,8 +83,8 @@
 </form> 
 
 <jsp:include page="common/futher.jsp"/>
-
 <script>
+
 function invia()
 {
 	document.form.action = "<%=response.encodeURL("LoginControl")%>";

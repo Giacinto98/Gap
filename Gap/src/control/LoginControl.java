@@ -48,7 +48,9 @@ public class LoginControl extends HttpServlet {
 			}
 			else 
 			{
-				response.sendRedirect("loginUser.jsp");
+				request.setAttribute("errore","Inserire dati di accesso corretti.");
+				getServletContext().getRequestDispatcher(response.encodeURL("/loginUser.jsp")).forward(request, response); //rimandiamo l'output alla parte view (jsp)			
+				
 			}
 		}
 

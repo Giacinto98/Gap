@@ -20,7 +20,7 @@
 <jsp:include page="common/header.jsp"/>
 
 	<p align="center"><h1 >Complimenti, ti sei registrato correttamente</p></h1>
-	<p align="center"><h2>Torna alla home ed effettua il <a href="<%=response.encodeURL("Index.jsp")%>">LOGIN</h2></a></p>
+	<p align="center"><h2>Torna alla home ed effettua il <a href="<%=response.encodeURL("loginUser.jsp")%>">LOGIN</h2></a></p>
 
 <jsp:include page="common/futher.jsp"/>
 </body>

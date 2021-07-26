@@ -20,8 +20,7 @@ public class RegControl extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	
 	}
 
 
@@ -36,6 +35,7 @@ public class RegControl extends HttpServlet {
 		utente.setPassword(request.getParameter("password"));
 		utente.setIndirizzo(request.getParameter("indirizzo"));
 		utente.setTelefono(request.getParameter("telefono"));
+		
 		
 		if(utente.getCf() == null || utente.getCf().equals(""))
 			error = error + "Inserire codice fiscale/n ";

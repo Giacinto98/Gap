@@ -64,24 +64,20 @@
     	while(itRec.hasNext())
 		{
 			RecensioneBean recensione = (RecensioneBean) itRec.next();
-System.out.println("T:"+ bean.getCodice() +" "+ recensione.getCodice() +" "+ recensione.getEmail() +" " + utente.getEmail());
 			if ((recensione.getCodice()== bean.getCodice()))
 			{
 				if((recensione.getEmail().equals(utente.getEmail())))
 				{
-System.out.println("Ciao");
 					variabile = false;
 					break;
 				}
 				else if(!(recensione.getEmail().equals(utente.getEmail())))
 				{
-System.out.println("Addio");
 					variabile = true;
 				}
 			}
 		}
-System.out.println(variabile);
-    	if(variabile)
+   	if(variabile)
     	{
 		String url = response.encodeURL("scriviRecensione.jsp?codice="+bean.getCodice());%>
     	<button  type="submit" onClick="location.href='<%=url%>'" name="bottone" value="<%=bean.getNome()%>">Recensisci</button></h3>

@@ -34,8 +34,15 @@
    {
 		utente = (UtenteBean) sessione.getAttribute("utente");
    }	
-	 //URL rewriting
-	//dobbiamo verificare che passiamo per la servlete che recupera le informazioni sulla tabella store per poi stamparla
+   
+	String errore = (String) request.getAttribute("errore");
+
+	if(errore != null)
+	{ %>
+		<h1 align="center"><%=errore %></h1>
+  <%}
+	else
+	{
 	Collection<?> ordini = (Collection<?>) request.getAttribute("ordini"); //leggo dalla request l'attributo products che ha la lista degli oggetti 
 	if(ordini != null)
 	{
@@ -72,7 +79,8 @@
 else {%>
 <h1 align="center"> Non ci sono ordini effettuati</h1>
 
-<%} %>
+<%} 
+}%>
 
 <jsp:include page="common/futher.jsp"/>
 </body>

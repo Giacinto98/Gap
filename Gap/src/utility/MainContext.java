@@ -21,7 +21,7 @@ public class MainContext implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		System.out.println("Startup web application"); //Messaggio di benvenuto
+		//System.out.println("Startup web application"); //Messaggio di benvenuto
 
 		ServletContext context = sce.getServletContext(); //accede  al contesto della servlet
 		DataSource ds = null; // creiamo una risorsa settata a null
@@ -35,8 +35,8 @@ public class MainContext implements ServletContextListener {
 			try {
 				con = ds.getConnection();
 				DatabaseMetaData metaData = con.getMetaData(); //possiamo leggere tutti i metadata di accesso
-				System.out.println("DBMS name:" + metaData.getDatabaseProductName());
-				System.out.println("DBMS version:" + metaData.getDatabaseProductVersion());
+				//System.out.println("DBMS name:" + metaData.getDatabaseProductName());
+				//System.out.println("DBMS version:" + metaData.getDatabaseProductVersion());
 				//Stampiamo delle informazioni non necessarie
 			} finally {
 				if (con != null)
@@ -49,7 +49,7 @@ public class MainContext implements ServletContextListener {
 
 		context.setAttribute("DataSource", ds); //rendiamo ds disponibile a tutte le servlet aggiungendo un attributo DataSource salvandoci ds
 		//qualisasi servlet che accede al contesto riceve il datasource di accesso.
-		System.out.println("DataSource creation: " + ds.toString()); //non necessaria, solo una stampa
+		//System.out.println("DataSource creation: " + ds.toString()); //non necessaria, solo una stampa
 
 	}
 

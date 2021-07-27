@@ -30,7 +30,7 @@ public class FileUploadControl extends HttpServlet {
 
 	public void init() {
 		// Get the file location where it would be stored
-		SAVE_DIR = getServletConfig().getInitParameter("file-upload"); //piglia il parametro inizializzato prima quindi tempdir
+		SAVE_DIR = getServletConfig().getInitParameter("file-upload"); //piglia il parametro inizializzato prima quindi Elementi
 	}
 
 	public FileUploadControl() {

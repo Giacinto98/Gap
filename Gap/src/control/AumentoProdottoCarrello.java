@@ -1,6 +1,9 @@
 package control;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +15,10 @@ import javax.sql.DataSource;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import model.CarrelloBean;
+import bean.CarrelloBean;
+import bean.MaterialeBean;
+import bean.ProdottoBean;
+import model.ProdottoModel;
 
 
 @WebServlet("/AumentoProdottoCarrello")
@@ -23,28 +29,76 @@ public class AumentoProdottoCarrello extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json");
 		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource"); 
-	//System.out.println("siamo qui");
 		String  codice = request.getParameter("codiceProdotto");
 		String id = request.getParameter("idMateriale");
-	//System.out.println("codice " + codice + " id " + id);
 		int codiceProdotto = Integer.parseInt(codice);
 		int idMateriale = Integer.parseInt(id);
-	//System.out.println("Dopo parse: " + codiceProdotto + " " + idMateriale);
 		CarrelloBean carrello = new CarrelloBean();
 		HttpSession sessione = request.getSession(false);
 		if (sessione != null)
 		{
 			 carrello = (CarrelloBean) sessione.getAttribute("carrello");
 		}
-			carrello.aumentaQuantitaProdotto(codiceProdotto, idMateriale);
-		int codiceAumento = carrello.getIndexDiUnProdotto(codiceProdotto, idMateriale);
+			try {
+			ProdottoModel model = new ProdottoModel (ds);
+			ProdottoBean prodotto = model.doRetrieveByCodice(codiceProdotto);
+			int quantita = model.restituisciQuantita(prodotto);
+			
+			ArrayList<ProdottoBean> prodotti = carrello.getProdotti();
+			ArrayList<MaterialeBean> materiali = carrello.getMateriali();
+			
+			
+			for(int i = 0; i<prodotti.size(); i++)
+			{
+				if(codiceProdotto == prodotti.get(i).getCodice())
+				{
+					if(materiali.get(i).getId() == idMateriale)
+					{
+						int quantitaProdottoCarrello = prodotti.get(i).getQuantita();
+						if(quantita > quantitaProdottoCarrello)
+						{
+							quantitaProdottoCarrello = quantitaProdottoCarrello + 1 ;
+							prodotti.get(i).setQuantita(quantitaProdottoCarrello);
+							
+						}
+					}
+				}
+			}		
+		//carrello.aumentaQuantitaProdotto(quantita, codiceProdotto, idMateriale);	
+		
+			int codiceAumento = -1;	
+			for(int i=0; i<prodotti.size();i++)
+			{
+				if((prodotti.get(i).getCodice() == codiceProdotto) && (materiali.get(i).getId() == idMateriale))
+					codiceAumento = i;
+			}
+		//int codiceAumento = carrello.getIndexDiUnProdotto(codiceProdotto, idMateriale);
+		
 		if(codiceAumento != -1)
 		{
 			JSONObject json = new JSONObject();
 			try {
-				json.put("quantita", carrello.getIndex(codiceAumento).getQuantita());
+				
+				ProdottoBean prodotto1 = new ProdottoBean();
+				MaterialeBean materiale1 = new MaterialeBean();
+				for(int i=0; i<prodotti.size(); i++)
+				{
+					if(i == codiceAumento)
+					{
+						prodotto1 = prodotti.get(i);
+						materiale1 = materiali.get(i);
+						carrello.setPrezzoTotale(prodotto1.getPrezzo());
+					}
+				}
+				//json.put("quantita", carrello.getIndex(codiceAumento).getQuantita());
+				json.put("quantita", prodotto1.getQuantita());
+				
+				
 				json.put("totale", carrello.getQuantita());
-				String riferimento = carrello.getIndex(codiceAumento).getCodice() + "_" + carrello.getIndexMateriale(codiceAumento).getId();
+				
+				
+				String riferimento = prodotto1.getCodice() + "_" + materiale1.getId();
+				//String riferimento = carrello.getIndex(codiceAumento).getCodice() + "_" + carrello.getIndexMateriale(codiceAumento).getId();
 			
 				json.put("riferimento", riferimento);
 				json.put("prezzoTot", carrello.getPrezzoTotale());
@@ -56,11 +110,15 @@ public class AumentoProdottoCarrello extends HttpServlet {
 		}
 		else
 			System.out.println("Errore funzione getIndexDiUnProdotto");
-	}
+				
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			
+}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

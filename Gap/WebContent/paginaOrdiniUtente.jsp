@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="java.util.*, model.* , java.lang.*" %>
+    pageEncoding="ISO-8859-1" import="java.util.*, model.* , bean.*, java.lang.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,6 +68,10 @@
 		<tr><td>Inviato a:</td><td> <%=utente.getNome()%> <%=utente.getCognome()%></td></tr>
 		<tr><td>Numero di elementi:</td><td> <%=ordine.getNumeroProdotti()%> </td></tr>
 		<tr><td>Prodotti:</td><td><button onclick="location.href='<%=url%>'">Visualizza Prodotti</button></td></tr>
+		<tr><td>Numero carta di pagamento:</td><td> <%=ordine.getNumeroCarta()%> </td></tr>
+		<tr><td>Mese scadenza:</td><td> <%=ordine.getMeseScadenzaCarta()%> </td></tr>
+		<tr><td>Anno scadenza:</td><td> <%=ordine.getAnnoScadenzaCarta()%> </td></tr>
+		<tr><td>Cvv Carta:</td><td> <%=ordine.getCvvCarta()%> </td></tr>
 		<tr><td>Prezzo totale:</td><td> <%=ordine.getPrezzoTotale()%> &euro;
 	</table>	
 	

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+<UTENTE CF='dnlgnt98a05g813p' Nome='Giacinto' Cognome='Adinolfi' Email='giaci95@live.it' Passw='root' Indirizzo_Fatturazione='Via alcide 24' Telefono='2365412569'/>
+	<UTENTE CF='dnn5sd47efr85gfd' Nome='Vincenzo' Cognome='Palcone' Email='vincenzo85@gmail.com' Passw='root' Indirizzo_Fatturazione='Via digno 24' Telefono='1457845236'/>
+	<UTENTE CF='dnlotp254689541d' Nome='Emanuele' Cognome='Giammarino' Email='giammarino85@gmail.com' Passw='emanuele' Indirizzo_Fatturazione='Via francse 47' Telefono='6985641236'/>
+	<UTENTE CF='dnlgnt95a05g813p' Nome='Marco' Cognome='Kalifa' Email='marko65@live.it' Passw='Marco14@live' Indirizzo_Fatturazione='Via Fiumana 25' Telefono='3256415789'/>
+	
+	<RUOLO Nome='GestoreOrdine'/>
+	<RUOLO Nome='GestoreCatalogo'/>
+	<RUOLO Nome='utente'/>
+	
+	<UTENTE_RUOLO Email='giaci95@live.it' Ruolo='utente'/>
+	<UTENTE_RUOLO Email='vincenzo85@gmail.com' Ruolo='GestoreOrdine'/>
+	<UTENTE_RUOLO Email='giammarino85@gmail.com' Ruolo='GestoreCatalogo'/>
+	<UTENTE_RUOLO Email='marko65@live.it' Ruolo='utente'/>
+	
+	<PRODOTTO Codice = '1' Nome='zeus' Altezza='150' Profondita='50' Larghezza='75' Tipologia='manuale' Quantita='15' Prezzo='150' Sconto='15' />
+	<PRODOTTO Codice = '2' Nome='arrow' Altezza='175' Profondita='120' Larghezza='100' Tipologia='elettrica' Quantita='200' Prezzo='250' Sconto='10' />
+
+	<MATERIALE Id='1' Tipologia_Materiale='pelle' Colore='rosso' />
+	
+	<COMPOSTO Id='1' codice='1' />
+	<COMPOSTO Id='1' codice='2' />
+	
+	<ORDINE Num_Ordine='1' Email='giaci95@live.it' Prezzo_Totale='1500' Num_Prodotti='2' data_Ordine='2021-12-12' NumeroCarta='1542569857451256' MeseScadenzaCarta='03' AnnoScadenzaCarta='2025' cvv='845'/>
+	<ORDINE Num_Ordine='2' Email='marko65@live.it' Prezzo_Totale='2000' Num_Prodotti='1' data_Ordine='2020-03-24' NumeroCarta='1475569857451256' MeseScadenzaCarta='09' AnnoScadenzaCarta='2026' cvv='654' />
+		
+	<COMPOSIZIONE Num_ordine='1' codice='1' Id_Materiale='1' quantita='1'/>
+	<COMPOSIZIONE Num_ordine='1' codice='2' Id_Materiale='1' quantita='1'/>
+	<COMPOSIZIONE Num_ordine='2' codice='2' Id_Materiale='1' quantita='1' />
+</dataset>

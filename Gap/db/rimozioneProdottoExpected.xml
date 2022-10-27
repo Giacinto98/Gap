@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<PRODOTTO Codice = '1' Nome='zeus' Altezza='150' Profondita='50' Larghezza='75' Tipologia='manuale' Quantita='15' Prezzo='150' Sconto='15' />
+	
+	<MATERIALE Id='1' Tipologia_Materiale='pelle' Colore='rosso' />
+	
+	<COMPOSTO Id='1' codice='1' />
+	
+</dataset>

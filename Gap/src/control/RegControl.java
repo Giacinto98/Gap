@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import model.RegModel;
-import model.UtenteBean;
+import bean.UtenteBean;
+import model.UtenteModel;
 
 @WebServlet("/RegControl")
 public class RegControl extends HttpServlet {
@@ -37,7 +37,7 @@ public class RegControl extends HttpServlet {
 		utente.setTelefono(request.getParameter("telefono"));
 		
 		
-		if(utente.getCf() == null || utente.getCf().equals(""))
+		if(utente.getCf() == null || utente.getCf().equals("") )
 			error = error + "Inserire codice fiscale/n ";
 		else
 			request.setAttribute("cf", utente.getCf());
@@ -78,7 +78,7 @@ public class RegControl extends HttpServlet {
 			request.setAttribute("telefono", utente.getTelefono());
 		
 		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource"); 
-		RegModel registrazione = new RegModel(ds);
+		UtenteModel registrazione = new UtenteModel(ds);
 		
 		Boolean var = null;
 		
@@ -114,6 +114,7 @@ public class RegControl extends HttpServlet {
 		}
 		else
 		{
+			request.setAttribute("error", "Salvataggio riuscito");
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(response.encodeURL("/regEffettuata.jsp"));
 			dispatcher.forward(request, response);
 		}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<UTENTE CF='dnlgnt98a05g813p' Nome='Giacinto' Cognome='Adinolfi' Email='giaci95@live.it' Passw='root' Indirizzo_Fatturazione='Via alcide 24' Telefono='2365412569'/>
+	<UTENTE CF='dnn5sd47efr85gfd' Nome='Emanuele' Cognome='Palcone' Email='vincenzo85@gmail.com' Passw='root' Indirizzo_Fatturazione='Via digno 24' Telefono='1457845236'/>
+	<UTENTE CF='dnlotp254689541d' Nome='Emanuele' Cognome='Giammarino' Email='giammarino85@gmail.com' Passw='emanuele' Indirizzo_Fatturazione='Via francse 47' Telefono='6985641236'/>
+	
+	<RUOLO Nome='GestoreOrdine'/>
+	<RUOLO Nome='GestoreCatalogo'/>
+	<RUOLO Nome='utente'/>
+	
+	<UTENTE_RUOLO Email='giaci95@live.it' Ruolo='utente'/>
+	<UTENTE_RUOLO Email='vincenzo85@gmail.com' Ruolo='GestoreOrdine'/>
+	<UTENTE_RUOLO Email='giammarino85@gmail.com' Ruolo='GestoreCatalogo'/>
+</dataset>

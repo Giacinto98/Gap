@@ -15,15 +15,15 @@ import javax.sql.DataSource;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import model.CarrelloBean;
-import model.LoginModel;
-import model.UtenteBean;
+import bean.CarrelloBean;
+import bean.UtenteBean;
+import model.UtenteModel;
 
 
 @WebServlet("/CambiaPasswordControl")
 public class CambiaPasswordControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,22 +35,33 @@ public class CambiaPasswordControl extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource"); //recuperiamo il datasource
 		String password = request.getParameter("password");
+		String passCorr = request.getParameter("passwordCorrente");
 		HttpSession sessione = request.getSession(false);
 		UtenteBean utente = new UtenteBean();
 		if (sessione != null)
 		{
 			 utente = (UtenteBean) sessione.getAttribute("utente");
-			 utente.setPassword(password);
+			 if(passCorr.equals(utente.getPassword()))
+			 {
+				 utente.setPassword(password);
+			 }	
+			 else
+			 {
+				 request.setAttribute("errore", "Password attuale non corretta");
+				 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(response.encodeURL("/cambioPassword.jsp"));
+				 dispatcher.forward(request, response);
+				 return;
+			 }
 		}
 		
-		LoginModel model = new LoginModel(ds);
+		UtenteModel model = new UtenteModel(ds);
 		try {
-			model.nuovaPassword(utente);
+			model.doUpdate(utente);
 		} catch (SQLException e) {
 			System.out.println("Errore cambio password a utente");
 			e.printStackTrace();
 		}
-		
+		request.setAttribute("messaggio", "Salvataggio riuscito");
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(response.encodeURL("/profilo.jsp"));
 		dispatcher.forward(request, response);
 	

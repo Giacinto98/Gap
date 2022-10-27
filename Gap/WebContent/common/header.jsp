@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="java.util.*, model.* , java.lang.*" %>
+    pageEncoding="ISO-8859-1" import="java.util.*, model.* , bean.*, java.lang.*" %>
 
 <style>
 
@@ -86,7 +86,7 @@ input[type=submit] {
 <%String url1 = response.encodeURL("CercaProdottoControl");%>
 <form autocomplete="off" action="<%=url1%>" method="get">
   <div class="autocomplete" style=" width:150px; top:20px; height: 35px; ">
-    <input id="myInput" Style="background-color: #e6e6fa;"  type="text" name="bottone" placeholder="Ricerca per nome">
+    <input id="myInput" Style="background-color: #e6e6fa;"  type="text" name="bottone" placeholder="Ricerca per nome" required>
   </div>
   <input type="submit" name="richerca" style="margin-top: 20px; height:30px;">
 </form>
@@ -154,12 +154,7 @@ input[type=submit] {
 	if(utente != null){
 		 %>
 		 <li id="profilo"><a href="<%=response.encodeURL("./profilo.jsp")%>">Profilo</a></li>
-		<% 	
-	if(utente.getRuolo().equals("amministratore"))
-		{%>
-		<li><a href="<%=response.encodeURL("./AdminControl")%>">Amministratore</a></li>
-		
-		<%} }%>
+		<%}%>
 </h3></ul>
 </nav>
 

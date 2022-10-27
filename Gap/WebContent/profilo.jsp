@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="java.util.*, model.* , java.lang.*" %>
+    pageEncoding="ISO-8859-1" import="java.util.*, model.* , bean.*, java.lang.*" %>
     
 <!DOCTYPE html>
 <html>
@@ -64,10 +64,10 @@ HttpSession sessione = request.getSession(false);
 <th>
 	<fieldset>
      	<legend><h3>Impostazioni</h3></legend>
-     	<h5>Modificia password dell'account</h5>
+     	<h5>Modifica password dell'account</h5>
      	<button onclick="location.href='cambioPassword.jsp'">Modifica Password</button>
      	<h5>Visualizza le tue informazioni pesonali</h5>
-     	<button onClick="cercaUtente('<%=utente.getEmail()%>')">Visualizza</button>
+     	<button onClick="cercaUtente('<%=utente.getCf()%>','<%=utente.getNome()%>','<%=utente.getCognome()%>','<%=utente.getEmail()%>','<%=utente.getIndirizzo()%>','<%=utente.getTelefono()%>')">Visualizza</button>
 	</fieldset>
 	
 </fieldset>
@@ -89,23 +89,13 @@ HttpSession sessione = request.getSession(false);
 
 <script>
 
-function cercaUtente(email)
+function cercaUtente(cf, nome, cognome, email, indirizzo, telefono)
 {
-	var url = 'RecuperoDatiUtenteControl?email=' + encodeURIComponent(email);
-  	var xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = 
-	function() 
-	{
-		if(xhr.readyState == 4 && xhr.status == 200)
-		{
-			var response = JSON.parse(xhr.responseText);
-			document.getElementById("demo").innerHTML = "<h3>Codice Fiscale: " + response.cf + "<br>Nome: " + response.nome + "<br>Cognome: " + response.cognome + "<br>Email: " + response.email + "<br>Password: Non visibile per questioni di sicurezza<br>Indirizzo: " + response.indirizzo + "<br>Telefono: " + response.telefono + "</h3><a href= 'profilo.jsp' >Indietro</a>";		
-		}
-	}
-	xhr.open("GET",url,true);
-	xhr.send(null);	
+console.log("Ciao ",cf, nome, cognome, email, indirizzo, telefono);
+document.getElementById("demo").innerHTML = "<h3>Codice Fiscale: " + cf + "<br>Nome: " 
++ nome + "<br>Cognome: " + cognome + "<br>Email: " + email + "<br>Password: Non visibile per questioni di sicurezza<br>Indirizzo: " 
++ indirizzo + "<br>Telefono: " + telefono + "</h3><a href= 'profilo.jsp' >Indietro</a>";		
 }
-
 
 </script>
 

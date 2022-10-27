@@ -1,6 +1,8 @@
 package control;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +14,9 @@ import javax.sql.DataSource;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import model.CarrelloBean;
+import bean.CarrelloBean;
+import bean.MaterialeBean;
+import bean.ProdottoBean;
 
 
 @WebServlet("/DiminuzioneProdottoCarrello")
@@ -23,31 +27,73 @@ public class DiminuzioneProdottoCarrello extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json");
 		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource"); 
-	//System.out.println("siamo qui");
+	
 		String  codice = request.getParameter("codiceProdotto");
 		String id = request.getParameter("idMateriale");
-	//System.out.println("codice " + codice + " id " + id);
+	
 		int codiceProdotto = Integer.parseInt(codice);
 		int idMateriale = Integer.parseInt(id);
-	//System.out.println("Dopo parse: " + codiceProdotto + " " + idMateriale);
+	
 		CarrelloBean carrello = new CarrelloBean();
 		HttpSession sessione = request.getSession(false);
 		if (sessione != null)
 		{
 			 carrello = (CarrelloBean) sessione.getAttribute("carrello");
 		}
-	//System.out.println("Quantita non aggiornata " +  carrello.getIndex(carrello.getIndexDiUnProdotto(codiceProdotto, idMateriale)).getQuantita());
-		int codiceDiminuzione = carrello.getIndexDiUnProdotto(codiceProdotto, idMateriale);
+		
+		ArrayList<ProdottoBean> prodotti = carrello.getProdotti();
+		ArrayList<MaterialeBean> materiali = carrello.getMateriali();
+		
+		int codiceDiminuzione = -1;	
+		for(int i=0; i<prodotti.size();i++)
+		{
+			if((prodotti.get(i).getCodice() == codiceProdotto) && (materiali.get(i).getId() == idMateriale))
+				codiceDiminuzione = i;
+		}
+		//int codiceDiminuzione = carrello.getIndexDiUnProdotto(codiceProdotto, idMateriale);
 		if(codiceDiminuzione != -1)
 		{
-			if(carrello.getIndex(codiceDiminuzione).getQuantita() > 1)
+			ProdottoBean prodotto1 = new ProdottoBean();
+			MaterialeBean materiale1 = new MaterialeBean();
+			for(int i=0; i<prodotti.size(); i++)
 			{
-				carrello.diminuisciQuantitaProdotto(codiceProdotto, idMateriale);
+				if(i == codiceDiminuzione)
+				{
+					prodotto1 = prodotti.get(i);
+					materiale1 = materiali.get(i);
+					
+				}
+			}
+			//if(carrello.getIndex(codiceDiminuzione).getQuantita() > 1)
+			{
+				int i=0;
+				for(; i<prodotti.size(); i++)
+				{
+					if(codiceProdotto == prodotti.get(i).getCodice())
+					{
+						if(materiali.get(i).getId() == idMateriale)
+						{
+							if(prodotti.get(i).getQuantita() > 1)
+							{
+								int quantita = prodotti.get(i).getQuantita();
+								quantita = quantita - 1 ;
+								prodotti.get(i).setQuantita(quantita);
+								carrello.setPrezzoTotaleRimozione(prodotto1.getPrezzo());
+							}
+						}
+					}
+				}	
+				
+				//carrello.diminuisciQuantitaProdotto(codiceProdotto, idMateriale);
 				JSONObject json = new JSONObject();
 				try {
-					json.put("quantita", carrello.getIndex(codiceDiminuzione).getQuantita());
+					json.put("quantita", prodotto1.getQuantita());
+					//json.put("quantita", carrello.getIndex(codiceDiminuzione).getQuantita());
+					
 					json.put("totale", carrello.getQuantita());
-					String riferimento = carrello.getIndex(codiceDiminuzione).getCodice() + "_" + carrello.getIndexMateriale(codiceDiminuzione).getId();		
+					
+					String riferimento = prodotto1.getCodice() + "_" + materiale1.getId();							
+					//String riferimento = carrello.getIndex(codiceDiminuzione).getCodice() + "_" + carrello.getIndexMateriale(codiceDiminuzione).getId();		
 					json.put("riferimento", riferimento);
 					json.put("prezzoTot", carrello.getPrezzoTotale());
 				} catch (JSONException e) {

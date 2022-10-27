@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import model.ProdottoBean;
+import bean.ProdottoBean;
 import model.ProdottoModel;
 
 
@@ -24,22 +24,61 @@ public class RemoveControl extends HttpServlet {
 		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource"); 
 		response.encodeURL("RemoveControl");
 		ProdottoBean bean = new ProdottoBean();
+		ProdottoBean bean1 = new ProdottoBean(); 
+		ProdottoModel model = new ProdottoModel (ds);
+		
+		try
+		{
 		bean.setCodice(Integer.parseInt(request.getParameter("codice")));
-		ProdottoModel model = new ProdottoModel(ds);
-		try {
-			model.doDelete(bean);
-		} catch (SQLException e) {
-			System.out.println("Eccezione rimozione prodotto");
-			e.printStackTrace();
+		}
+		catch (NumberFormatException e)
+		{
+			try 
+			{
+			request.setAttribute("prodotti", model.doRetriveAll("")); //passiamo alla request l'array di prodotti nella variabile products
+			}catch (SQLException a) {} 
+			request.setAttribute("errore1","Inserire valori numerici");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(response.encodeURL("/admin/modifica.jsp"));
+			dispatcher.forward(request, response);
+			return;
 		}
 		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(response.encodeURL("/Index.jsp"));
+		try {
+			bean1 = model.doRetrieveByCodice(bean.getCodice());
+			if (bean1.getCodice() == -1)
+			{
+				try 
+				{
+				request.setAttribute("prodotti", model.doRetriveAll("")); //passiamo alla request l'array di prodotti nella variabile products
+				}catch (SQLException e) {} 
+				request.setAttribute("errore1","Inserire un codice esistente");
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(response.encodeURL("/admin/modifica.jsp"));
+				dispatcher.forward(request, response);
+				return;
+			}
+			model.doDelete(bean);
+		} catch (SQLException e) {
+			try 
+			{
+			request.setAttribute("prodotti", model.doRetriveAll("")); //passiamo alla request l'array di prodotti nella variabile products
+			}catch (SQLException a) {} 
+			request.setAttribute("errore1","Inserire un codice esistente");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(response.encodeURL("/admin/modifica.jsp"));
+			dispatcher.forward(request, response);
+			return;
+		}
+		try 
+		{
+		request.setAttribute("prodotti", model.doRetriveAll("")); //passiamo alla request l'array di prodotti nella variabile products
+		}catch (SQLException e) {} 
+		request.setAttribute("errore1","Rimozione con successo");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(response.encodeURL("/admin/modifica.jsp"));
 		dispatcher.forward(request, response);
+		return;
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

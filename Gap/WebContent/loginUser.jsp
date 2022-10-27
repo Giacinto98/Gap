@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="java.util.*, model.* , java.lang.*" %>
+    pageEncoding="ISO-8859-1" import="java.util.*, model.* , bean.*, java.lang.*" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 	 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
-<title>Registrati</title>
 
 <link href="css/index.css" rel="stylesheet" type="text/css">
 <link href="css/generale.css" rel="stylesheet" type="text/css">

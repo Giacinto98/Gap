@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<RECENSIONE Testo='Ottimo prodotto di arredamento' Data_Recensione='2020-05-06' Codice='1' Email='marko25@live' />
+	<RECENSIONE Testo='Fa un po pena' Data_Recensione='2021-05-06' Codice='1' Email='franco25@live'/>
+	<RECENSIONE Testo='Lo gradisco ma non il migliore' Data_Recensione='2021-11-06' Codice='2' Email='marko25@live'/>
+	<RECENSIONE Testo='Ottimo prodotto' Data_Recensione='2021-05-01' Codice='2' Email='franco@live.it' />
+</dataset>

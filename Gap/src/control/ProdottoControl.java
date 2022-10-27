@@ -8,7 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
+
+import bean.CarrelloBean;
+import bean.UtenteBean;
 import model.ProdottoModel;
 
 @WebServlet("/ProdottoControl")
@@ -26,11 +30,24 @@ public class ProdottoControl extends HttpServlet {
 		{
 		request.setAttribute("prodotti", model.doRetriveAll("")); //passiamo alla request l'array di prodotti nella variabile products
 		} 
-		
 		catch (SQLException e) {
 			System.out.println(e); //sampiamo per visualizzarla duante la fase di debugghing nella console
 			request.setAttribute("errore", e.getMessage()); //creiamo un attributo errore dove mettiamo l'errore che abbiamo avuto nel lancio dell'eccezione
 		}
+		
+		UtenteBean tipoUtente = new UtenteBean();
+		HttpSession sessione = request.getSession(false);
+		if (sessione != null)
+		{
+			 tipoUtente = (UtenteBean) sessione.getAttribute("GestoreCatalogo");
+		}
+		
+		if(tipoUtente != null && tipoUtente.getRuolo().equals("GestoreCatalogo"))
+		{
+			getServletContext().getRequestDispatcher(response.encodeURL("/admin/modifica.jsp")).forward(request, response); //rimandiamo l'output alla parte view (jsp)
+			return;
+		}
+		
 		getServletContext().getRequestDispatcher(response.encodeURL("/Index.jsp")).forward(request, response); //rimandiamo l'output alla parte view (jsp)
 	}
 	

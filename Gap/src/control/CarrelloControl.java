@@ -1,8 +1,8 @@
 package control;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,11 +15,10 @@ import javax.sql.DataSource;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import model.CarrelloBean;
-import model.ProdottoBean;
+import bean.CarrelloBean;
+import bean.MaterialeBean;
+import bean.ProdottoBean;
 import model.ProdottoModel;
-
-import org.json.JSONObject;
 
 @WebServlet("/CarrelloControl")
 public class CarrelloControl extends HttpServlet {
@@ -37,8 +36,54 @@ public class CarrelloControl extends HttpServlet {
 			 carrello = (CarrelloBean) sessione.getAttribute("carrello");
 		}
 		
+		ProdottoModel modelProd = new ProdottoModel (ds);
+		ProdottoBean prodotto = new ProdottoBean ();
+		MaterialeBean materiale = new MaterialeBean();
 		
-		carrello.inserisciElemento(ds, nome, idMateriale);
+		try {
+			prodotto = modelProd.doRetrieveByKey(nome);
+		} catch (SQLException e) {
+			System.out.println("Errore ricerca prodotto nel db");
+			e.printStackTrace();
+		} 
+		
+		try {
+			materiale = modelProd.doRetriveByKeyMateriale(idMateriale);
+		} catch (SQLException e) {
+			System.out.println("Errore ricerca materiale associato al prodotto");
+			e.printStackTrace();
+		}
+		
+		ArrayList<ProdottoBean> prodotti = carrello.getProdotti();
+		ArrayList<MaterialeBean> materiali = carrello.getMateriali();
+		int i=0;
+		for (; i<prodotti.size(); i++)
+		{
+			if(prodotto.getCodice() == prodotti.get(i).getCodice())
+			{
+				if(materiali.get(i).getId() == materiale.getId())
+				{
+					int quantita=prodotti.get(i).getQuantita() + 1;
+					prodotti.get(i).setQuantita(quantita);
+					carrello.setProdotti(prodotti);
+					carrello.setMateriali(materiali);
+					break;
+				}
+			}
+		}
+			if(i >= prodotti.size())
+			{
+				prodotto.setQuantita(1);
+				float sconto = prodotto.getSconto();
+				if(sconto > 0)
+				{
+				sconto = ((prodotto.getSconto() * prodotto.getPrezzo()) / 100);
+				prodotto.setPrezzo(prodotto.getPrezzo() - sconto);
+				carrello.addProdotto(prodotto, materiale);
+				}
+			}
+		//carrello.inserisciElemento (prodotto, materiale);
+		carrello.setPrezzoTotale(prodotto.getPrezzo());
 		response.setContentType("application/json");
 		JSONObject json = new JSONObject();
 		try {
@@ -50,6 +95,7 @@ public class CarrelloControl extends HttpServlet {
 		
 		response.getWriter().print(json.toString());
 	}
+
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

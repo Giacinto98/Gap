@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="java.util.*, model.* , java.lang.*"%>
+    pageEncoding="ISO-8859-1" import="java.util.*, model.* , bean.*, java.lang.*"%>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="ISO-8859-1">
 	<title>Insert title here</title>
 	
-	<link href="../css/indexAdmin.css" rel="stylesheet" type="text/css">
-	<link href="../css/admin.css" rel="stylesheet" type="text/css">
-	<link href="../css/prodotto.css" rel="stylesheet" type="text/css">
-	<link href="../css/generale.css" rel="stylesheet" type="text/css">
-	<link href="../css/responsive.css" rel="stylesheet" type="text/css">
+	<link href="./css/indexAdmin.css" rel="stylesheet" type="text/css">
+	<link href="./css/admin.css" rel="stylesheet" type="text/css">
+	<link href="./css/prodotto.css" rel="stylesheet" type="text/css">
+	<link href="./css/generale.css" rel="stylesheet" type="text/css">
+	<link href="./css/responsive.css" rel="stylesheet" type="text/css">
 	
 <style>
 		div 
@@ -31,25 +31,27 @@
 	
 	<div>
 		<p align="center">
-		<a href="../Index.jsp"><img src = "../Elementi/logo.png" width="75" height="75"></a>
+		<a href="./logout.jsp"><img src = "./Elementi/logout.png" width="50" height="50"></a>
 		<p align="center">
 	</div>
 	
 	
 </header>
 
-<nav id="navbar">
-	<ul><h3>
-	<li><a href="<%=response.encodeURL("./paginaAdmin.jsp")%>" class="dropdown">Pagina Ordini</a></li>
-</h3></ul>
-</nav>	
-
-
-<div id="modificaAmministratore">
+<div id="modificaAmministratore" >
 <div id="left">
-	<form  method="post" action="<%=response.encodeURL("../fileupload")%>" name="echo" enctype="multipart/form-data">
-		<fieldset Style="background-color:white; border-radius:10px; border: none"> 
+
+	<form  method="post" action="<%=response.encodeURL("./fileupload")%>" name="echo" enctype="multipart/form-data">
+		<fieldset Style="background-color:white; border-radius:10px; border: none; margin-top: 0px"> 
 		<legend><h3 Style="color: #0088b3">Aggiungi Prodotto</h3></legend>
+		<%
+	String error = (String)request.getAttribute("errore"); //mi prendo anche la stringa dove tengo scritta una eventuale eccezione
+	if(error != null){ //se non sono riuscito a prednere i prodotti e non ho l'errore, c'è qualche problema
+	%>
+	<div align="center" Style="color:red"><%=error %></div>
+	<% 
+	}
+%> 
 		<table >
 		<tr>
 		<th>Nome</th> 
@@ -134,9 +136,15 @@
 
 
 <div id="right" Style="margin-right:15px">
-		<form Style="margin-bottom:50px; margin-top:0px;" method="get" action="<%=response.encodeURL("../ModificaControl")%>">
-		<fieldset Style="background-color:white; border-radius:10px; border: none"> 
+		<form Style="margin-bottom:50px; margin-top:0px;" method="get" action="<%=response.encodeURL("./ModificaControl")%>">
+		<fieldset Style="background-color:white; border-radius:10px; border: none;  margin-top: 0px"> 
 		<legend><h3 Style="color: #0088b3">Modifica Prodotto</h3></legend>
+	<%
+	String error2 = (String)request.getAttribute("errore2"); 
+	if(error2 != null){ 
+	%>
+	<div align="center" Style="color:red"><%=error2 %></div>
+	<% }%> 
 			<table>
 			<tr>
 				<th>Codice</th> 
@@ -168,11 +176,16 @@
 </div>
 
 <div id="center">
-	<form Style="margin-bottom:50px; margin-top:-30px;" method="get" action="<%=response.encodeURL("../RemoveControl")%>">
-		<fieldset Style="background-color:white; border-radius:10px; border: none"> 
+	<form Style="margin-bottom:50px; margin-top:-30px;" method="get" action="<%=response.encodeURL("./RemoveControl")%>">
+		<fieldset Style="background-color:white; border-radius:10px; border: none;  margin-top: 25px"> 
 		<legend><h3 Style="color: #0088b3">Rimuovi Prodotto</h3></legend>
+		<%
+		String error1 = (String)request.getAttribute("errore1"); 
+		if(error1 != null){ 
+		%>
+		<div align="center" Style="color:red"><%=error1 %></div>
+		<%}%> 
 		<table>
-		
 		<tr>
 		<th>Codice</th> 
 		<th><input type = "text" name="codice" required></th> 
@@ -187,12 +200,60 @@
 	</form>
 	
 </div>
+
 </div>
+
+<table class="tabellaProdottiPerModifica" >
+<tr>
+	<th>Codice</th> 
+	<th>Nome</th> 
+	<th>Altezza</th> 
+	<th>Profondita</th>
+	<th>Larghezza</th>
 	
-	
-</span>
-</div>
-</footer>
+	<th>Quantita</th>   
+	<th>Prezzo</th> 
+	<th>Sconto</th> 
+</tr>
+
+
+<%
+	Collection<?> prodotti = (Collection<?>) request.getAttribute("prodotti");
+	if(prodotti == null && error == null){ //se non sono riuscito a prednere i prodotti e non ho l'errore, c'è qualche problema
+		response.sendRedirect(response.encodeRedirectURL("./ProdottoControl")); //chiamiamo noi la servlet
+		return;	
+	}
+	if(prodotti != null && prodotti.size() > 0) //controllo se ci sono prodotti all'interno dell'array
+	{
+		Iterator<?> it = prodotti.iterator(); //iteriamo i prodotti
+		while(it.hasNext()) //fin quando ho prodotti
+		{
+			ProdottoBean bean = (ProdottoBean) it.next();//metto nel bean riferito alla tabella dei prodotti il prodotto i-esimo	
+			if(bean.getQuantita() > 0)
+			{
+%>
+		<tr >
+		<th ><%=bean.getCodice()%></th> 
+		<th><%=bean.getNome()%></th> 
+		<th><%=bean.getAltezza()%></th> 
+		<th><%=bean.getProfondita()%></th> 
+		<th><%=bean.getLarghezza()%></th> 
+		
+		<th><%=bean.getQuantita()%></th> 
+		<th><%=bean.getPrezzo()%></th> 
+		<th><%=bean.getSconto()%></th> 
+		</tr>
+<%			}
+		}
+	}
+%>
+</table>
+
+
+
+
+
+
 
 <script>
 function toggle() 

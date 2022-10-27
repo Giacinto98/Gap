@@ -10,9 +10,8 @@ import javax.servlet.annotation.*;
 import javax.servlet.http.*;
 import javax.sql.DataSource;
 
-import model.CompostoBean;
-import model.CompostoModel;
-import model.ProdottoBean;
+import bean.CompostoBean;
+import bean.ProdottoBean;
 import model.ProdottoModel;
 
 @WebServlet(name = "/FileUploadControl", urlPatterns = { "/fileupload" }, initParams = {
@@ -41,7 +40,6 @@ public class FileUploadControl extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/plain");
-
 		out.write("Error: GET method is used but POST method is required");
 		out.close();
 	}
@@ -51,7 +49,12 @@ public class FileUploadControl extends HttpServlet {
 		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource"); 
 		String savePath = request.getServletContext().getRealPath("") + File.separator + SAVE_DIR;
 		ProdottoBean prodotto = new ProdottoBean();
-		//prodotto.setCodice((int)(Math.random()*10000000));
+		
+		ProdottoModel model = new ProdottoModel (ds);
+		
+		
+		try
+		{
 		prodotto.setNome(request.getParameter("nome"));
 		prodotto.setAltezza(Integer.parseInt(request.getParameter("altezza")));
 		prodotto.setPrezzo(Integer.parseInt(request.getParameter("profondita")));
@@ -60,7 +63,29 @@ public class FileUploadControl extends HttpServlet {
 		prodotto.setQuantita(Integer.parseInt(request.getParameter("quantita")));
 		prodotto.setPrezzo(Integer.parseInt(request.getParameter("prezzo")));
 		prodotto.setSconto(Integer.parseInt(request.getParameter("sconto")));
-		ProdottoModel model = new ProdottoModel(ds);
+		}catch (NumberFormatException e)
+		{
+			try 
+			{
+			request.setAttribute("prodotti", model.doRetriveAll("")); //passiamo alla request l'array di prodotti nella variabile products
+			}catch (SQLException a) {} 
+			request.setAttribute("errore","Inserire numerazioni corrette");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(response.encodeURL("/admin/modifica.jsp"));
+			dispatcher.forward(request, response);
+			return;
+		}
+		if(prodotto.getSconto() > 100 || prodotto.getSconto() < 1)
+		{
+			try 
+			{
+			request.setAttribute("prodotti", model.doRetriveAll("")); //passiamo alla request l'array di prodotti nella variabile products
+			}catch (SQLException e) {} 
+			request.setAttribute("errore","Sconto può variare tra 1 e 100");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(response.encodeURL("/admin/modifica.jsp"));
+			dispatcher.forward(request, response);
+			return;
+		}
+		
 		try {
 			model.doSave(prodotto);
 		} catch (SQLException e) {
@@ -68,7 +93,7 @@ public class FileUploadControl extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		
+		int cont = 0;
 		if(request.getParameter("abelia_monocromo") != null && (request.getParameter("abelia_monocromo") != ""))
 		{
 			String idMateriale = request.getParameter("abelia_monocromo");
@@ -80,16 +105,19 @@ public class FileUploadControl extends HttpServlet {
 				System.out.println("Eccezione recupero prodotto dal database");
 				e.printStackTrace();
 			}
-			CompostoModel modelComposto = new CompostoModel(ds);
 			CompostoBean composto = new CompostoBean();
 			composto.setCodiceProdotto(bean.getCodice());
 			composto.setIdMateriale(id);
 			try {
-				modelComposto.doSave(composto);
+				model.doSaveComposizioneProdotto(composto);
 			} catch (SQLException e) {
 				System.out.println("Errore salvataggio composto di prodotto e materiale");
 				e.printStackTrace();
 			}
+		}
+		else
+		{
+			cont++;
 		}
 		
 		if(request.getParameter("bergonia_marrone") != null && (request.getParameter("bergonia_marrone") != ""))
@@ -103,16 +131,19 @@ public class FileUploadControl extends HttpServlet {
 				System.out.println("Eccezione recupero prodotto dal database");
 				e.printStackTrace();
 			}
-			CompostoModel modelComposto = new CompostoModel(ds);
 			CompostoBean composto = new CompostoBean();
 			composto.setCodiceProdotto(bean.getCodice());
 			composto.setIdMateriale(id);
 			try {
-				modelComposto.doSave(composto);
+				model.doSaveComposizioneProdotto(composto);
 			} catch (SQLException e) {
 				System.out.println("Errore salvataggio composto di prodotto e materiale");
 				e.printStackTrace();
 			}
+		}
+		else
+		{
+			cont++;
 		}
 		
 		if(request.getParameter("lilum_blu") != null && (request.getParameter("lilum_blu") != ""))
@@ -126,16 +157,19 @@ public class FileUploadControl extends HttpServlet {
 				System.out.println("Eccezione recupero prodotto dal database");
 				e.printStackTrace();
 			}
-			CompostoModel modelComposto = new CompostoModel(ds);
 			CompostoBean composto = new CompostoBean();
 			composto.setCodiceProdotto(bean.getCodice());
 			composto.setIdMateriale(id);
 			try {
-				modelComposto.doSave(composto);
+				model.doSaveComposizioneProdotto(composto);
 			} catch (SQLException e) {
 				System.out.println("Errore salvataggio composto di prodotto e materiale");
 				e.printStackTrace();
 			}
+		}
+		else
+		{
+			cont++;
 		}
 		
 		if(request.getParameter("liroe_bianco") != null && (request.getParameter("liroe_bianco") != ""))
@@ -149,16 +183,19 @@ public class FileUploadControl extends HttpServlet {
 				System.out.println("Eccezione recupero prodotto dal database");
 				e.printStackTrace();
 			}
-			CompostoModel modelComposto = new CompostoModel(ds);
 			CompostoBean composto = new CompostoBean();
 			composto.setCodiceProdotto(bean.getCodice());
 			composto.setIdMateriale(id);
 			try {
-				modelComposto.doSave(composto);
+				model.doSaveComposizioneProdotto(composto);
 			} catch (SQLException e) {
 				System.out.println("Errore salvataggio composto di prodotto e materiale");
 				e.printStackTrace();
 			}
+		}
+		else
+		{
+			cont++;
 		}
 		
 		if(request.getParameter("pelle_beige") != null && (request.getParameter("pelle_beige") != ""))
@@ -172,16 +209,19 @@ public class FileUploadControl extends HttpServlet {
 				System.out.println("Eccezione recupero prodotto dal database");
 				e.printStackTrace();
 			}
-			CompostoModel modelComposto = new CompostoModel(ds);
 			CompostoBean composto = new CompostoBean();
 			composto.setCodiceProdotto(bean.getCodice());
 			composto.setIdMateriale(id);
 			try {
-				modelComposto.doSave(composto);
+				model.doSaveComposizioneProdotto(composto);
 			} catch (SQLException e) {
 				System.out.println("Errore salvataggio composto di prodotto e materiale");
 				e.printStackTrace();
 			}
+		}
+		else
+		{
+			cont++;
 		}
 		
 		if(request.getParameter("pelle_nero") != null && (request.getParameter("pelle_nero") != ""))
@@ -195,16 +235,19 @@ public class FileUploadControl extends HttpServlet {
 				System.out.println("Eccezione recupero prodotto dal database");
 				e.printStackTrace();
 			}
-			CompostoModel modelComposto = new CompostoModel(ds);
 			CompostoBean composto = new CompostoBean();
 			composto.setCodiceProdotto(bean.getCodice());
 			composto.setIdMateriale(id);
 			try {
-				modelComposto.doSave(composto);
+				model.doSaveComposizioneProdotto(composto);
 			} catch (SQLException e) {
 				System.out.println("Errore salvataggio composto di prodotto e materiale");
 				e.printStackTrace();
 			}
+		}
+		else
+		{
+			cont++;
 		}
 		
 		if(request.getParameter("pelle_ombra") != null && (request.getParameter("pelle_ombra") != ""))
@@ -218,16 +261,19 @@ public class FileUploadControl extends HttpServlet {
 				System.out.println("Eccezione recupero prodotto dal database");
 				e.printStackTrace();
 			}
-			CompostoModel modelComposto = new CompostoModel(ds);
 			CompostoBean composto = new CompostoBean();
 			composto.setCodiceProdotto(bean.getCodice());
 			composto.setIdMateriale(id);
 			try {
-				modelComposto.doSave(composto);
+				model.doSaveComposizioneProdotto(composto);
 			} catch (SQLException e) {
 				System.out.println("Errore salvataggio composto di prodotto e materiale");
 				e.printStackTrace();
 			}
+		}
+		else
+		{
+			cont++;
 		}
 		
 		if(request.getParameter("pelle_rosso") != null && (request.getParameter("pelle_rosso") != ""))
@@ -241,16 +287,19 @@ public class FileUploadControl extends HttpServlet {
 				System.out.println("Eccezione recupero prodotto dal database");
 				e.printStackTrace();
 			}
-			CompostoModel modelComposto = new CompostoModel(ds);
 			CompostoBean composto = new CompostoBean();
 			composto.setCodiceProdotto(bean.getCodice());
 			composto.setIdMateriale(id);
 			try {
-				modelComposto.doSave(composto);
+				model.doSaveComposizioneProdotto(composto);
 			} catch (SQLException e) {
 				System.out.println("Errore salvataggio composto di prodotto e materiale");
 				e.printStackTrace();
 			}
+		}
+		else
+		{
+			cont++;
 		}
 		
 		if(request.getParameter("santolina_bordeaux") != null && (request.getParameter("santolina_bordeaux") != ""))
@@ -264,16 +313,19 @@ public class FileUploadControl extends HttpServlet {
 				System.out.println("Eccezione recupero prodotto dal database");
 				e.printStackTrace();
 			}
-			CompostoModel modelComposto = new CompostoModel(ds);
 			CompostoBean composto = new CompostoBean();
 			composto.setCodiceProdotto(bean.getCodice());
 			composto.setIdMateriale(id);
 			try {
-				modelComposto.doSave(composto);
+				model.doSaveComposizioneProdotto(composto);
 			} catch (SQLException e) {
 				System.out.println("Errore salvataggio composto di prodotto e materiale");
 				e.printStackTrace();
 			}
+		}
+		else
+		{
+			cont++;
 		}
 		
 		if(request.getParameter("solidago_monocromo") != null && (request.getParameter("solidago_monocromo") != ""))
@@ -287,25 +339,38 @@ public class FileUploadControl extends HttpServlet {
 				System.out.println("Eccezione recupero prodotto dal database");
 				e.printStackTrace();
 			}
-			CompostoModel modelComposto = new CompostoModel(ds);
 			CompostoBean composto = new CompostoBean();
 			composto.setCodiceProdotto(bean.getCodice());
 			composto.setIdMateriale(id);
 			try {
-				modelComposto.doSave(composto);
+				model.doSaveComposizioneProdotto(composto);
 			} catch (SQLException e) {
 				System.out.println("Errore salvataggio composto di prodotto e materiale");
 				e.printStackTrace();
 			}
 		}
+		else
+		{
+			cont++;
+		}
 		
-		
-		
+		if(cont == 10)
+		{
+			try 
+			{
+			request.setAttribute("prodotti", model.doRetriveAll("")); //passiamo alla request l'array di prodotti nella variabile products
+			}catch (SQLException e) {} 
+			request.setAttribute("errore","Nessun materiale selezionato");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(response.encodeURL("/admin/modifica.jsp"));
+			dispatcher.forward(request, response);
+			return;
+		}
 		
 		File fileSaveDir = new File(savePath); //path dove salvare il file
 		if (!fileSaveDir.exists()) {
 			fileSaveDir.mkdir(); //se non trova il path lo crea
 		}
+		
 
 		String message = "upload =\n";
 		if (request.getParts() != null && request.getParts().size() > 0) {
@@ -317,16 +382,17 @@ public class FileUploadControl extends HttpServlet {
 		//System.out.println(savePath + File.separator + fileName);
 					message = message + fileName + "\n";
 				} else {
-					request.setAttribute("error", "Errore: Bisogna selezionare almeno un file");
-
+					request.setAttribute("errore", "Inserire Numerazioni correttamente");
 				}
 			}
 		}
-
-		request.setAttribute("message", message);
-
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(response.encodeURL("/Index.jsp"));
+		try 
+		{
+		request.setAttribute("prodotti", model.doRetriveAll("")); //passiamo alla request l'array di prodotti nella variabile products
+		}catch (SQLException e) {} 
+		request.setAttribute("errore","Prodotto inserito correttamente");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(response.encodeURL("/admin/modifica.jsp"));
 		dispatcher.forward(request, response);
-
+		return;
 	}
 }

@@ -25,11 +25,20 @@
 
 <jsp:include page="common/header.jsp"/>
 
-<p align="center" id="ciao" style="color:red"></p>
+<p align="center" id="ciao" style="color:red">
+<%String error = (String)request.getAttribute("errore"); //mi prendo anche la stringa dove tengo scritta una eventuale eccezione
+if(error != null){ //se non sono riuscito a prednere i prodotti e non ho l'errore, c'è qualche problema
+%>
+<div align="center" Style="color:red"><%=error %></div>
+<% 
+} %>
+</p>
+
 <fieldset id="demo" align="center">
     <legend><h2 align="center">Inserire nuova password</h2></legend>
 	<form name="form"  method="post"> 
-		<input type="password" placeholder="Password" name="password" required><br>
+		<input type="password" placeholder="Password Corrente" name="passwordCorrente" required><br>
+		<input type="password" placeholder="Password" name="password" Style="margin-top: 7px;" required><br>
 		<input type="button" style="width:100px;
 									border-radius: 5px;
    									border: 3px solid #0088b3;
@@ -55,7 +64,7 @@ function ControlloFinale()
     if(!(passExpression.test(pass)))
     {
     	count++;
-		document.getElementById("ciao").innerHTML = "Inserire password correttamente";
+		document.getElementById("ciao").innerHTML = "Inserire formato password corretto";
    	}
     else
     {
@@ -68,7 +77,6 @@ function ControlloFinale()
 		document.form.submit();
 	}
 }
-
 </script>
 
 

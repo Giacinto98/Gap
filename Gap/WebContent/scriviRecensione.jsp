@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="java.util.*, model.* , java.lang.*"%>
+    pageEncoding="ISO-8859-1" import="java.util.*, model.* , bean.*, java.lang.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +42,7 @@
 	<input type="hidden" name="codice" value="<%=codice%>">
 	<input type="hidden" name="email" value="<%=utente.getEmail()%>">
 	<tr><td><label><%=utente.getNome()%> <%=utente.getCognome()%>:</label></td></tr>
-	<tr><td><textarea form="pippo" name="recensione" rows="15" cols="85" placeholder="Scrivi qui la tua recensione(max 250 caratteri)"></textarea></td></tr>
+	<tr><td><textarea form="pippo" name="recensione" rows="15" cols="85" placeholder="Scrivi qui la tua recensione(max 250 caratteri)" required></textarea></td></tr>
 	<tr><td><input type="submit" value="Invia recensione"></td></tr>
 </form>
 </table>

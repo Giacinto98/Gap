@@ -183,3 +183,13 @@ text-align:center;
 #left{float:left;width:20%;}
 #right{float:right;width: 20%;}
 #center{margin:0 auto;width: 20%;}
+
+.tabellaProdottiPerModifica{
+	width:100%;
+
+	
+}
+.tabellaProdottiPerModifica th{
+	border:1px solid;
+	border-color:#0088b3;
+	}

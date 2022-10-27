@@ -13,12 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import model.ComposizioneBean;
-import model.CompostoModel;
+import bean.ComposizioneBean;
+import bean.ProdottoBean;
+import bean.RecensioneBean;
 import model.OrdineModel;
-import model.ProdottoBean;
 import model.ProdottoModel;
-import model.RecensioneBean;
 import model.RecensioneModel;
 
 @WebServlet("/ComposizioneControl")

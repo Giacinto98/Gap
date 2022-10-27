@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<PRODOTTO Codice = '1' Nome='zeus' Altezza='150' Profondita='50' Larghezza='75' Tipologia='manuale' Quantita='15' Prezzo='150' Sconto='15' />
+	<PRODOTTO Codice = '2' Nome='arrow' Altezza='175' Profondita='120' Larghezza='100' Tipologia='elettrica' Quantita='200' Prezzo='250' Sconto='10' />
+	<PRODOTTO Codice = '3' Nome='ciao' Altezza='155' Profondita='140' Larghezza='350' Tipologia='classica' Quantita='50' Prezzo='250' Sconto='5' />
+	
+	<MATERIALE Id='1' Tipologia_Materiale='pelle' Colore='rosso' />
+	
+	<COMPOSTO Id='1' codice='1' />
+	<COMPOSTO Id='1' codice='2' />
+	<COMPOSTO Id='1' codice='3' />
+</dataset>

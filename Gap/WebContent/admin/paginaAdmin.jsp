@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="java.util.*, model.* , java.lang.*"%>
+    pageEncoding="ISO-8859-1" import="java.util.*, model.* , bean.*, java.lang.*"%>
 <meta charset="ISO-8859-1">
 	<title>Insert title here</title>
 	
@@ -89,7 +89,7 @@ input[type=submit] {
 	 
 <div>
 	<p align="center">
-	<a href="<%=response.encodeURL("./Index.jsp")%>"> <img src = "Elementi/logo.png" width="75" height="75"> </a>
+	<a href="<%=response.encodeURL("./loginUser.jsp")%>"> <img src = "Elementi/logout.png" width="50" height="50"> </a>
 	<p align="center">
 </div>
 					
@@ -107,7 +107,7 @@ input[type=submit] {
 	Collection<?> ordini = (Collection<?>) request.getAttribute("ordini"); //leggo dalla request l'attributo products che ha la lista degli oggetti 
 	
 	if(ordini == null){ 
-		response.sendRedirect(response.encodeRedirectURL("../AdminControl")); //chiamiamo noi la servlet
+		response.sendRedirect(response.encodeRedirectURL("./GestoreOrdiniControl")); //chiamiamo noi la servlet
 		return;//se non sono riuscito a prednere i prodotti e non ho l'errore, c'è qualche problema
 }
 else
@@ -123,11 +123,15 @@ else
 		OrdineBean bean = (OrdineBean) it.next(); //metto nel bean riferito alla tabella dei prodotti il prodotto i-esimo	
 %>
 <td> 
-	<div style="width:20rem;height:5rem; background-color:white;border-radius:5px;">
+	<div style="width:20rem;height:9.5rem; background-color:white;border-radius:5px;">
 <span style="color:#0088b3"> <b>Ordine n°:</b></span> <%=bean.getNumeroOrdine()%>&nbsp; <br>
 <span style="color:#0088b3"><b>Email:</b></span> <%=bean.getEmail()%><br>
 <span style="color:#0088b3"><b>N° prodotti:</b></span> <%=bean.getNumeroProdotti()%><br>
-<span style="color:#0088b3"><b>Importo:</b></span><%=bean.getPrezzoTotale()%><br>
+<span style="color:#0088b3"><b>Importo: </b></span><%=bean.getPrezzoTotale()%> &euro; <br>
+<span style="color:#0088b3"><b>Numero carta: </b></span><%=bean.getNumeroCarta()%><br>
+<span style="color:#0088b3"><b>Mese scadenza: </b></span><%=bean.getMeseScadenzaCarta()%><br>
+<span style="color:#0088b3"><b>Anno scadenza: </b></span><%=bean.getAnnoScadenzaCarta()%><br>
+<span style="color:#0088b3"><b>cvv: </b></span><%=bean.getCvvCarta()%><br>
 <br>
 
 </div>

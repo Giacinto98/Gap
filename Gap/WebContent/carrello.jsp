@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="java.util.*, model.* , java.lang.*"%>
+    pageEncoding="ISO-8859-1" import="java.util.*, model.* , bean.*, java.lang.*"%>
 <!DOCTYPE html>
 <html>
 
@@ -25,6 +25,12 @@
 <jsp:include page="common/header.jsp"/>
 
 
+	<%
+	String error = (String)request.getAttribute("error");
+	if(error != null)
+	{ %>
+		<div align="center" Style="color:red"><%=error %></div>
+  <%}%>
 	<%
 	String url=response.encodeURL("AumentoProdottoCarrello");
 	String url1=response.encodeURL("DiminuzioneProdottoCarrello");
@@ -116,8 +122,8 @@ alt="Card image cap"><%=materiali.get(i).getTipologiaMateriale()%>
 <h2 >TOTALE ORDINE</h2>
 Numero di prodotti: <b id ="totale"><%=carrello.getQuantita()%></b><br>
 <h3>Importo Totale</h3><b id="importo"> <%=prezzoTot%> &euro; </b>
-<form method = "GET" action = "<%=response.encodeURL("AcquistoControl")%>"> 
-<button type="submit" name="Acquista">Acquista</button>
+<form method = "GET" action = "<%=response.encodeURL("./datiCartaAcquisto.jsp")%>"> 
+<button type="submit" name="Acquista">Continua Acquisto</button>
 </form>
 
 </fieldset>
@@ -152,7 +158,7 @@ function funzionePiu(idProdotto, idMateriale)
 				document.getElementById(stringa).innerHTML = response.quantita;
 				document.getElementById("totale").innerHTML = response.totale;
 				document.getElementById("carrello").innerHTML = response.totale;
-				document.getElementById("importo").innerHTML = response.prezzoTot;
+				document.getElementById("importo").innerHTML = response.prezzoTot + " &euro;";
 			}
 		}
 	xhr.open("GET",url,true);

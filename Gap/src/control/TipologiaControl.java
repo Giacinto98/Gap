@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import model.TipologiaModel;
+import model.ProdottoModel;
 
 @WebServlet("/TipologiaControl")
 public class TipologiaControl extends HttpServlet {
@@ -20,10 +20,10 @@ public class TipologiaControl extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource"); //recuperiamo il datasource
 		String tipo = request.getParameter("tipo");
-		TipologiaModel model = new TipologiaModel(ds);
+		ProdottoModel model = new ProdottoModel(ds);
 		try 
 		{
-		request.setAttribute("prodotti1", model.doRetriveAll(tipo)); //passiamo alla request l'array di prodotti nella variabile products
+		request.setAttribute("prodotti1", model.doRetriveAllTipologia (tipo)); //passiamo alla request l'array di prodotti nella variabile products
 		} 
 		catch (SQLException e) {
 			System.out.println(e); //sampiamo per visualizzarla duante la fase di debugghing nella console
